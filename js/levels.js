@@ -5,9 +5,10 @@
 /*********************************************************************************************************************/
 
 /**
- * Temporary structure.
- * Player always starts top left.
- * dots are empty tiles, J is a jump pad, X is a hazard, G is the end goal.
+ * . empty tile
+ * J jump pad
+ * X hazard
+ * G end goal
  */
 
 const levels = [

@@ -93,7 +93,7 @@ function draw_level(level_id)
       }
 
       // Handle the player's starting position
-      if(x === level.start[0] && y === level.start[1])
+      if(x === game.player_x && y === game.player_y)
       {
         const player = document.createElement('span');
         player.classList.add('player');
@@ -108,12 +108,3 @@ function draw_level(level_id)
     }
   }
 }
-
-
-/*********************************************************************************************************************/
-/*                                                                                                                   */
-/*                                                   INITIALIZATION                                                  */
-/*                                                                                                                   */
-/*********************************************************************************************************************/
-// Draw the level on the game board
-draw_level(0);
