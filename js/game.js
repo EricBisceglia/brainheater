@@ -7,10 +7,12 @@
 /*********************************************************************************************************************/
 
 const game = {
-  level: 0,
-  player_x: 0,
-  player_y: 0,
-  status: 'playing'
+  level:      0         ,
+  player_x:   0         ,
+  player_y:   0         ,
+  status:     'playing' ,
+  animation:  null      ,
+  generation: 0
 };
 
 
@@ -45,6 +47,16 @@ function level_load(level_id)
   // Stop here if the requested level does not exist
   if(!level)
     return;
+
+  // Increment the level generation counter
+  game.generation++;
+
+  // Cancel any active movement animation
+  if(game.animation)
+  {
+    game.animation.cancel();
+    game.animation = null;
+  }
 
   // Reset the game state
   game.level    = level_id;
@@ -81,7 +93,7 @@ function level_restart()
  * @returns {void}
  */
 
-function move_player(direction)
+async function move_player(direction)
 {
   // Stop here if the player isn't allowed to move
   if(game.status !== 'playing')
@@ -125,11 +137,27 @@ function move_player(direction)
   if(next_x < 0 || next_x >= level.map[next_y].length)
     return;
 
-  // Move the player on the board
+  // Remember which generation this movement belongs to
+  const generation = game.generation;
+
+  // Temporarily prevent additional movement
+  game.status = 'moving';
+
+  // Animate the player towards the destination
+  await animate_player(next_x, next_y);
+
+  // Stop here if the level was restarted during movement
+  if(generation !== game.generation)
+    return;
+
+  // Update the player's position
   game.player_x = next_x;
   game.player_y = next_y;
 
-  // Draw the updated player position
+  // Allow movement again
+  game.status = 'playing';
+
+  // Draw the player inside the destination tile
   draw_level(game.level);
 }
 

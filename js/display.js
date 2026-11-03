@@ -1,6 +1,7 @@
 /*********************************************************************************************************************/
 /*                                                                                                                   */
-/*  draw_level  Draw a level on the game board.                                                                      */
+/*  draw_level      Draw a level on the game board.                                                                  */
+/*  animate_player  Animate the player's movement on the board.                                                      */
 /*                                                                                                                   */
 /*********************************************************************************************************************/
 
@@ -106,5 +107,73 @@ function draw_level(level_id)
       // Place the tile on the board
       board.append(tile);
     }
+  }
+}
+
+
+
+
+/**
+ * Animates the player moving to another tile.
+ *
+ * @param   {number}  next_x  The destination column.
+ * @param   {number}  next_y  The destination row.
+ *
+ * @returns {Promise<void>}
+ */
+
+async function animate_player(next_x, next_y)
+{
+  // Fetch the board, the player's current tile, and the destination tile
+  const board       = document.getElementById('brain_board');
+  const player      = board.querySelector('.player');
+  const destination = board.querySelector('[data-x="' + next_x + '"][data-y="' + next_y + '"]');
+
+  // Don't animate if tiles are missing (uh oh)
+  if(!player || !destination)
+    return;
+
+  // Get the measurements of the starting and destination tiles
+  const start = player.parentElement.getBoundingClientRect();
+  const end   = destination.getBoundingClientRect();
+
+  // Calculate the distance between the tiles' centers
+  const distance_x = (end.left + end.width / 2) - (start.left + start.width / 2);
+  const distance_y = (end.top + end.height / 2) - (start.top + start.height / 2);
+
+  // Smoothly animate the player's movement
+  const animation = player.animate(
+    [
+      { transform: 'translate(0px, 0px) rotate(-12deg)'                                   } ,
+      { transform: 'translate(' + distance_x + 'px, ' + distance_y + 'px) rotate(-12deg)' }
+    ] ,
+    {
+      duration: 120         ,
+      easing:   'ease-out'  ,
+      fill:     'forwards'
+    }
+  );
+
+  // Keep a reference to this animation so it can be cancelled if the player restarts the level
+  game.animation = animation;
+
+  // Wait for the animation to finish
+  try
+  {
+    await animation.finished;
+  }
+
+  // Cancellation is expected if the player restarts the level
+  catch(error)
+  {
+    if(error.name !== 'AbortError')
+      throw error;
+  }
+
+  // Clear the animation reference once it's done (if it hasn't been replaced yet)
+  finally
+  {
+    if(game.animation === animation)
+      game.animation = null;
   }
 }

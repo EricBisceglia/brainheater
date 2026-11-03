@@ -100,7 +100,7 @@ button:focus-visible, select:focus-visible, .brain_board:focus-visible
 .tile_loss                { color: var(--red);                                                      }
 .tile_jump                { color: var(--green);                                                    }
 .tile_exit                { color: var(--yellow); background: var(--yellowish);                     }
-.tile_player              { background: var(--yellowish);                                           }
+.tile_player              { background: var(--yellowish); z-index: 1;                               }
 .tile .player             { position: absolute; inset: 0; margin: auto; width: 60%; height: 60%     ;
                             border: 3px solid var(--yellow); border-radius: 46% 54% 49% 51%         ;
                             transform: rotate(-12deg); pointer-events: none;                        }
