@@ -12,7 +12,7 @@ Built for [The Bad Website](https://thebad.website/).
 
 Download this repo then open `index.html` in your browser :)
 
-No build, no dependencies, it'll work right away.
+There's no build or dependencies, it will work right away
 
 ## License
 
