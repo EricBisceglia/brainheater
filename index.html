@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>
+      Brain Heater
+    </title>
+    <link rel="stylesheet" href="./css/brainheater.css">
+  </head>
+  <body>
+    <main class="brain_container">
+
+<!-------------------------------------------------------------------------------------------------------------------->
+<!--                                                                                                                -->
+<!--                                                     HEADER                                                     -->
+<!--                                                                                                                -->
+<!-------------------------------------------------------------------------------------------------------------------->
+
+      <header class="brain_header">
+        <h1 class="brain_title">
+          Brain <span>Heater</span><i aria-hidden="true">!</i>
+        </h1>
+      </header>
+
+<!-------------------------------------------------------------------------------------------------------------------->
+<!--                                                                                                                -->
+<!--                                                     BOARD                                                      -->
+<!--                                                                                                                -->
+<!-------------------------------------------------------------------------------------------------------------------->
+
+      <section id="brain_area" aria-label="Current puzzle">
+
+        <!-- Level info -->
+        <div class="level_info">
+          <span id="level_number" class="level_number">
+            01/10
+          </span>
+          <h2 id="level_name">
+            First steps
+          </h2>
+        </div>
+
+        <!-- Game board -->
+        <div class="brain_board_container">
+          <div id="brain_board" class="brain_board" tabindex="0" role="group" aria-label="Puzzle grid">
+            <div class="tile tile_player">
+              <span class="player" role="img" aria-label="Player"></span>
+            </div>
+            <div class="tile"></div>
+            <div class="tile"></div>
+            <div class="tile"></div>
+            <div class="tile"></div>
+            <div class="tile tile_jump">
+              <span aria-hidden="true">X</span>
+            </div>
+            <div class="tile tile_loss">
+              <span aria-hidden="true">X</span>
+            </div>
+            <div class="tile"></div>
+            <div class="tile"></div>
+            <div class="tile tile_loss">
+              <span aria-hidden="true">X</span>
+            </div>
+            <div class="tile tile_loss">
+              <span aria-hidden="true">X</span>
+            </div>
+            <div class="tile"></div>
+            <div class="tile"></div>
+            <div class="tile"></div>
+            <div class="tile"></div>
+            <div class="tile"></div>
+          </div>
+        </div>
+      </section>
+
+<!-------------------------------------------------------------------------------------------------------------------->
+<!--                                                                                                                -->
+<!--                                                  LEVEL SELECT                                                  -->
+<!--                                                                                                                -->
+<!-------------------------------------------------------------------------------------------------------------------->
+
+      <nav class="level_selection" aria-label="Level selection">
+        <select id="levelset_select" class="levelset_select" aria-label="Level set">
+          <option value="0">The first pages</option>
+        </select>
+        <div id="level_buttons" class="level_buttons">
+          <button type="button" class="level_button selected" aria-current="step">01</button>
+          <button type="button" class="level_button">02</button>
+          <button type="button" class="level_button">03</button>
+          <button type="button" class="level_button">04</button>
+          <button type="button" class="level_button">05</button>
+          <button type="button" class="level_button">06</button>
+          <button type="button" class="level_button">07</button>
+          <button type="button" class="level_button">08</button>
+          <button type="button" class="level_button">09</button>
+          <button type="button" class="level_button">10</button>
+        </div>
+      </nav>
+
+<!-------------------------------------------------------------------------------------------------------------------->
+<!--                                                                                                                -->
+<!--                                                     FOOTER                                                     -->
+<!--                                                                                                                -->
+<!-------------------------------------------------------------------------------------------------------------------->
+
+      <p class="controls">
+        Move with arrow keys<br>
+        Space to restart
+      </p>
+
+    </main>
+  </body>
+</html>
