@@ -56,7 +56,7 @@ button:focus-visible, select:focus-visible, .brain_board:focus-visible
 .brain_container        { position: relative; width: 100%; max-width: 42rem; margin: 0 auto       ;
                           padding: 2rem 3rem 2rem 4rem; min-height: 100vh; min-height: 100dvh;    }
 .brain_container:before { content: ''; position: absolute; top: 0; bottom: 0; left: 1.5rem        ;
-                          width: 1px; background: var(--notebook); box-shadow: 3px 0 #B976741A    ;
+                          width: 1px; background: var(--margin); box-shadow: 3px 0 #B976741A      ;
                           pointer-events: none;                                                   }
 
 /*********************************************************************************************************************/
@@ -120,7 +120,7 @@ button:focus-visible, select:focus-visible, .brain_board:focus-visible
 /*                                                                                                                   */
 /*********************************************************************************************************************/
 
-.brain_board.dead       { animation: death_shake 400ms ease-out;                                                }
+.brain_board.dead       { animation: death_shake 500ms ease-out;                                                }
 @keyframes death_shake  { 0%, 100% { transform: translateX(0);                                                  }
                           20%, 60% { transform: translateX(-4px);                                               }
                           40%, 80% { transform: translateX(4px);                                              } }
@@ -160,34 +160,21 @@ button:focus-visible, select:focus-visible, .brain_board:focus-visible
 
 /*********************************************************************************************************************/
 /*                                                                                                                   */
-/*                                                  PROGRESS RESET                                                   */
-/*                                                                                                                   */
-/*********************************************************************************************************************/
-
-.progress_controls        { margin-top: 1.5rem; text-align: center;                           }
-.progress_reset           { padding: 0.4rem 0.7rem; color: var(--darkink); font-size: 0.75rem ;
-                            border: 1px solid var(--grid); border-radius: 5px 2px 6px 3px;    }
-.progress_reset:hover     { color: var(--red); border-color: var(--red);                      }
-@media (pointer: coarse)  { .progress_reset { min-height: 44px; }                             }
-
-/*********************************************************************************************************************/
-/*                                                                                                                   */
-/*                                                  LINKS / CREDITS                                                  */
+/*                                         LINKS / CREDITS / PROGRESS RESET                                          */
 /*                                                                                                                   */
 /*********************************************************************************************************************/
 
 .link_buttons                 { display: flex; justify-content: center; flex-wrap: wrap             ;
                                 gap: 0.8rem; margin-top: 2.0rem;                                    }
-.link_buttons a               { display: inline-flex; align-items: center; justify-content: center  ;
-                                padding: 0.4rem 0.8rem; color: var(--ink); font-size: 0.8rem        ;
-                                text-decoration: none; border: 1px solid var(--grid)                ;
-                                border-radius: 5px 2px 6px 3px;                                     }
-.link_buttons a:first-child   { transform: rotate(-2deg);                                           }
-.link_buttons > :last-child   { transform: rotate(2deg); }
-.link_buttons a:hover         { color: var(--yellow); border-color: var(--yellow);                  }
-.link_buttons a:focus-visible { outline: 2px dashed var(--yellow); outline-offset: 5px;             }
+.link_buttons a               { color: var(--ink);                                                  }
 .link_buttons a, .link_buttons button
                               { display: inline-flex; align-items: center; justify-content: center  ;
                                 padding: 0.4rem 0.8rem; font-size: 0.8rem; text-decoration: none    ;
                                 border: 1px solid var(--grid); border-radius: 5px 2px 6px 3px;      }
-@media (pointer: coarse)      { .link_buttons a { min-height: 44px;                               } }
+.link_buttons a:first-child   { transform: rotate(-2deg);                                           }
+.link_buttons > :last-child   { transform: rotate(2deg);                                            }
+.link_buttons a:hover         { color: var(--yellow); border-color: var(--yellow);                  }
+.link_buttons a:focus-visible { outline: 2px dashed var(--yellow); outline-offset: 5px;             }
+.progress_reset               { color: var(--darkink);                                              }
+.progress_reset:hover         { color: var(--red); border-color: var(--red);                        }
+@media (pointer: coarse)      { .link_buttons a, .link_buttons button { min-height: 44px;         } }

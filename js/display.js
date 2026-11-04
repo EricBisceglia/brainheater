@@ -72,6 +72,10 @@ function level_draw(level_id)
       tile.dataset.y = y;
 
       // Determine the tile's appearance
+      let tile_symbol = '';
+      let tile_name   = 'Empty';
+
+      // Update it based on the tile's type
       switch(tile_type)
       {
         case 'X':
@@ -90,11 +94,6 @@ function level_draw(level_id)
           tile.classList.add('tile_exit');
           tile_symbol = '⚑';
           tile_name   = 'Exit';
-          break;
-
-        default:
-          tile_symbol = '';
-          tile_name   = 'Empty';
           break;
       }
 
@@ -304,7 +303,7 @@ async function animate_death()
       { offset: 0.4,  transform: 'translateX(4px) rotate(0deg) scale(1)',       opacity: 1    },
       { offset: 1,    transform: 'translateX(0px) rotate(-30deg) scale(0.2)',   opacity: 0.2  }
     ],
-    { duration: 280, easing: 'ease-out', fill: 'forwards' }
+    { duration: 500, easing: 'ease-out', fill: 'forwards' }
   );
 
   // Keep a reference to this animation so it can be cancelled if the player restarts the level
