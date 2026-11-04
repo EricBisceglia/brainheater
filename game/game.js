@@ -8,6 +8,7 @@
 
 const game = {
   level:      0         , // Current level ID
+  map:        []        , // Current level map
   player_x:   0         , // Player's current position
   player_y:   0         , // Player's current position
   status:     'playing' , // Current game status ('playing', 'moving', 'dead', 'won')
@@ -61,6 +62,12 @@ function level_load(level_id)
     game.animation = null;
   }
 
+  // Create an copy of the level's map for the game state
+  game.map = level.map.map(function(row)
+  {
+    return row.split('');
+  });
+
   // Clear the visited tiles
   game.visited = new Set();
 
@@ -105,8 +112,7 @@ function level_restart()
 async function tile_resolve(direction)
 {
   // Fetch the tile under the player
-  const level = levels[game.level];
-  const tile  = level.map[game.player_y][game.player_x];
+  const tile = game.map[game.player_y][game.player_x];
 
   // Handle the tile's effect
   switch(tile)
@@ -147,9 +153,6 @@ async function player_move( direction     ,
   if(game.status !== 'playing')
     return;
 
-  // Fetch the current level
-  const level = levels[game.level];
-
   // Fetch the player's current position
   let next_x = game.player_x;
   let next_y = game.player_y;
@@ -180,8 +183,8 @@ async function player_move( direction     ,
   // Check whether the player hit the edge of the game board
   const hit_wall = next_x < 0
                 || next_y < 0
-                || next_x >= level.map[0].length
-                || next_y >= level.map.length;
+                || next_x >= game.map[0].length
+                || next_y >= game.map.length;
 
   // Different treatment depending on whether the player walked or was thrust into the edge
   if(hit_wall)
@@ -191,8 +194,8 @@ async function player_move( direction     ,
       return;
 
     // Shorten jumps to the last valid tile inside the board
-    next_x = Math.max(0, Math.min(next_x, level.map[0].length - 1));
-    next_y = Math.max(0, Math.min(next_y, level.map.length - 1));
+    next_x = Math.max(0, Math.min(next_x, game.map[0].length - 1));
+    next_y = Math.max(0, Math.min(next_y, game.map.length - 1));
   }
 
   // Remember which generation this movement belongs to

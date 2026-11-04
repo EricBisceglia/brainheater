@@ -41,7 +41,7 @@ function level_draw(level_id)
                                                       + String(levels.length).padStart(2, '0');
 
   // Fetch the level's grid size
-  const grid_size = level.map.length;
+  const grid_size = game.map.length;
 
   // Calculate the size of the board
   const board_size = 314 + Math.max(0, grid_size - 4) * 32;
@@ -54,13 +54,13 @@ function level_draw(level_id)
   board.replaceChildren();
 
   // Loop through rows
-  for(let y = 0; y < level.map.length; y++)
+  for(let y = 0; y < game.map.length; y++)
   {
     // Loop through columns
-    for(let x = 0; x < level.map[y].length; x++)
+    for(let x = 0; x < game.map[y].length; x++)
     {
       // Fetch the tile type
-      const tile_type = level.map[y][x];
+      const tile_type = game.map[y][x];
 
       // Draw the tile
       const tile = document.createElement('div');
