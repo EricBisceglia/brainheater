@@ -35,7 +35,7 @@ function level_draw(level_id)
   board.classList.toggle('dead', game.status === 'dead');
 
   // Update the level info
-  document.getElementById('level_name').textContent   = level.name;
+  document.getElementById('level_name').textContent   = string_translate(level.name);
   document.getElementById('level_number').textContent = String(level_id + 1).padStart(2, '0')
                                                       + ' / '
                                                       + String(levels.length).padStart(2, '0');
@@ -73,7 +73,6 @@ function level_draw(level_id)
 
       // Determine the tile's appearance
       let tile_symbol = '';
-      let tile_name   = 'Empty';
 
       // Update it based on the tile's type
       switch(tile_type)
@@ -81,31 +80,24 @@ function level_draw(level_id)
         case 'X':
           tile.classList.add('tile_loss');
           tile_symbol = 'X';
-          tile_name   = 'Loss';
           break;
 
         case 'J':
           tile.classList.add('tile_jump');
           tile_symbol = 'X';
-          tile_name   = 'Jump';
           break;
 
         case 'G':
           tile.classList.add('tile_exit');
           tile_symbol = '⚑';
-          tile_name   = 'Exit';
           break;
       }
-
-      // Name the tile
-      tile.setAttribute('aria-label', tile_name);
 
       // Add the tile symbol if required
       if(tile_symbol)
       {
         const symbol = document.createElement('span');
         symbol.textContent = tile_symbol;
-        symbol.setAttribute('aria-hidden', 'true');
         tile.append(symbol);
       }
 
@@ -114,8 +106,6 @@ function level_draw(level_id)
       {
         const player = document.createElement('span');
         player.classList.add('player');
-        player.setAttribute('role', 'img');
-        player.setAttribute('aria-label', 'Player');
         tile.append(player);
         tile.classList.add('tile_player');
       }
@@ -153,7 +143,7 @@ function level_select_draw()
   {
     const option        = document.createElement('option');
     option.value        = levelset.id;
-    option.textContent  = levelset.name;
+    option.textContent = string_translate(levelset.name);
     select.append(option);
   }
 
@@ -177,15 +167,9 @@ function level_select_draw()
     button.classList.add('level_button');
     button.textContent = String(level_id + 1).padStart(2, '0');
 
-    // Describe the level
-    button.setAttribute('aria-label', 'Level ' + (level_id + 1) + ': ' + level.name + (completed ? ', completed' : ''));
-
     // Highlight the current level
     if(level_id === game.level)
-    {
       button.classList.add('selected');
-      button.setAttribute('aria-current', 'step');
-    }
 
     // Mark cleared levels as completed
     if(completed)
@@ -193,7 +177,6 @@ function level_select_draw()
       const check = document.createElement('span');
       check.classList.add('level_check');
       check.textContent = '✓';
-      check.setAttribute('aria-hidden', 'true');
       button.append(check);
     }
 

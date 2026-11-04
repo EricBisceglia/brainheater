@@ -13,6 +13,8 @@
     <script src="./js/game.js" defer></script>
     <script src="./js/save.js" defer></script>
     <script src="./js/controls.js" defer></script>
+    <script src="./lang/language.js" defer></script>
+    <script src="./lang/translations.js" defer></script>
     <script src="./js/main.js" defer></script>
   </head>
   <body>
@@ -29,7 +31,7 @@
 
       <header class="brain_header">
         <h1 class="brain_title">
-          Brain <span>Heater</span><i aria-hidden="true">!</i>
+          Brain <span>Heater</span><i>!</i>
         </h1>
       </header>
 
@@ -42,7 +44,7 @@
 <!--                                                                                                                -->
 <!-------------------------------------------------------------------------------------------------------------------->
 
-      <section id="brain_area" aria-label="Current puzzle">
+      <section id="brain_area">
 
         <!-- Level info -->
         <div class="level_info">
@@ -58,13 +60,13 @@
         <div class="brain_board_container">
 
           <!-- Main board -->
-          <div id="brain_board" class="brain_board" tabindex="0" role="group" aria-label="Puzzle grid">
+          <div id="brain_board" class="brain_board" tabindex="0">
           </div>
 
           <!-- Death message -->
-          <div id="death_message" class="death_message" role="status" aria-live="polite" hidden>
-            <h3>Oops.</h3>
-            <p>Press space to restart.</p>
+          <div id="death_message" class="death_message" hidden>
+            <h3 data-i18n="death_title"></h3>
+            <p data-i18n="death_restart"></p>
           </div>
 
         </div>
@@ -79,8 +81,8 @@
 <!--                                                                                                                -->
 <!-------------------------------------------------------------------------------------------------------------------->
 
-      <nav class="level_selection" aria-label="Level selector">
-        <select id="levelset_select" class="levelset_select" aria-label="Level sets">
+      <nav class="level_selection">
+        <select id="levelset_select" class="levelset_select">
         </select>
         <div id="level_buttons" class="level_buttons">
         </div>
@@ -97,21 +99,23 @@
 
       <!-- Controls -->
       <p class="controls">
-        Move with arrow keys<br>
-        Space to restart
+        <span data-i18n="controls_move"></span><br>
+        <span data-i18n="controls_restart"></span>
       </p>
 
       <!-- Links / credits / reset progression -->
-      <nav class="link_buttons" aria-label="thebad.website">
+      <nav class="link_buttons">
         <a href="https://discord.gg/XTd3qQKZqV" target="_blank" rel="noopener noreferrer">
           Discord
         </a>
         <a href="https://thebad.website/" target="_blank" rel="noopener noreferrer">
           thebad.website
         </a>
-        <button type="button" id="progress_reset" class="progress_reset">
-          Reset progression
-        </button>
+        <select id="language_select" class="language_select">
+          <option value="en" data-i18n="language_en"></option>
+          <option value="fr" data-i18n="language_fr"></option>
+        </select>
+        <button type="button" id="progress_reset" class="progress_reset" data-i18n="reset_progress"></button>
       </nav>
 
     </main>

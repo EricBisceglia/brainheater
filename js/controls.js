@@ -55,6 +55,9 @@ document.addEventListener('keydown', function(event)
   }
 });
 
+
+
+
 // Handle levelset selection
 document.getElementById('levelset_select').addEventListener('change', function(event)
 {
@@ -78,5 +81,21 @@ document.getElementById('levelset_select').addEventListener('change', function(e
   document.getElementById('brain_board').focus({ preventScroll: true });
 });
 
+
+
+
 // Handle progression reset
 document.getElementById('progress_reset').addEventListener('click', progress_reset);
+
+
+
+
+// Handle language selection
+document.getElementById('language_select').addEventListener('change', function(event)
+{
+  // Set the selected language
+  language_change(event.target.value);
+
+  // Return keyboard control to the board (else the game will become unplayable)
+  document.getElementById('brain_board').focus({ preventScroll: true });
+});

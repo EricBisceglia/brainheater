@@ -85,7 +85,7 @@ function progress_load()
 function progress_reset()
 {
   // Ask before erasing progression
-  const confirmed = window.confirm('Erase all completed levels and start from the beginning?\n\nThis cannot be undone.');
+  const confirmed = window.confirm(string_translate('reset_confirm'));
 
   // Stop here if the player changed their mind
   if(!confirmed)

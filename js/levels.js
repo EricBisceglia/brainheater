@@ -5,8 +5,8 @@
 /*********************************************************************************************************************/
 
 const levelsets = [
-  { id: 1,  name: 'The first pages' },
-  { id: 2,  name: 'More pages'      }
+  { id: 1,  name: 'set_first_pages' },
+  { id: 2,  name: 'set_more_pages'  }
 ];
 
 
@@ -21,7 +21,7 @@ const levelsets = [
 const levels = [
   {
     id:     '0101',
-    name:   'First level',
+    name:   'level_first',
     set:    1,
     start:  [0, 0],
     map:    [
@@ -33,7 +33,7 @@ const levels = [
   },
   {
     id:     '0102',
-    name:   'Second level',
+    name:   'level_second',
     set:    1,
     start:  [0, 0],
     map:    [
@@ -46,7 +46,7 @@ const levels = [
   },
   {
     id:     '0201',
-    name:   'Third level',
+    name:   'level_third',
     set:    2,
     start:  [0, 0],
     map:    [
@@ -60,7 +60,7 @@ const levels = [
   },
   {
     id:     '0202',
-    name:   'Fourth level',
+    name:   'level_fourth',
     set:    2,
     start:  [0, 0],
     map:    [

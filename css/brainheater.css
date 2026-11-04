@@ -175,6 +175,10 @@ button:focus-visible, select:focus-visible, .brain_board:focus-visible
 .link_buttons > :last-child   { transform: rotate(2deg);                                            }
 .link_buttons a:hover         { color: var(--yellow); border-color: var(--yellow);                  }
 .link_buttons a:focus-visible { outline: 2px dashed var(--yellow); outline-offset: 5px;             }
+.language_select              { padding: 0.4rem 0.6rem; background: var(--paper); color: var(--ink) ;
+                                font-size: 0.8rem; border: 1px solid var(--grid)                    ;
+                                border-radius: 5px 2px 6px 3px; cursor: pointer;                    }
 .progress_reset               { color: var(--darkink);                                              }
 .progress_reset:hover         { color: var(--red); border-color: var(--red);                        }
-@media (pointer: coarse)      { .link_buttons a, .link_buttons button { min-height: 44px;         } }
+@media (pointer: coarse)      { .link_buttons a, .link_buttons button, .language_select
+                              { min-height: 44px;                                                 } }

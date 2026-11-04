@@ -4,6 +4,9 @@
 /*                                                                                                                   */
 /*********************************************************************************************************************/
 
+// Determine the interface language
+language_load();
+
 // Load saved progression
 progress_load();
 
@@ -15,3 +18,6 @@ const first_unfinished = levels.findIndex(function(level)
 
 // Load the first unfinished level, or return to the beginning if everything is complete
 level_load(first_unfinished === -1 ? 0 : first_unfinished);
+
+// Translate the interface
+language_apply();
