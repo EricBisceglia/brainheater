@@ -93,12 +93,14 @@ function level_restart()
 
 
 /**
- * Resolves the effect of tile the player is standing on.
+ * Resolves the effect of the tile the player is standing on.
  *
- * @returns {void}
+ * @param   {string}  direction  The direction the player entered from.
+ *
+ * @returns {Promise<void>}
  */
 
-function tile_resolve()
+async function tile_resolve(direction)
 {
   // Fetch the tile under the player
   const level = levels[game.level];
@@ -107,8 +109,14 @@ function tile_resolve()
   // Handle the tile's effect
   switch(tile)
   {
+    // Deadly tile
     case 'X':
       player_die();
+      break;
+
+    // Jump pad
+    case 'J':
+      await player_move(direction, 2);
       break;
   }
 }
@@ -120,11 +128,13 @@ function tile_resolve()
  * Moves the player one tile in the requested direction.
  *
  * @param   {string}  direction  The direction to move (up, down, left, right).
+ * @param   {number}  distance   The number of tiles to move.
  *
  * @returns {void}
  */
 
-async function player_move(direction)
+async function player_move( direction     ,
+                            distance = 1  )
 {
   // Stop here if the player isn't allowed to move
   if(game.status !== 'playing')
@@ -141,32 +151,44 @@ async function player_move(direction)
   switch(direction)
   {
     case 'up':
-      next_y--;
+      next_y -= distance;
       break;
 
     case 'down':
-      next_y++;
+      next_y += distance;
       break;
 
     case 'left':
-      next_x--;
+      next_x -= distance;
       break;
 
     case 'right':
-      next_x++;
+      next_x += distance;
       break;
 
     default:
       return;
   }
 
-  // Stop here if the move hits a row border
+  // Check for row borders
   if(next_y < 0 || next_y >= level.map.length)
-    return;
+  {
+    // Being thrust into the row border kills the player
+    if(distance > 1)
+      player_die();
 
-  // Stop here if the move hits a column border
-  if(next_x < 0 || next_x >= level.map[next_y].length)
     return;
+  }
+
+  // Check for column borders
+  if(next_x < 0 || next_x >= level.map[next_y].length)
+  {
+    // Being thrust into the column border kills the player
+    if(distance > 1)
+      player_die();
+
+    return;
+  }
 
   // Remember which generation this movement belongs to
   const generation = game.generation;
@@ -195,7 +217,7 @@ async function player_move(direction)
   level_draw(game.level);
 
   // Resolve the effects of the tile the player landed on
-  tile_resolve();
+  await tile_resolve(direction);
 }
 
 

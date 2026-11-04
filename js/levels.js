@@ -16,10 +16,11 @@ const levels = [
     name: 'First level',
     start: [0, 0],
     map: [
-      '....',
-      '.JX.',
-      '.XX.',
-      '...G'
+      '.J.J.',
+      '.JXX.',
+      '.XX..',
+      '.J...',
+      '....G'
     ]
   }
 ];
