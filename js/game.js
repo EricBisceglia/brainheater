@@ -170,24 +170,22 @@ async function player_move( direction     ,
       return;
   }
 
-  // Check for row borders
-  if(next_y < 0 || next_y >= level.map.length)
+  // Check whether the player hit the edge of the game board
+  const hit_wall = next_x < 0
+                || next_y < 0
+                || next_x >= level.map[0].length
+                || next_y >= level.map.length;
+
+  // Different treatment depending on whether the player walked or was thrust into the edge
+  if(hit_wall)
   {
-    // Being thrust into the row border kills the player
-    if(distance > 1)
-      player_die();
+    // Prevent moving into a border
+    if(distance === 1)
+      return;
 
-    return;
-  }
-
-  // Check for column borders
-  if(next_x < 0 || next_x >= level.map[next_y].length)
-  {
-    // Being thrust into the column border kills the player
-    if(distance > 1)
-      player_die();
-
-    return;
+    // Shorten jumps to the last valid tile inside the board
+    next_x = Math.max(0, Math.min(next_x, level.map[0].length - 1));
+    next_y = Math.max(0, Math.min(next_y, level.map.length - 1));
   }
 
   // Remember which generation this movement belongs to
@@ -215,6 +213,13 @@ async function player_move( direction     ,
 
   // Draw the level after the player has moved
   level_draw(game.level);
+
+  // Kill the player if were thrust into a wall
+  if(hit_wall)
+  {
+    player_die();
+    return;
+  }
 
   // Resolve the effects of the tile the player landed on
   await tile_resolve(direction);
