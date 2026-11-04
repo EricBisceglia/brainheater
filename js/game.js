@@ -7,13 +7,14 @@
 /*********************************************************************************************************************/
 
 const game = {
-  level:      0         ,
-  player_x:   0         ,
-  player_y:   0         ,
-  status:     'playing' ,
-  animation:  null      ,
-  generation: 0         ,
-  visited:    new Set()
+  level:      0         , // Current level ID
+  player_x:   0         , // Player's current position
+  player_y:   0         , // Player's current position
+  status:     'playing' , // Current game status ('playing', 'dead', 'completed')
+  animation:  null      , // Ongoing player animation
+  generation: 0         , // Level generation counter (incremented on reset and victory)
+  visited:    new Set() , // Tiles visited by the player in the current generation
+  completed:  new Set()   // Levels completed by the player
 };
 
 
@@ -25,13 +26,17 @@ const game = {
 /*                                                                                                                   */
 /*********************************************************************************************************************/
 /*                                                                                                                   */
-/*  level_load     Loads a level.                                                                                    */
-/*  level_restart  Restarts the current level.                                                                       */
+/*  level_load      Loads a level.                                                                                   */
+/*  level_restart   Restarts the current level.                                                                      */
 /*                                                                                                                   */
-/*  tile_resolve   Resolves the effect of tile the player is standing on.                                            */
+/*  tile_resolve    Resolves the effect of tile the player is standing on.                                           */
 /*                                                                                                                   */
-/*  player_move    Moves the player one tile in the requested direction.                                             */
-/*  player_die     Kills the player and triggers the death animation.                                                */
+/*  player_move     Moves the player one tile in the requested direction.                                            */
+/*  player_die      Kills the player and triggers the death animation.                                               */
+/*  player_win      Marks the level as completed and loads the next one.                                             */
+/*                                                                                                                   */
+/*  progress_save   Saves the current game progression.                                                              */
+/*  progress_load   Loads the saved game progression.                                                                */
 /*                                                                                                                   */
 /*********************************************************************************************************************/
 
@@ -73,6 +78,9 @@ function level_load(level_id)
 
   // Draw the level
   level_draw(game.level);
+
+  // Update the level selector
+  level_select_draw();
 }
 
 
@@ -117,6 +125,11 @@ async function tile_resolve(direction)
     // Jump pad
     case 'J':
       await player_move(direction, 2);
+      break;
+
+    // Exit
+    case 'G':
+      player_win();
       break;
   }
 }
@@ -253,6 +266,92 @@ function player_die()
 
 
 
+/**
+ * Marks the current level as completed and loads the next one.
+ *
+ * @returns {void}
+ */
+
+function player_win()
+{
+  // Stop here if the gamestate prevents victory
+  if(game.status !== 'playing')
+    return;
+
+  // Mark the level as completed
+  game.status = 'won';
+  game.completed.add(game.level);
+
+  // Save the updated progression
+  progress_save();
+
+  // Move on to the next level, looping back to the start after the final one
+  const next_level = (game.level + 1) % levels.length;
+  level_load(next_level);
+}
+
+
+
+
+/**
+ * Saves the current game progression.
+ *
+ * @returns {void}
+ */
+
+function progress_save()
+{
+  // Convert the set of completed levels into an array in the browser's local storage
+  try
+  {
+    localStorage.setItem('brainheater-completed-levels', JSON.stringify([...game.completed]));
+  }
+
+  // Allow play to continue even if progress cannot be saved
+  catch(error)
+  {
+    console.warn("Could not save the game's progression to the browser's local storage.", error);
+  }
+}
+
+
+
+
+/**
+ * Loads the current game progression.
+ *
+ * @returns {void}
+ */
+
+function progress_load()
+{
+  // Attempt to load the saved progression from the browser's local storage
+  try
+  {
+    // Fetch the current saved progression from local storage
+    const completed = JSON.parse(localStorage.getItem('brainheater-completed-levels') || '[]');
+
+    // Skip wrong data
+    if(!Array.isArray(completed))
+      return;
+
+    // Filter out invalid / oob level ids
+    game.completed = new Set(completed.filter(function(level_id)
+    {
+      return Number.isInteger(level_id) && level_id >= 0 && level_id < levels.length;
+    }));
+  }
+
+  // Allow play to continue even if loading progress fails
+  catch(error)
+  {
+    console.warn("Could not load the game's progression from the browser's local storage.", error);
+  }
+}
+
+
+
+
 /*********************************************************************************************************************/
 /*                                                                                                                   */
 /*                                                      CONTROLS                                                     */
@@ -308,6 +407,29 @@ document.addEventListener('keydown', function(event)
         level_restart();
       break;
   }
+
+  // Handle levelset selection
+  document.getElementById('levelset_select').addEventListener('change', function(event)
+  {
+    // Fetch the selected levelset
+    const set_id = Number(event.target.value);
+
+    // Figure out its first level's id
+    const level_id = levels.findIndex(function(level)
+    {
+      return level.set === set_id;
+    });
+
+    // Stop here if the levelset has no levels
+    if(level_id === -1)
+      return;
+
+    // Load the levelset's first level
+    level_load(level_id);
+
+    // Return keyboard control to the board (else the game will become unplayable)
+    document.getElementById('brain_board').focus({ preventScroll: true });
+  });
 });
 
 
@@ -319,5 +441,14 @@ document.addEventListener('keydown', function(event)
 /*                                                                                                                   */
 /*********************************************************************************************************************/
 
-// Load the first level
-level_load(0);
+// Load saved progression
+progress_load();
+
+// Find the first level that hasn't been completed yet
+const first_unfinished = levels.findIndex(function(level, level_id)
+{
+  return !game.completed.has(level_id);
+});
+
+// Load the first unfinished level, or return to the beginning if everything is complete
+level_load(first_unfinished === -1 ? 0 : first_unfinished);

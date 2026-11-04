@@ -147,6 +147,9 @@ button:focus-visible, select:focus-visible, .brain_board:focus-visible
                           color: var(--darkink); font-size: 0.9rem;                   }
 .level_button.selected  { color: var(--yellow); border: 1px solid var(--yellow)       ;
                           border-radius: 46% 54% 49% 51%; transform: rotate(-5deg);   }
+.level_check            { position: absolute; top: -0.2rem; right: -0.2rem            ;
+                          color: var(--green); font-size: 0.75rem; line-height: 1     ;
+                          pointer-events: none;                                       }
 
 /*********************************************************************************************************************/
 /*                                                                                                                   */

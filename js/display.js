@@ -1,9 +1,10 @@
 /*********************************************************************************************************************/
 /*                                                                                                                   */
-/*  level_draw      Draw a level on the game board.                                                                  */
+/*  level_draw          Draw a level on the game board.                                                              */
+/*  level_select_draw   Generate the contents of the level selector.                                                 */
 /*                                                                                                                   */
-/*  animate_player  Animate the player's movement on the board.                                                      */
-/*  animate_death   Animate the player's death.                                                                      */
+/*  animate_player      Animate the player's movement on the board.                                                  */
+/*  animate_death       Animate the player's death.                                                                  */
 /*                                                                                                                   */
 /*********************************************************************************************************************/
 
@@ -123,6 +124,89 @@ function level_draw(level_id)
       // Place the tile on the board
       board.append(tile);
     }
+  }
+}
+
+
+
+
+/**
+ * Generates the contents of the level selector.
+ *
+ * @returns {void}
+ */
+
+function level_select_draw()
+{
+  // Fetch the level selector elements
+  const select  = document.getElementById('levelset_select');
+  const buttons = document.getElementById('level_buttons');
+
+  // Fetch the current level's levelset
+  const current_set = levels[game.level].set;
+
+  // Clear the level selector
+  select.replaceChildren();
+  buttons.replaceChildren();
+
+  // Make a list of levelsets
+  for(let set_id = 0; set_id < levelsets.length; set_id++)
+  {
+    const option        = document.createElement('option');
+    option.value        = set_id;
+    option.textContent  = levelsets[set_id].name;
+    select.append(option);
+  }
+
+  // Select the current level's levelset
+  select.value = current_set;
+
+  // Make a list of levels belonging to the current levelset
+  for(let level_id = 0; level_id < levels.length; level_id++)
+  {
+    // Fetch each level's data
+    const level = levels[level_id];
+
+    // Skip levels belonging to another levelset
+    if(level.set !== current_set)
+      continue;
+
+    // Fetch the level's completion state and create the level button
+    const completed = game.completed.has(level_id);
+    const button    = document.createElement('button');
+    button.type     = 'button';
+    button.classList.add('level_button');
+    button.textContent = String(level_id + 1).padStart(2, '0');
+
+    // Describe the level
+    button.setAttribute('aria-label', 'Level ' + (level_id + 1) + ': ' + level.name + (completed ? ', completed' : ''));
+
+    // Highlight the current level
+    if(level_id === game.level)
+    {
+      button.classList.add('selected');
+      button.setAttribute('aria-current', 'step');
+    }
+
+    // Mark cleared levels as completed
+    if(completed)
+    {
+      const check = document.createElement('span');
+      check.classList.add('level_check');
+      check.textContent = '✓';
+      check.setAttribute('aria-hidden', 'true');
+      button.append(check);
+    }
+
+    // Load levels when clicked on (and return keyboard control to the game board else the game will become unplayble)
+    button.addEventListener('click', function()
+    {
+      level_load(level_id);
+      document.getElementById('brain_board').focus({ preventScroll: true });
+    });
+
+    // Draw the level buttons
+    buttons.append(button);
   }
 }
 
