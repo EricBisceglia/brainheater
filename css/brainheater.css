@@ -76,8 +76,8 @@ button:focus-visible, select:focus-visible, .brain_board:focus-visible
 /*                                                                                                                   */
 /*********************************************************************************************************************/
 
-.brain_board_container    { position: relative; width: 100%; max-width: 314px; margin: 0 auto       ;
-                            --board_size: 314px;                                                    }
+.brain_board_container    { position: relative; width: 100%; max-width: var(--board_size)           ;
+                            margin: 0 auto; container-type: inline-size; --board_size: 314px;       }
 .brain_board              { position: relative; display: grid;                                      ;
                             grid-template-columns: repeat(var(--grid_size), minmax(0, 1fr))         ;
                             grid-template-rows: repeat(var(--grid_size), minmax(0, 1fr))            ;
@@ -98,8 +98,8 @@ button:focus-visible, select:focus-visible, .brain_board:focus-visible
                             border-right: 1px solid var(--grid)                                     ;
                             border-bottom: 1px solid var(--grid)                                    }
 .tile > span:not(.player) { position: absolute; inset: 0; display: grid; place-items: center        ;
-                            font-size: min(12vw, calc(var(--board_size) / var(--grid_size) * 0.75)) ;
-                            line-height: 1; pointer-events: none; transform: translateY(0.12em);    }
+                            font-size: calc(100cqw / var(--grid_size) * 0.75); line-height: 1       ;
+                            pointer-events: none; transform: translateY(0.12em);                    }
 .tile_light:not(.tile_exit):not(.tile_player)
                           { background: #C0CEAE0C;                                                  }
 .tile_loss                { color: var(--red);                                                      }
@@ -124,10 +124,11 @@ button:focus-visible, select:focus-visible, .brain_board:focus-visible
 @keyframes death_shake  { 0%, 100% { transform: translateX(0);                                                  }
                           20%, 60% { transform: translateX(-4px);                                               }
                           40%, 80% { transform: translateX(4px);                                              } }
-.death_message          { position: absolute; inset: 19% 12%; text-align: center; transform: rotate(-2deg)      ;
+.death_message          { position: absolute; text-align: center; top: 50%; left: 50%; width: max-content       ;
+                          min-width: min(17rem, 85%); max-width: 85%; padding: 2rem 1.8rem; z-index: 5          ;
+                          transform: translate(-50%, -50%) rotate(-2deg); border-radius: 3px 7px 3px 2px        ;
                           display: flex; flex-direction: column; align-items: center; justify-content: center   ;
-                          padding: 1rem; background: #20262BF5; border: 1px solid #A5B2A488                     ;
-                          border-radius: 3px 7px 3px 2px; box-shadow: 5px 7px 0 #0E121666; z-index: 5;          }
+                          background: #20262BF5; border: 1px solid #A5B2A488; box-shadow: 5px 7px 0 #0E121666;  }
 .death_message h3       { margin: 0 0 0.6rem; font-size: 1.8rem; font-weight: normal;                           }
 .death_message p        { margin: 0; color: var(--darkink); font-size: 0.85rem;                                 }
 

@@ -62,6 +62,12 @@ document.addEventListener('keydown', function(event)
 
 
 
+/*********************************************************************************************************************/
+/*                                                                                                                   */
+/*                                                   LEVEL SELECT                                                    */
+/*                                                                                                                   */
+/*********************************************************************************************************************/
+
 // Handle levelset selection
 document.getElementById('levelset_select').addEventListener('change', function(event)
 {
@@ -88,20 +94,11 @@ document.getElementById('levelset_select').addEventListener('change', function(e
 
 
 
-// Handle progression reset
-document.getElementById('progress_reset').addEventListener('click', progress_reset);
-
-
-
-
-// Handle language selection
-document.getElementById('language_select').addEventListener('change', function(event)
-{
-  language_change(event.target.value);
-});
-
-
-
+/*********************************************************************************************************************/
+/*                                                                                                                   */
+/*                                                     SETTINGS                                                      */
+/*                                                                                                                   */
+/*********************************************************************************************************************/
 
 // Open settings
 document.getElementById('settings_open').addEventListener('click', function()
@@ -109,22 +106,23 @@ document.getElementById('settings_open').addEventListener('click', function()
   document.getElementById('settings_menu').showModal();
 });
 
-
-
-
-
 // Close settings
 document.getElementById('settings_close').addEventListener('click', function()
 {
   document.getElementById('settings_menu').close();
 });
 
-
-
-
-
 // Return keyboard control to the game board after closing settings
 document.getElementById('settings_menu').addEventListener('close', function()
 {
   document.getElementById('brain_board').focus({ preventScroll: true });
+});
+
+// Handle progression reset
+document.getElementById('progress_reset').addEventListener('click', progress_reset);
+
+// Handle language selection
+document.getElementById('language_select').addEventListener('change', function(event)
+{
+  language_change(event.target.value);
 });

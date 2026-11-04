@@ -40,8 +40,15 @@ function level_draw(level_id)
                                                       + ' / '
                                                       + String(levels.length).padStart(2, '0');
 
-  // Update the size of the board
-  board.style.setProperty('--grid_size', level.map.length);
+  // Fetch the level's grid size
+  const grid_size = level.map.length;
+
+  // Calculate the size of the board
+  const board_size = 314 + Math.max(0, grid_size - 4) * 32;
+
+  // Update the board and its container
+  board.style.setProperty('--grid_size', grid_size);
+  board.parentElement.style.setProperty('--board_size', board_size + 'px');
 
   // Delete any previously existing level
   board.replaceChildren();

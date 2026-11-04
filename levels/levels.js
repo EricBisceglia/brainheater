@@ -64,13 +64,19 @@ const levels = [
     set:    2,
     start:  [0, 0],
     map:    [
-      '.......',
-      '.......',
-      '.......',
-      '.......',
-      '.......',
-      '.......',
-      '......G'
+      "...X.J.J.XXXX",
+      "JJXJ.JXXXX...",
+      "X.JX...X.X..X",
+      "X......XJXJ..",
+      "XX.JXXXJ...J.",
+      "..JX..JJX..J.",
+      "J...J.X...XJJ",
+      "XXXX...X.XJ.X",
+      "X.XJ.X.X...XJ",
+      "X.X.XXJJ....X",
+      "XX.X.JXJ.X.X.",
+      "XXXX.......X.",
+      "XXJ..XJX.X.XG"
     ]
   }
 ];
