@@ -100,6 +100,8 @@ button:focus-visible, select:focus-visible, .brain_board:focus-visible
 .tile > span:not(.player) { position: absolute; inset: 0; display: grid; place-items: center        ;
                             font-size: min(12vw, calc(var(--board_size) / var(--grid_size) * 0.75)) ;
                             line-height: 1; pointer-events: none; transform: translateY(0.12em);    }
+.tile_light:not(.tile_exit):not(.tile_player)
+                          { background: #C0CEAE0C;                                                  }
 .tile_loss                { color: var(--red);                                                      }
 .tile_jump                { color: var(--green);                                                    }
 .tile_exit                { color: var(--yellow); background: var(--yellowish);                     }
@@ -107,6 +109,10 @@ button:focus-visible, select:focus-visible, .brain_board:focus-visible
 .tile .player             { position: absolute; inset: 0; margin: auto; width: 60%; height: 60%     ;
                             border: 3px solid var(--yellow); border-radius: 46% 54% 49% 51%         ;
                             transform: rotate(-12deg); pointer-events: none;                        }
+.tile_visited:not(.tile_loss):not(.tile_jump):not(.tile_exit):not(.tile_player):after
+                          { content: ''; position: absolute; inset: 0; margin: auto; width: 4px     ;
+                            height: 4px; background: #9BA98D66; border-radius: 50%                  ;
+                            pointer-events: none;                                                   }
 
 /*********************************************************************************************************************/
 /*                                                                                                                   */

@@ -12,7 +12,8 @@ const game = {
   player_y:   0         ,
   status:     'playing' ,
   animation:  null      ,
-  generation: 0
+  generation: 0         ,
+  visited:    new Set()
 };
 
 
@@ -60,6 +61,9 @@ function level_load(level_id)
     game.animation.cancel();
     game.animation = null;
   }
+
+  // Clear the visited tiles
+  game.visited = new Set();
 
   // Reset the game state
   game.level    = level_id;
@@ -176,6 +180,9 @@ async function player_move(direction)
   // Stop here if the level was restarted during movement
   if(generation !== game.generation)
     return;
+
+  // Remember the coordinates of the tile the player has just left
+  game.visited.add(game.player_x + ',' + game.player_y);
 
   // Update the player's position
   game.player_x = next_x;

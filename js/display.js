@@ -58,6 +58,14 @@ function level_draw(level_id)
       const tile = document.createElement('div');
       tile.classList.add('tile');
 
+      // Lighten tiles along repeating diagonals (for decoration)
+      if((x + y) % 3 === 0)
+        tile.classList.add('tile_light');
+
+      // Style the visited tiles
+      if(game.visited.has(x + ',' + y))
+        tile.classList.add('tile_visited');
+
       // Store the tile's coordinate
       tile.dataset.x = x;
       tile.dataset.y = y;
