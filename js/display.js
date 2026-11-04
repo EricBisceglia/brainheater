@@ -148,12 +148,12 @@ function level_select_draw()
   select.replaceChildren();
   buttons.replaceChildren();
 
-  // Make a list of levelsets
-  for(let set_id = 0; set_id < levelsets.length; set_id++)
+    // Make a list of levelsets
+  for(const levelset of levelsets)
   {
     const option        = document.createElement('option');
-    option.value        = set_id;
-    option.textContent  = levelsets[set_id].name;
+    option.value        = levelset.id;
+    option.textContent  = levelset.name;
     select.append(option);
   }
 
