@@ -27,7 +27,10 @@ const game = {
 /*  level_load     Loads a level.                                                                                    */
 /*  level_restart  Restarts the current level.                                                                       */
 /*                                                                                                                   */
-/*  move_player    Moves the player one tile in the requested direction.                                             */
+/*  tile_resolve   Resolves the effect of tile the player is standing on.                                            */
+/*                                                                                                                   */
+/*  player_move    Moves the player one tile in the requested direction.                                             */
+/*  player_die     Kills the player and triggers the death animation.                                                */
 /*                                                                                                                   */
 /*********************************************************************************************************************/
 
@@ -65,7 +68,7 @@ function level_load(level_id)
   game.status   = 'playing';
 
   // Draw the level
-  draw_level(game.level);
+  level_draw(game.level);
 }
 
 
@@ -86,6 +89,30 @@ function level_restart()
 
 
 /**
+ * Resolves the effect of tile the player is standing on.
+ *
+ * @returns {void}
+ */
+
+function tile_resolve()
+{
+  // Fetch the tile under the player
+  const level = levels[game.level];
+  const tile  = level.map[game.player_y][game.player_x];
+
+  // Handle the tile's effect
+  switch(tile)
+  {
+    case 'X':
+      player_die();
+      break;
+  }
+}
+
+
+
+
+/**
  * Moves the player one tile in the requested direction.
  *
  * @param   {string}  direction  The direction to move (up, down, left, right).
@@ -93,7 +120,7 @@ function level_restart()
  * @returns {void}
  */
 
-async function move_player(direction)
+async function player_move(direction)
 {
   // Stop here if the player isn't allowed to move
   if(game.status !== 'playing')
@@ -154,11 +181,39 @@ async function move_player(direction)
   game.player_x = next_x;
   game.player_y = next_y;
 
-  // Allow movement again
+  // Allow movement to resume
   game.status = 'playing';
 
-  // Draw the player inside the destination tile
-  draw_level(game.level);
+  // Draw the level after the player has moved
+  level_draw(game.level);
+
+  // Resolve the effects of the tile the player landed on
+  tile_resolve();
+}
+
+
+
+
+/**
+ * Kills the player and triggers the death animation.
+ *
+ * @returns {void}
+ */
+
+function player_die()
+{
+  // Stop here if the player is already dead
+  if(game.status === 'dead')
+    return;
+
+  // Prevent further movement by changing the game's state
+  game.status = 'dead';
+
+  // Draw the level in its lost state
+  level_draw(game.level);
+
+  // Animate the player's death
+  animate_death();
 }
 
 
@@ -188,28 +243,28 @@ document.addEventListener('keydown', function(event)
     case 'ArrowUp':
       event.preventDefault();
       if(!event.repeat)
-        move_player('up');
+        player_move('up');
       break;
 
     // Move the player down
     case 'ArrowDown':
       event.preventDefault();
       if(!event.repeat)
-        move_player('down');
+        player_move('down');
       break;
 
     // Move the player left
     case 'ArrowLeft':
       event.preventDefault();
       if(!event.repeat)
-        move_player('left');
+        player_move('left');
       break;
 
     // Move the player right
     case 'ArrowRight':
       event.preventDefault();
       if(!event.repeat)
-        move_player('right');
+        player_move('right');
       break;
 
     // Restart the level

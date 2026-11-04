@@ -1,7 +1,9 @@
 /*********************************************************************************************************************/
 /*                                                                                                                   */
-/*  draw_level      Draw a level on the game board.                                                                  */
+/*  level_draw      Draw a level on the game board.                                                                  */
+/*                                                                                                                   */
 /*  animate_player  Animate the player's movement on the board.                                                      */
+/*  animate_death   Animate the player's death.                                                                      */
 /*                                                                                                                   */
 /*********************************************************************************************************************/
 
@@ -13,7 +15,7 @@
  * @returns {void}
  */
 
-function draw_level(level_id)
+function level_draw(level_id)
 {
   // Fetch the requested level
   const level = levels[level_id];
@@ -24,6 +26,12 @@ function draw_level(level_id)
 
   // Fetch the board's element id
   const board = document.getElementById('brain_board');
+
+  // Hide any previous death message
+  document.getElementById('death_message').hidden = true;
+
+  // Update the board's death state
+  board.classList.toggle('dead', game.status === 'dead');
 
   // Update the level info
   document.getElementById('level_name').textContent   = level.name;
@@ -147,11 +155,7 @@ async function animate_player(next_x, next_y)
       { transform: 'translate(0px, 0px) rotate(-12deg)'                                   } ,
       { transform: 'translate(' + distance_x + 'px, ' + distance_y + 'px) rotate(-12deg)' }
     ] ,
-    {
-      duration: 120         ,
-      easing:   'ease-out'  ,
-      fill:     'forwards'
-    }
+    { duration: 120 , easing: 'ease-out' , fill: 'forwards' }
   );
 
   // Keep a reference to this animation so it can be cancelled if the player restarts the level
@@ -176,4 +180,68 @@ async function animate_player(next_x, next_y)
     if(game.animation === animation)
       game.animation = null;
   }
+}
+
+
+
+
+/**
+ * Animates the player's death.
+ *
+ * @returns {Promise<void>}
+ */
+
+async function animate_death()
+{
+  // Track which attempt this animation belongs to
+  const generation = game.generation;
+
+  // Fetch the player
+  const board  = document.getElementById('brain_board');
+  const player = board.querySelector('.player');
+
+  // Stop here if the player tile is missing (uh oh)
+  if(!player)
+    return;
+
+  // Shrink and fade the player
+  const animation = player.animate(
+    [
+      { offset: 0,    transform: 'translateX(0px) rotate(-12deg) scale(1)',     opacity: 1    },
+      { offset: 0.2,  transform: 'translateX(-4px) rotate(-20deg) scale(1.1)',  opacity: 1    },
+      { offset: 0.4,  transform: 'translateX(4px) rotate(0deg) scale(1)',       opacity: 1    },
+      { offset: 1,    transform: 'translateX(0px) rotate(-30deg) scale(0.2)',   opacity: 0.2  }
+    ],
+    { duration: 280, easing: 'ease-out', fill: 'forwards' }
+  );
+
+  // Keep a reference to this animation so it can be cancelled if the player restarts the level
+  game.animation = animation;
+
+  // Wait for the animation to finish
+  try
+  {
+    await animation.finished;
+  }
+
+  // Cancellation is expected if the player restarts the level
+  catch(error)
+  {
+    if(error.name !== 'AbortError')
+      throw error;
+  }
+
+  // Clear the animation reference once it's done (if it hasn't been replaced yet)
+  finally
+  {
+    if(game.animation === animation)
+      game.animation = null;
+  }
+
+  // Stop here if the player restarted during the animation
+  if(generation !== game.generation || game.status !== 'dead')
+    return;
+
+  // Show the death message once the animation finishes
+  document.getElementById('death_message').hidden = false;
 }
