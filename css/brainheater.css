@@ -143,13 +143,12 @@ button:focus-visible, select:focus-visible, .brain_board:focus-visible
                           font-size: 0.8rem; cursor: pointer;                         }
 .level_buttons          { display: flex; justify-content: center; flex-wrap: wrap     ;
                           gap: 0.6rem; margin-top: 0.8rem;                            }
-.level_button           { min-width: 2.3rem; min-height: 2.3rem; padding: 0.3rem      ;
-                          color: var(--darkink); font-size: 0.9rem;                   }
+.level_button           { position: relative; min-width: 2.3rem; min-height: 2.3rem   ;
+                          padding: 0.3rem; color: var(--darkink); font-size: 0.9rem;  }
 .level_button.selected  { color: var(--yellow); border: 1px solid var(--yellow)       ;
                           border-radius: 46% 54% 49% 51%; transform: rotate(-5deg);   }
-.level_check            { position: absolute; top: -0.2rem; right: -0.2rem            ;
-                          color: var(--green); font-size: 0.75rem; line-height: 1     ;
-                          pointer-events: none;                                       }
+.level_check            { position: absolute; top: 0; right: -0; pointer-events: none ;
+                          color: var(--green); font-size: 0.75rem; line-height: 1;    }
 
 /*********************************************************************************************************************/
 /*                                                                                                                   */
@@ -158,6 +157,18 @@ button:focus-visible, select:focus-visible, .brain_board:focus-visible
 /*********************************************************************************************************************/
 
 .controls { margin: 1.5rem 0 0; text-align: center; color: var(--darkink) ; font-size: 0.85rem; }
+
+/*********************************************************************************************************************/
+/*                                                                                                                   */
+/*                                                  PROGRESS RESET                                                   */
+/*                                                                                                                   */
+/*********************************************************************************************************************/
+
+.progress_controls        { margin-top: 1.5rem; text-align: center;                           }
+.progress_reset           { padding: 0.4rem 0.7rem; color: var(--darkink); font-size: 0.75rem ;
+                            border: 1px solid var(--grid); border-radius: 5px 2px 6px 3px;    }
+.progress_reset:hover     { color: var(--red); border-color: var(--red);                      }
+@media (pointer: coarse)  { .progress_reset { min-height: 44px; }                             }
 
 /*********************************************************************************************************************/
 /*                                                                                                                   */
@@ -172,7 +183,11 @@ button:focus-visible, select:focus-visible, .brain_board:focus-visible
                                 text-decoration: none; border: 1px solid var(--grid)                ;
                                 border-radius: 5px 2px 6px 3px;                                     }
 .link_buttons a:first-child   { transform: rotate(-2deg);                                           }
-.link_buttons a:last-child    { transform: rotate(2deg);                                            }
+.link_buttons > :last-child   { transform: rotate(2deg); }
 .link_buttons a:hover         { color: var(--yellow); border-color: var(--yellow);                  }
 .link_buttons a:focus-visible { outline: 2px dashed var(--yellow); outline-offset: 5px;             }
+.link_buttons a, .link_buttons button
+                              { display: inline-flex; align-items: center; justify-content: center  ;
+                                padding: 0.4rem 0.8rem; font-size: 0.8rem; text-decoration: none    ;
+                                border: 1px solid var(--grid); border-radius: 5px 2px 6px 3px;      }
 @media (pointer: coarse)      { .link_buttons a { min-height: 44px;                               } }

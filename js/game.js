@@ -37,6 +37,7 @@ const game = {
 /*                                                                                                                   */
 /*  progress_save   Saves the current game progression.                                                              */
 /*  progress_load   Loads the saved game progression.                                                                */
+/*  progress_reset  Resets (deletes) saved game progression.                                                         */
 /*                                                                                                                   */
 /*********************************************************************************************************************/
 
@@ -352,6 +353,37 @@ function progress_load()
 
 
 
+/**
+ * Resets (deletes) saved game progression.
+ *
+ * @returns {void}
+ */
+
+function progress_reset()
+{
+  // Ask before erasing progression
+  const confirmed = window.confirm('Erase all completed levels and start from the beginning?\n\nThis cannot be undone.');
+
+  // Stop here if the player changed their mind
+  if(!confirmed)
+    return;
+
+  // Clear the completed levels
+  game.completed.clear();
+
+  // Save the cleared progression
+  progress_save();
+
+  // Return to the first level
+  level_load(0);
+
+  // Return keyboard control to the board (else the game will become unplayable)
+  document.getElementById('brain_board').focus({ preventScroll: true });
+}
+
+
+
+
 /*********************************************************************************************************************/
 /*                                                                                                                   */
 /*                                                      CONTROLS                                                     */
@@ -407,30 +439,33 @@ document.addEventListener('keydown', function(event)
         level_restart();
       break;
   }
-
-  // Handle levelset selection
-  document.getElementById('levelset_select').addEventListener('change', function(event)
-  {
-    // Fetch the selected levelset
-    const set_id = Number(event.target.value);
-
-    // Figure out its first level's id
-    const level_id = levels.findIndex(function(level)
-    {
-      return level.set === set_id;
-    });
-
-    // Stop here if the levelset has no levels
-    if(level_id === -1)
-      return;
-
-    // Load the levelset's first level
-    level_load(level_id);
-
-    // Return keyboard control to the board (else the game will become unplayable)
-    document.getElementById('brain_board').focus({ preventScroll: true });
-  });
 });
+
+// Handle levelset selection
+document.getElementById('levelset_select').addEventListener('change', function(event)
+{
+  // Fetch the selected levelset
+  const set_id = Number(event.target.value);
+
+  // Figure out its first level's id
+  const level_id = levels.findIndex(function(level)
+  {
+    return level.set === set_id;
+  });
+
+  // Stop here if the levelset has no levels
+  if(level_id === -1)
+    return;
+
+  // Load the levelset's first level
+  level_load(level_id);
+
+  // Return keyboard control to the board (else the game will become unplayable)
+  document.getElementById('brain_board').focus({ preventScroll: true });
+});
+
+// Handle progression reset
+document.getElementById('progress_reset').addEventListener('click', progress_reset);
 
 
 
