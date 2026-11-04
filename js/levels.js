@@ -24,10 +24,11 @@ const levelsets = [
 
 const levels = [
   {
-    name: 'First level',
-    set: 0,
-    start: [0, 0],
-    map: [
+    id:     '0101',
+    name:   'First level',
+    set:    0,
+    start:  [0, 0],
+    map:    [
       '.J.J',
       '.JXX',
       '.XX.',
@@ -35,10 +36,11 @@ const levels = [
     ]
   },
   {
-    name: 'Second level',
-    set: 0,
-    start: [0, 0],
-    map: [
+    id:     '0102',
+    name:   'Second level',
+    set:    0,
+    start:  [0, 0],
+    map:    [
       '.J.J.',
       '.JXX.',
       '.XX..',
@@ -47,16 +49,32 @@ const levels = [
     ]
   },
   {
-    name: 'Third level',
-    set: 1,
-    start: [0, 0],
-    map: [
+    id:     '0201',
+    name:   'Third level',
+    set:    1,
+    start:  [0, 0],
+    map:    [
       '.J.J..',
       '.JXX..',
       '.XX...',
       '.J....',
       '......',
       '.....G'
+    ]
+  },
+  {
+    id:     '0202',
+    name:   'Fourth level',
+    set:    1,
+    start:  [0, 0],
+    map:    [
+      '.......',
+      '.......',
+      '.......',
+      '.......',
+      '.......',
+      '.......',
+      '......G'
     ]
   }
 ];

@@ -21,7 +21,8 @@ function progress_save()
   // Convert the set of completed levels into an array in the browser's local storage
   try
   {
-    localStorage.setItem('brainheater-completed-levels', JSON.stringify([...game.completed]));
+    const progress = { completed: [...game.completed] };
+    localStorage.setItem('brainheater-completed-levels', JSON.stringify(progress));
   }
 
   // Allow play to continue even if progress cannot be saved
@@ -46,16 +47,22 @@ function progress_load()
   try
   {
     // Fetch the current saved progression from local storage
-    const completed = JSON.parse(localStorage.getItem('brainheater-completed-levels') || '[]');
+    const progress = JSON.parse(localStorage.getItem('brainheater-completed-levels') || 'null');
 
-    // Skip wrong data
-    if(!Array.isArray(completed))
+    // Stop here if there is no valid save to work with
+    if(!progress || !Array.isArray(progress.completed))
       return;
 
-    // Filter out invalid / oob level ids
-    game.completed = new Set(completed.filter(function(level_id)
+    // Fetch all available level ids
+    const available = new Set(levels.map(function(level)
     {
-      return Number.isInteger(level_id) && level_id >= 0 && level_id < levels.length;
+      return level.id;
+    }));
+
+    // Filter out invalid / oob level ids
+    game.completed = new Set(progress.completed.filter(function(level_id)
+    {
+      return typeof level_id === 'string' && available.has(level_id);
     }));
   }
 

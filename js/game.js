@@ -274,7 +274,7 @@ function player_win()
 
   // Mark the level as completed
   game.status = 'won';
-  game.completed.add(game.level);
+  game.completed.add(levels[game.level].id);
 
   // Save the updated progression
   progress_save();

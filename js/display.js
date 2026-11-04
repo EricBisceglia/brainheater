@@ -171,7 +171,7 @@ function level_select_draw()
       continue;
 
     // Fetch the level's completion state and create the level button
-    const completed = game.completed.has(level_id);
+    const completed = game.completed.has(level.id);
     const button    = document.createElement('button');
     button.type     = 'button';
     button.classList.add('level_button');
