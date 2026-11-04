@@ -22,18 +22,16 @@ const translations = {
   controls_move:    { en: 'Move with arrow keys', fr: 'Déplace-toi avec les flèches'  },
   controls_restart: { en: 'Space to restart',     fr: 'Recommence avec espace'        },
 
+  /*                                                    SETTINGS                                                     */
 
-  /*                                                LANGUAGE SELECTOR                                                */
-
-  language_en:  { en: 'English',  fr: 'English'   },
-  language_fr:  { en: 'Français', fr: 'Français'  },
-
-
-  /*                                                 PROGRESS RESET                                                  */
-
-  reset_progress: { en: 'Reset progression',  fr: 'Effacer la progression'       },
-  reset_confirm:  { en: 'Erase all progression and restart from the beginning?\n\nThis cannot be undone.',
-                    fr: 'Effacer toute la progression et recommencer de zéro ?\n\nCette action est irréversible.' },
+  settings:           { en: 'Settings',           fr: 'Réglages'                                                },
+  settings_close:     { en: 'Close',              fr: 'Fermer'                                                  },
+  settings_language:  { en: 'Language',           fr: 'Langue'                                                  },
+  language_en:        { en: 'English',            fr: 'English'                                                 },
+  language_fr:        { en: 'Français',           fr: 'Français'                                                },
+  reset_progress:     { en: 'Reset progression',  fr: 'Effacer la progression'                                  },
+  reset_confirm:      { en: 'Erase progression and restart from the beginning?\n\nThis cannot be undone.'       ,
+                        fr: 'Effacer la progression et recommencer de zéro ?\n\nCette action est irréversible.' },
 
 
   /*                                                    LEVELSETS                                                    */

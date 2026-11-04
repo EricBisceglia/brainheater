@@ -7,6 +7,10 @@
 // React to keyboard input
 document.addEventListener('keydown', function(event)
 {
+  // Leave keyboard input to the settings menu if it is open
+  if(document.getElementById('settings_menu').open)
+    return;
+
   // Ignore keyboard shortcuts
   if(event.ctrlKey || event.altKey || event.metaKey)
     return;
@@ -93,9 +97,34 @@ document.getElementById('progress_reset').addEventListener('click', progress_res
 // Handle language selection
 document.getElementById('language_select').addEventListener('change', function(event)
 {
-  // Set the selected language
   language_change(event.target.value);
+});
 
-  // Return keyboard control to the board (else the game will become unplayable)
+
+
+
+// Open settings
+document.getElementById('settings_open').addEventListener('click', function()
+{
+  document.getElementById('settings_menu').showModal();
+});
+
+
+
+
+
+// Close settings
+document.getElementById('settings_close').addEventListener('click', function()
+{
+  document.getElementById('settings_menu').close();
+});
+
+
+
+
+
+// Return keyboard control to the game board after closing settings
+document.getElementById('settings_menu').addEventListener('close', function()
+{
   document.getElementById('brain_board').focus({ preventScroll: true });
 });

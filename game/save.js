@@ -100,6 +100,9 @@ function progress_reset()
   // Return to the first level
   level_load(0);
 
+  // Close the settings menu
+  document.getElementById('settings_menu').close();
+
   // Return keyboard control to the board (else the game will become unplayable)
   document.getElementById('brain_board').focus({ preventScroll: true });
 }

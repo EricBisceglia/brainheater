@@ -8,14 +8,14 @@
     </title>
     <link rel="stylesheet" href="./css/brainheater.css">
     <link rel="icon" href="./favicon.ico">
-    <script src="./js/levels.js" defer></script>
-    <script src="./js/display.js" defer></script>
-    <script src="./js/game.js" defer></script>
-    <script src="./js/save.js" defer></script>
-    <script src="./js/controls.js" defer></script>
     <script src="./lang/language.js" defer></script>
     <script src="./lang/translations.js" defer></script>
-    <script src="./js/main.js" defer></script>
+    <script src="./levels/levels.js" defer></script>
+    <script src="./game/display.js" defer></script>
+    <script src="./game/game.js" defer></script>
+    <script src="./game/save.js" defer></script>
+    <script src="./game/controls.js" defer></script>
+    <script src="./game/main.js" defer></script>
   </head>
   <body>
     <main class="brain_container">
@@ -33,6 +33,7 @@
         <h1 class="brain_title">
           Brain <span>Heater</span><i>!</i>
         </h1>
+        <button type="button" id="settings_open" class="settings_open" data-i18n="settings"></button>
       </header>
 
 
@@ -103,21 +104,45 @@
         <span data-i18n="controls_restart"></span>
       </p>
 
-      <!-- Links / credits / reset progression -->
+      <!-- Links / credits -->
       <nav class="link_buttons">
-        <a href="https://discord.gg/XTd3qQKZqV" target="_blank" rel="noopener noreferrer">
-          Discord
-        </a>
         <a href="https://thebad.website/" target="_blank" rel="noopener noreferrer">
           thebad.website
         </a>
+        <a href="https://discord.gg/XTd3qQKZqV" target="_blank" rel="noopener noreferrer">
+          Discord
+        </a>
+      </nav>
+
+    </main>
+
+
+
+
+<!-------------------------------------------------------------------------------------------------------------------->
+<!--                                                                                                                -->
+<!--                                                    SETTINGS                                                    -->
+<!--                                                                                                                -->
+<!-------------------------------------------------------------------------------------------------------------------->
+
+    <dialog id="settings_menu" class="settings_menu">
+
+      <div class="settings_header">
+        <h2 data-i18n="settings"></h2>
+        <button type="button" id="settings_close" data-i18n="settings_close"></button>
+      </div>
+
+      <div class="settings_row">
+        <label for="language_select" data-i18n="settings_language"></label>
         <select id="language_select" class="language_select">
           <option value="en" data-i18n="language_en"></option>
           <option value="fr" data-i18n="language_fr"></option>
         </select>
-        <button type="button" id="progress_reset" class="progress_reset" data-i18n="reset_progress"></button>
-      </nav>
+      </div>
 
-    </main>
+      <button type="button" id="progress_reset" class="progress_reset" data-i18n="reset_progress"></button>
+
+    </dialog>
+
   </body>
 </html>
