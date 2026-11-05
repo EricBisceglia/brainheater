@@ -29,6 +29,8 @@ const game = {
 /*                                                                                                                   */
 /*  tile_resolve    Resolves the effect of tile the player is standing on.                                           */
 /*                                                                                                                   */
+/*  key_collect     Collects a key and removes all matching hazards.                                                 */
+/*                                                                                                                   */
 /*  player_move     Moves the player one tile in the requested direction.                                            */
 /*  player_die      Kills the player and triggers the death animation.                                               */
 /*  player_win      Marks the level as completed and loads the next one.                                             */
@@ -117,14 +119,20 @@ async function tile_resolve(direction)
   // Handle the tile's effect
   switch(tile)
   {
-    // Deadly tile
+    // Deadly tiles
     case 'X':
+    case 'D':
       player_die();
       break;
 
-    // Jump pad
+    // Jump
     case 'J':
       await player_move(direction, 2);
+      break;
+
+    // Key
+    case 'K':
+      key_collect();
       break;
 
     // Exit
@@ -132,6 +140,35 @@ async function tile_resolve(direction)
       player_win();
       break;
   }
+}
+
+
+
+
+/**
+ * Collects a key and removes all matching hazards.
+ *
+ * @returns {void}
+ */
+
+function key_collect()
+{
+  // Remove the collected key
+  game.map[game.player_y][game.player_x] = '.';
+
+  // Look through the map for matching hazards
+  for(let y = 0; y < game.map.length; y++)
+  {
+    for(let x = 0; x < game.map[y].length; x++)
+    {
+      // Turn locked tiles into regular tiles
+      if(game.map[y][x] === 'D')
+        game.map[y][x] = '.';
+    }
+  }
+
+  // Update the game board
+  level_draw(game.level);
 }
 
 

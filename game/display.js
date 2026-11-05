@@ -98,6 +98,15 @@ function level_draw(level_id)
           tile.classList.add('tile_exit');
           tile_symbol = '⚑';
           break;
+
+        case 'K':
+          tile.classList.add('tile_key');
+          break;
+
+        case 'D':
+          tile.classList.add('tile_loss', 'tile_locked');
+          tile_symbol = 'X';
+          break;
       }
 
       // Add the tile symbol if required
