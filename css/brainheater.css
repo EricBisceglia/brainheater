@@ -26,8 +26,6 @@
 
 @font-face            { font-family: 'brain-heater'; src: url('./kalam.ttf') format('truetype')                       ;
                         font-style: normal; font-weight: 400; font-display: swap;                                     }
-@font-face            { font-family: 'level-counter'; src: url('./courierprime.ttf') format('truetype')               ;
-                        font-style: normal; font-weight: 400; font-display: swap;                                     }
 *, *:before, *:after  { box-sizing: border-box;                                                                       }
 body                  { margin: 0; background-color: var(--paper); color: var(--ink); font-family: var(--handwriting) ;
                         line-height: 1.5; background-image: repeating-linear-gradient( to bottom, transparent 0       ,
@@ -59,17 +57,6 @@ button:focus-visible, select:focus-visible, .brain_board:focus-visible
 .brain_container:before { content: ''; position: absolute; top: 0; bottom: 0; left: 1.5rem        ;
                           width: 1px; background: var(--margin); box-shadow: 3px 0 #B976741A      ;
                           pointer-events: none;                                                   }
-
-/*********************************************************************************************************************/
-/*                                                                                                                   */
-/*                                                    LEVEL INFO                                                     */
-/*                                                                                                                   */
-/*********************************************************************************************************************/
-
-.level_info     { display: flex; align-items: baseline; flex-wrap: wrap           ;
-                    gap: 0.8rem; margin-bottom: 1.5rem; justify-content: center;  }
-.level_number   { color: var(--darkink); font: 1.0rem 'level-counter', monospace; }
-.level_info h2  { margin: 0; font-size: 1rem; font-weight: normal;                }
 
 /*********************************************************************************************************************/
 /*                                                                                                                   */
@@ -118,9 +105,11 @@ button:focus-visible, select:focus-visible, .brain_board:focus-visible
 .tile_jump                { color: var(--green);                                                        }
 .tile_exit                { color: var(--yellow); background: var(--yellowish);                         }
 .tile_launcher            { color: var(--orange); margin-top: -0.8rem;                                  }
-.tile_launcher:before     { content: '↕'; position: absolute; inset: 0; display: grid                   ;
-                            place-items: center; font-size: calc(100cqw / var(--grid_size) * 0.75)      ;
-                            line-height: 1; transform: translateY(0.12em); pointer-events: none;        }
+.tile_launcher > span:not(.player), .tile_launcher:before
+                          { position: absolute; inset: 0; display: grid; place-items: center            ;
+                            font-family: Arial, sans-serif;  transform: none; pointer-events: none      ;
+                            font-size: calc(100cqw / var(--grid_size) * 0.75); line-height: 1;          }
+.tile_launcher:before     { content: '↕';                                                               }
 .tile_key:before, .tile_key:after, .tile_locked:before, .tile_locked:after
                           { content: ''; position: absolute; pointer-events: none;                      }
 .tile_key:before          { left: 21%; top: 33%; width: 28%; height: 28%                                ;

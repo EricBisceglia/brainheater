@@ -6,7 +6,13 @@
 
 const levelsets = [
   { id: 1,  name: 'set_first_pages' },
-  { id: 2,  name: 'set_more_pages'  }
+  { id: 2,  name: 'set_keys'        },
+  { id: 3,  name: 'set_arrows'      },
+  { id: 4,  name: 'set_launchers'   },
+  { id: 5,  name: 'set_crumblers'   },
+  { id: 6,  name: 'set_erasers'     },
+  { id: 7,  name: 'set_portals'     },
+  { id: 8,  name: 'set_final_pages' }
 ];
 
 
@@ -31,52 +37,104 @@ const levelsets = [
 const levels = [
   {
     id:     '0101',
-    name:   'level_first',
     set:    1,
-    start:  [0, 0],
     map:    [
-      '.J.J',
-      '.JXX',
-      '.XX.',
-      '.J.G'
+      ".....",
+      "XXXX.",
+      ".....",
+      ".XXXX",
+      "....G"
     ]
   },
   {
     id:     '0102',
-    name:   'level_second',
     set:    1,
-    start:  [0, 0],
     map:    [
-      '.J.J.',
-      '.JXX.',
-      '.XX..',
-      '.J...',
-      '....G'
+      "..J..",
+      "XXXX.",
+      ".XJ..",
+      ".XXXX",
+      "....G"
     ]
   },
   {
-    id:     '0201',
-    name:   'level_third',
-    set:    2,
-    start:  [0, 0],
+    id:     '0103',
+    set:    1,
     map:    [
-      '.J.J.D',
-      '.JXX..',
-      '.XX...',
-      '.JKDD.',
-      '.L..DD',
-      '....DG'
+      ".JXXXX",
+      ".JXJ.X",
+      ".JXXXX",
+      "..JXJ.",
+      "X.JXX.",
+      "X..JXG"
     ]
   },
   {
-    id:     '0202',
-    name:   'level_fourth',
-    set:    2,
-    start:  [0, 0],
+    id:     '0104',
+    set:    1,
+    map:    [
+      "..J.X..",
+      ".XX.XXJ",
+      "JX..JX.",
+      "XX.XXXJ",
+      "JX..X..",
+      ".XX.X..",
+      ".JX.X.G"
+    ]
+  },
+  {
+    id:     '0105',
+    set:    1,
+    map:    [
+      "..J.J.J.",
+      "XJXXXXXJ",
+      "XX...JX.",
+      "XJ...JXJ",
+      "XX...JX.",
+      "XJ....XJ",
+      "XXXXJJX.",
+      "...J..XG"
+    ]
+  },
+  {
+    id:     '0106',
+    set:    1,
+    map:    [
+      ".XX...XX.",
+      ".XX.J.XX.",
+      "....X....",
+      "JJJJJJJJJ",
+      "XXXXXXXXX",
+      "JJJJJJJJJ",
+      "XXXX.....",
+      "JXJX.XJXX",
+      "XXXX..JXG"
+    ]
+  },
+  {
+    id:     '0107',
+    set:    1,
+    map:    [
+      "..JJX.....X",
+      ".XJXX.XX..X",
+      ".XJJ...X..X",
+      ".X.JX..X.J.",
+      ".X...X.X.JX",
+      "JX.XJ..X.JX",
+      ".J.J.JJXX.J",
+      ".XXX.XX.XJ.",
+      ".XJJXXX..XX",
+      "......X....",
+      "JXX..X....G"
+    ]
+  },
+  {
+    id:     '0108',
+    set:    1,
     map:    [
       "...X.J.J.XXXX",
       "JJXJ.JXXXX...",
-      "X.JX...X.X..X",
+      "X.JX...X.X...",
       "X......XJXJ..",
       "XX.JXXXJ...J.",
       "..JX..JJX..J.",
@@ -88,5 +146,29 @@ const levels = [
       "XXXX.......X.",
       "XXJ..XJX.X.XG"
     ]
-  }
+  },
+  {
+    id:     '0201',
+    set:    2,
+    map:    [
+      "..J.K",
+      "DXXXJ",
+      "..J..",
+      "..JDX",
+      "..XDG"
+    ]
+  },
+  {
+    id:     '0401',
+    set:    4,
+    map: [
+      "..X....",
+      "..X...X",
+      "..XJJJL",
+      "..LXXX.",
+      "..XXLXX",
+      "..X....",
+      "..X..JG"
+    ]
+  },
 ];

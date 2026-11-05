@@ -136,10 +136,6 @@ function language_apply()
   // Flip the language selector to the current language
   document.getElementById('language_select').value = language.current;
 
-  // Translate the current level's name
-  const level = levels[game.level];
-  document.getElementById('level_name').textContent = string_translate(level.name);
-
   // Redraw the level selector in the current language
   level_select_draw();
 }

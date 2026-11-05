@@ -76,8 +76,8 @@ function level_load(level_id)
 
   // Reset the game state
   game.level    = level_id;
-  game.player_x = level.start[0];
-  game.player_y = level.start[1];
+  game.player_x = 0;
+  game.player_y = 0;
   game.status   = 'playing';
 
   // Draw the level

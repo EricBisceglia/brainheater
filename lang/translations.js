@@ -36,15 +36,13 @@ const translations = {
 
   /*                                                    LEVELSETS                                                    */
 
-  set_first_pages:  { en: 'The first pages',  fr: 'Les premières pages' },
-  set_more_pages:   { en: 'More pages',       fr: 'D\'autres pages'     },
-
-
-  /*                                                     LEVELS                                                      */
-
-  level_first:  { en: 'First level',  fr: 'Premier niveau'    },
-  level_second: { en: 'Second level', fr: 'Deuxième niveau'   },
-  level_third:  { en: 'Third level',  fr: 'Troisième niveau'  },
-  level_fourth: { en: 'Fourth level', fr: 'Quatrième niveau'  }
+  set_first_pages:  { en: 'First pages',        fr: 'Premières pages'         },
+  set_keys:         { en: 'Keys to success',    fr: 'Les clés du succès'      },
+  set_arrows:       { en: 'A turn of events',   fr: 'Nouvelle direction'      },
+  set_launchers:    { en: 'Full speed ahead',   fr: 'À toute allure'          },
+  set_crumblers:    { en: 'Leaving it behind',  fr: 'Fuir le passé'           },
+  set_erasers:      { en: 'Forgotten memories', fr: 'Sans laisser de traces'  },
+  set_portals:      { en: 'A long journey',     fr: 'Un long voyage'          },
+  set_final_pages:  { en: 'Final pages',        fr: 'Dernières pages'         },
 
 };

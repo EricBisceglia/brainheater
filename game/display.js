@@ -34,12 +34,6 @@ function level_draw(level_id)
   // Update the board's death state
   board.classList.toggle('dead', game.status === 'dead');
 
-  // Update the level info
-  document.getElementById('level_name').textContent   = string_translate(level.name);
-  document.getElementById('level_number').textContent = String(level_id + 1).padStart(2, '0')
-                                                      + ' / '
-                                                      + String(levels.length).padStart(2, '0');
-
   // Fetch the level's grid size
   const grid_size = game.map.length;
 
