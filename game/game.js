@@ -14,7 +14,7 @@ const game = {
   player_y:   0         , // Player's current position
   status:     'playing' , // Current game status ('playing', 'moving', 'dead', 'won')
   animation:  null      , // Ongoing player animation
-  chain:      new Set() , // Movement states experienced during the current move
+  chain:      new Map() , // Movement states experienced during the current move
   visited:    new Set() , // Tiles visited by the player in the current generation
   completed:  new Set()   // Levels completed by the player
 };
@@ -133,15 +133,16 @@ async function tile_resolve(direction)
     // Serialize the current movement state
     const state = JSON.stringify([game.player_x, game.player_y, direction, game.map]);
 
-    // Kill the player if trapped in a repeating movement state
-    if(game.chain.has(state))
+    // Count how many times this movement state has occurred
+    const visits = (game.chain.get(state) || 0) + 1;
+    game.chain.set(state, visits);
+
+    // Kill the player after four repetitions
+    if(visits > 4)
     {
       player_die();
       return;
     }
-
-    // Otherwise add the current movement state to the ongoing chain
-    game.chain.add(state);
   }
 
   // Handle arrow tiles

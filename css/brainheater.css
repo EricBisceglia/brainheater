@@ -102,15 +102,20 @@ button:focus-visible, select:focus-visible, .brain_board:focus-visible
 .tile .player             { position: absolute; inset: 0; margin: auto; width: 60%; height: 60%         ;
                             border: 3px solid var(--yellow); border-radius: 46% 54% 49% 51%             ;
                             transform: rotate(-12deg); pointer-events: none;                            }
+.tile_exit                { color: var(--yellow); background: var(--yellowish);                         }
 .tile_loss                { color: var(--red);                                                          }
 .tile_jump                { color: var(--green);                                                        }
-.tile_exit                { color: var(--yellow); background: var(--yellowish);                         }
 .tile_launcher            { color: var(--orange);                                                       }
 .tile_launcher > span:not(.player), .tile_launcher:before
                           { position: absolute; inset: 0; display: grid; place-items: center            ;
                             font-family: Arial, sans-serif;  transform: none; pointer-events: none      ;
                             font-size: calc(100cqw / var(--grid_size) * 0.75); line-height: 1;          }
 .tile_launcher:before     { content: '↕';                                                               }
+.tile_arrow               { color: var(--blue);                                                         }
+.tile_arrow > span:not(.player)
+                          { font-family: Arial, sans-serif; transform: none;                            }
+.tile_arrow > span:not(.player), .tile_launcher > span:not(.player), .tile_launcher:before
+                          { transform: translateY(-0.09em);                                             }
 .tile_key:before, .tile_key:after, .tile_locked:before, .tile_locked:after
                           { content: ''; position: absolute; pointer-events: none;                      }
 .tile_key:before          { left: 21%; top: 33%; width: 28%; height: 28%                                ;
@@ -223,16 +228,3 @@ button:focus-visible, select:focus-visible, .brain_board:focus-visible
 .progress_reset:hover     { color: var(--red); border-color: var(--red);                              }
 @media (pointer: coarse)  { .link_buttons a, .settings_open, .settings_header button,
                             .language_select, .progress_reset { min-height: 44px;                   } }
-
-
-
-.tile_arrow
-{
-  color: var(--blue);
-}
-
-.tile_arrow > span:not(.player)
-{
-  font-family: Arial, sans-serif;
-  transform: none;
-}
