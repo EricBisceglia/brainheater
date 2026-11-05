@@ -12,6 +12,7 @@
         --green:        #92BDA0                                   ;
         --red:          #DF897F                                   ;
         --orange:       #D6A06D                                   ;
+        --blue:         #8FBBD9                                   ;
         --grid:         #A6B6A544                                 ;
         --notebook:     #91A2980D                                 ;
         --margin:       #B9767444                                 ;
@@ -104,7 +105,7 @@ button:focus-visible, select:focus-visible, .brain_board:focus-visible
 .tile_loss                { color: var(--red);                                                          }
 .tile_jump                { color: var(--green);                                                        }
 .tile_exit                { color: var(--yellow); background: var(--yellowish);                         }
-.tile_launcher            { color: var(--orange); margin-top: -0.8rem;                                  }
+.tile_launcher            { color: var(--orange);                                                       }
 .tile_launcher > span:not(.player), .tile_launcher:before
                           { position: absolute; inset: 0; display: grid; place-items: center            ;
                             font-family: Arial, sans-serif;  transform: none; pointer-events: none      ;
@@ -124,7 +125,7 @@ button:focus-visible, select:focus-visible, .brain_board:focus-visible
 .tile_locked:after        { right: 17%; bottom: 31%; width: 13%; height: 13%; z-index: 1                ;
                             border: 2px solid var(--yellow); border-bottom: 0                           ;
                             border-radius: 50% 50% 0 0; transform: rotate(-5deg);                       }
-.tile_visited:not(.tile_loss):not(.tile_jump):not(.tile_exit):not(.tile_player):not(.tile_key):not(.tile_launcher):after
+.tile_visited:not(.tile_loss):not(.tile_jump):not(.tile_exit):not(.tile_player):not(.tile_key):not(.tile_launcher):not(.tile_arrow):after
                           { content: ''; position: absolute; inset: 0; margin: auto; width: 4px         ;
                             height: 4px; background: #9BA98D66; border-radius: 50%                      ;
                             pointer-events: none;                                                       }
@@ -222,3 +223,16 @@ button:focus-visible, select:focus-visible, .brain_board:focus-visible
 .progress_reset:hover     { color: var(--red); border-color: var(--red);                              }
 @media (pointer: coarse)  { .link_buttons a, .settings_open, .settings_header button,
                             .language_select, .progress_reset { min-height: 44px;                   } }
+
+
+
+.tile_arrow
+{
+  color: var(--blue);
+}
+
+.tile_arrow > span:not(.player)
+{
+  font-family: Arial, sans-serif;
+  transform: none;
+}

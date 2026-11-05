@@ -29,9 +29,13 @@ const levelsets = [
  * X  Loss
  * J  Jump
  * L  Launcher
- * G  Goal
+ * ^  Up arrow
+ * v  Down arrow
+ * <  Left arrow
+ * >  Right arrow
  * K  Key
  * D  Lock
+ * G  Goal
  */
 
 const levels = [
@@ -159,16 +163,27 @@ const levels = [
     ]
   },
   {
+    id:     '0301',
+    set:    3,
+    map: [
+      ".><..",
+      "v.X^J",
+      "v.JXX",
+      "v><J.",
+      ".J.^G"
+    ]
+  },
+  {
     id:     '0401',
     set:    4,
     map: [
-      "..X....",
+      ".XX....",
       "..X...X",
-      "..XJJJL",
+      "LLXJJJL",
       "..LXXX.",
       "..XXLXX",
       "..X....",
-      "..X..JG"
+      "X.X...G"
     ]
   },
 ];

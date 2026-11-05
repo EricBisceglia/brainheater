@@ -8,12 +8,13 @@
 
 const game = {
   level:      0         , // Current level ID
+  generation: 0         , // Level generation counter (incremented on reset and victory)
   map:        []        , // Current level map
   player_x:   0         , // Player's current position
   player_y:   0         , // Player's current position
   status:     'playing' , // Current game status ('playing', 'moving', 'dead', 'won')
   animation:  null      , // Ongoing player animation
-  generation: 0         , // Level generation counter (incremented on reset and victory)
+  chain:      new Set() , // Movement states experienced during the current move
   visited:    new Set() , // Tiles visited by the player in the current generation
   completed:  new Set()   // Levels completed by the player
 };
@@ -74,6 +75,9 @@ function level_load(level_id)
   // Clear the visited tiles
   game.visited = new Set();
 
+  // Clear the movement chain
+  game.chain.clear();
+
   // Reset the game state
   game.level    = level_id;
   game.player_x = 0;
@@ -117,7 +121,37 @@ async function tile_resolve(direction)
   // Fetch the tile under the player
   const tile = game.map[game.player_y][game.player_x];
 
-  // Handle the tile's effect
+  // Define arrow tile directions
+  const arrows = {  '^': 'up'     ,
+                    '>': 'right'  ,
+                    'v': 'down'   ,
+                    '<': 'left'   };
+
+  // Check for repeating movement states
+  if(tile === 'J' || tile === 'L' || arrows[tile])
+  {
+    // Serialize the current movement state
+    const state = JSON.stringify([game.player_x, game.player_y, direction, game.map]);
+
+    // Kill the player if trapped in a repeating movement state
+    if(game.chain.has(state))
+    {
+      player_die();
+      return;
+    }
+
+    // Otherwise add the current movement state to the ongoing chain
+    game.chain.add(state);
+  }
+
+  // Handle arrow tiles
+  if(arrows[tile])
+  {
+    await player_move(arrows[tile], 1, true);
+    return;
+  }
+
+  // Handle other tile effects
   switch(tile)
   {
     // Deadly tiles
@@ -128,7 +162,7 @@ async function tile_resolve(direction)
 
     // Jump
     case 'J':
-      await player_move(direction, 2);
+      await player_move(direction, 2, true);
       break;
 
     // Launcher
@@ -185,16 +219,22 @@ function key_collect()
  *
  * @param   {string}  direction  The direction to move (up, down, left, right).
  * @param   {number}  distance   The number of tiles to move.
+ * @param   {boolean} forced     Whether the movement is forced (eg. by a directional arrow).
  *
  * @returns {Promise<void>}
  */
 
-async function player_move( direction     ,
-                            distance = 1  )
+async function player_move( direction         ,
+                            distance  = 1     ,
+                            forced    = false )
 {
   // Stop here if the player isn't allowed to move
   if(game.status !== 'playing')
     return;
+
+  // Each move initiated by the player starts a chain
+  if(!forced)
+    game.chain.clear();
 
   // Fetch the player's current position
   let next_x = game.player_x;
@@ -233,7 +273,7 @@ async function player_move( direction     ,
   if(hit_wall)
   {
     // Prevent moving into a border
-    if(distance === 1)
+    if(!forced && distance === 1)
       return;
 
     // Shorten jumps to the last valid tile inside the board
@@ -317,7 +357,7 @@ async function player_launch(direction)
     return;
 
   // Move the player to the edge and resolve the landing tile
-  await player_move(direction, distance);
+  await player_move(direction, distance, true);
 }
 
 

@@ -98,6 +98,26 @@ function level_draw(level_id)
           tile_symbol = '↔';
           break;
 
+        case '^':
+          tile.classList.add('tile_arrow');
+          tile_symbol = '↑';
+          break;
+
+        case '>':
+          tile.classList.add('tile_arrow');
+          tile_symbol = '→';
+          break;
+
+        case 'v':
+          tile.classList.add('tile_arrow');
+          tile_symbol = '↓';
+          break;
+
+        case '<':
+          tile.classList.add('tile_arrow');
+          tile_symbol = '←';
+          break;
+
         case 'K':
           tile.classList.add('tile_key');
           break;
