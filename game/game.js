@@ -32,6 +32,7 @@ const game = {
 /*  key_collect     Collects a key and removes all matching hazards.                                                 */
 /*                                                                                                                   */
 /*  player_move     Moves the player one tile in the requested direction.                                            */
+/*  player_launch   Launches the player to the edge of the board in the requested direction.                         */
 /*  player_die      Kills the player and triggers the death animation.                                               */
 /*  player_win      Marks the level as completed and loads the next one.                                             */
 /*                                                                                                                   */
@@ -128,6 +129,11 @@ async function tile_resolve(direction)
     // Jump
     case 'J':
       await player_move(direction, 2);
+      break;
+
+    // Launcher
+    case 'L':
+      await player_launch(direction);
       break;
 
     // Key
@@ -270,6 +276,48 @@ async function player_move( direction     ,
 
   // Resolve the effects of the tile the player landed on
   await tile_resolve(direction);
+}
+
+
+
+
+/**
+ * Launches the player to the edge of the board in the requested direction.
+ *
+ * @param   {string}  direction  The direction to launch the player in (up, down, left, right).
+ *
+ * @returns {Promise<void>}
+ */
+
+async function player_launch(direction)
+{
+  // Calculate the distance to the edge of the board in the requested direction
+  let distance = 0;
+  switch(direction)
+  {
+    case 'up':
+      distance = game.player_y;
+      break;
+
+    case 'down':
+      distance = game.map.length - 1 - game.player_y;
+      break;
+
+    case 'left':
+      distance = game.player_x;
+      break;
+
+    case 'right':
+      distance = game.map[0].length - 1 - game.player_x;
+      break;
+  }
+
+  // Stop here if the player is already at the edge
+  if(distance === 0)
+    return;
+
+  // Move the player to the edge and resolve the landing tile
+  await player_move(direction, distance);
 }
 
 

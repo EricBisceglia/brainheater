@@ -22,6 +22,7 @@ const levelsets = [
  * .  Empty
  * X  Loss
  * J  Jump
+ * L  Launcher
  * G  Goal
  * K  Key
  * D  Lock
@@ -63,7 +64,7 @@ const levels = [
       '.JXX..',
       '.XX...',
       '.JKDD.',
-      '....DD',
+      '.L..DD',
       '....DG'
     ]
   },

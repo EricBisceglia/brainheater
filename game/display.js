@@ -99,6 +99,11 @@ function level_draw(level_id)
           tile_symbol = '⚑';
           break;
 
+        case 'L':
+          tile.classList.add('tile_launcher');
+          tile_symbol = '↔';
+          break;
+
         case 'K':
           tile.classList.add('tile_key');
           break;
@@ -239,13 +244,18 @@ async function animate_player(next_x, next_y)
   const distance_x = (end.left + end.width / 2) - (start.left + start.width / 2);
   const distance_y = (end.top + end.height / 2) - (start.top + start.height / 2);
 
+  // Give longer movements longer animations (but keep them quick)
+  const distance = Math.abs(next_x - game.player_x)
+                 + Math.abs(next_y - game.player_y);
+  const duration = Math.min(360, 120 + Math.max(0, distance - 1) * 30);
+
   // Smoothly animate the player's movement
   const animation = player.animate(
     [
       { transform: 'translate(0px, 0px) rotate(-12deg)'                                   } ,
       { transform: 'translate(' + distance_x + 'px, ' + distance_y + 'px) rotate(-12deg)' }
     ] ,
-    { duration: 120 , easing: 'ease-out' , fill: 'forwards' }
+    { duration: duration , easing: 'ease-out' , fill: 'forwards' }
   );
 
   // Keep a reference to this animation so it can be cancelled if the player restarts the level
