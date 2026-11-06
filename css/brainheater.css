@@ -12,6 +12,7 @@
         --green:        #92BDA0                                   ;
         --red:          #DF897F                                   ;
         --orange:       #D6A06D                                   ;
+        --pink:         #D69BBF                                   ;
         --blue:         #8FBBD9                                   ;
         --grid:         #A6B6A544                                 ;
         --notebook:     #91A2980D                                 ;
@@ -85,6 +86,21 @@ button:focus-visible, select:focus-visible, .brain_board:focus-visible
 
 /*********************************************************************************************************************/
 /*                                                                                                                   */
+/*                                                  ERASER COUNTER                                                   */
+/*                                                                                                                   */
+/*********************************************************************************************************************/
+
+.eraser_icon        { position: relative; display: inline-block; width: 1.4rem; height: 0.8rem      ;
+                      color: var(--pink); border: 2px solid currentColor; pointer-events: none      ;
+                      border-radius: 3px 2px 3px 2px; transform: rotate(-30deg);                    }
+.eraser_icon:before { content: ''; position: absolute; top: 0; right: 0; bottom: 0; width: 35%      ;
+                      border-left: 2px solid currentColor; background: currentColor; opacity: 0.4;  }
+.eraser_counter     { position: absolute; top: calc(100% + 0.9rem); right: 0.2rem; display: flex    ;
+                      align-items: center; gap: 0.5rem; height: 1.2rem; color: var(--pink)          ;
+                      font-size: 0.8rem; pointer-events: none;                                      }
+
+/*********************************************************************************************************************/
+/*                                                                                                                   */
 /*                                                       TILES                                                       */
 /*                                                                                                                   */
 /*********************************************************************************************************************/
@@ -131,8 +147,9 @@ button:focus-visible, select:focus-visible, .brain_board:focus-visible
 .tile_locked:after        { right: 17%; bottom: 31%; width: 13%; height: 13%; z-index: 1                ;
                             border: 2px solid var(--yellow); border-bottom: 0                           ;
                             border-radius: 50% 50% 0 0; transform: rotate(-5deg);                       }
-.tile_crumble             { color: var(--white);                                                      }
-.tile_visited:not(.tile_loss):not(.tile_jump):not(.tile_exit):not(.tile_player):not(.tile_key):not(.tile_launcher):not(.tile_arrow):not(.tile_crumble):after
+.tile_crumble             { color: var(--white);                                                        }
+.tile > span.eraser_icon  { inset: 0; margin: auto; width: 52%; height: 28%; transform: rotate(-30deg); }
+.tile_visited:not(.tile_loss):not(.tile_jump):not(.tile_exit):not(.tile_player):not(.tile_key):not(.tile_launcher):not(.tile_arrow):not(.tile_crumble):not(.tile_eraser):after
                           { content: ''; position: absolute; inset: 0; margin: auto; width: 4px         ;
                             height: 4px; background: #9BA98D66; border-radius: 50%                      ;
                             pointer-events: none;                                                       }

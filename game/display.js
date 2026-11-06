@@ -29,6 +29,16 @@ function level_draw(level_id)
   // Fetch the board's element id
   const board = document.getElementById('brain_board');
 
+  // Check for erasers in the level
+  const has_erasers = level.map.some(function(row)
+  {
+    return row.includes('E');
+  });
+
+  // Show the eraser inventory on levels that contain erasers
+  document.getElementById('eraser_counter').hidden = !has_erasers;
+  document.getElementById('eraser_count').textContent = 'x' + game.erasers;
+
   // Hide any previous death message
   document.getElementById('death_message').hidden = true;
 
@@ -131,6 +141,13 @@ function level_draw(level_id)
         case 'C':
           tile.classList.add('tile_crumble');
           tile_symbol = 'X';
+          break;
+
+        case 'E':
+          tile.classList.add('tile_eraser');
+          const eraser = document.createElement('span');
+          eraser.classList.add('eraser_icon');
+          tile.append(eraser);
           break;
       }
 

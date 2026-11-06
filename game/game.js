@@ -12,6 +12,7 @@ const game = {
   map:        []        , // Current level map
   player_x:   0         , // Player's current position
   player_y:   0         , // Player's current position
+  erasers:    0         , // Number of available erasers
   status:     'playing' , // Current game status ('playing', 'moving', 'dead', 'won')
   animation:  null      , // Ongoing player animation
   bump:       null      , // Ongoing wall impact animation
@@ -83,6 +84,7 @@ function level_load(level_id)
   game.level    = level_id;
   game.player_x = 0;
   game.player_y = 0;
+  game.erasers  = 0;
   game.status   = 'playing';
 
   // Cancel any ongoing impact animation
@@ -139,7 +141,7 @@ async function tile_resolve(direction)
   if(tile === 'J' || tile === 'L' || arrows[tile])
   {
     // Serialize the current movement state
-    const state = JSON.stringify([game.player_x, game.player_y, direction, game.map]);
+    const state = JSON.stringify([game.player_x, game.player_y, direction, game.map, game.erasers]);
 
     // Count how many times this movement state has occurred
     const visits = (game.chain.get(state) || 0) + 1;
@@ -163,10 +165,28 @@ async function tile_resolve(direction)
   // Handle other tile effects
   switch(tile)
   {
-    // Deadly tiles
+    // Deadly tile
     case 'X':
+      if(game.erasers === 0)
+      {
+        player_die();
+        break;
+      }
+
+      // Spend eraser charges on deadly tiles if available
+      game.erasers--;
+      game.map[game.player_y][game.player_x] = '.';
+      level_draw(game.level);
+      break;
+
+    // Locked deadly tiles
     case 'D':
       player_die();
+      break;
+
+    // Key
+    case 'K':
+      key_collect();
       break;
 
     // Jump
@@ -179,9 +199,11 @@ async function tile_resolve(direction)
       await player_launch(direction);
       break;
 
-    // Key
-    case 'K':
-      key_collect();
+    // Eraser pickups
+    case 'E':
+      game.erasers++;
+      game.map[game.player_y][game.player_x] = '.';
+      level_draw(game.level);
       break;
 
     // Exit

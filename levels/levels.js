@@ -36,6 +36,7 @@ const levelsets = [
  * K  Key
  * D  Lock
  * C  Crumbling
+ * E  Eraser
  * G  Goal
  */
 
@@ -196,6 +197,17 @@ const levels = [
       "JCXCC",
       "CCCCX",
       "CJCCG"
+    ]
+  },
+  {
+    id:     '0601',
+    set:    6,
+    map: [
+      ".EEEE",
+      "XXXXX",
+      "XXXXX",
+      "XXXXX",
+      "XXXXG"
     ]
   }
 ];
