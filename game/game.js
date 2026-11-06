@@ -14,6 +14,7 @@ const game = {
   player_y:   0         , // Player's current position
   status:     'playing' , // Current game status ('playing', 'moving', 'dead', 'won')
   animation:  null      , // Ongoing player animation
+  bump:       null      , // Ongoing wall impact animation
   chain:      new Map() , // Movement states experienced during the current move
   visited:    new Set() , // Tiles visited by the player in the current generation
   completed:  new Set()   // Levels completed by the player
@@ -83,6 +84,13 @@ function level_load(level_id)
   game.player_x = 0;
   game.player_y = 0;
   game.status   = 'playing';
+
+  // Cancel any ongoing impact animation
+  if(game.bump)
+  {
+    game.bump.cancel();
+    game.bump = null;
+  }
 
   // Draw the level
   level_draw(game.level);
@@ -221,13 +229,15 @@ function key_collect()
  * @param   {string}  direction  The direction to move (up, down, left, right).
  * @param   {number}  distance   The number of tiles to move.
  * @param   {boolean} forced     Whether the movement is forced (eg. by a directional arrow).
+ * @param   {boolean} impact     Whether the movement will trigger an impact animation upon hitting a wall.
  *
  * @returns {Promise<void>}
  */
 
 async function player_move( direction         ,
                             distance  = 1     ,
-                            forced    = false )
+                            forced    = false ,
+                            impact    = false )
 {
   // Stop here if the player isn't allowed to move
   if(game.status !== 'playing')
@@ -308,6 +318,10 @@ async function player_move( direction         ,
   // Draw the level after the player has moved
   level_draw(game.level);
 
+  // Trigger an impact animation when the player is sent into a wall by a launcher
+  if(impact && !hit_wall)
+    animate_impact(direction);
+
   // Kill the player if were thrust into a wall
   if(hit_wall)
   {
@@ -358,7 +372,7 @@ async function player_launch(direction)
     return;
 
   // Move the player to the edge and resolve the landing tile
-  await player_move(direction, distance, true);
+  await player_move(direction, distance, true, true);
 }
 
 
@@ -378,6 +392,13 @@ function player_die()
 
   // Prevent further movement by changing the game's state
   game.status = 'dead';
+
+  // Cancel any ongoing impact animation
+  if(game.bump)
+  {
+    game.bump.cancel();
+    game.bump = null;
+  }
 
   // Draw the level in its lost state
   level_draw(game.level);

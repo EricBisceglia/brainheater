@@ -4,6 +4,7 @@
 /*  level_select_draw   Generate the contents of the level selector.                                                 */
 /*                                                                                                                   */
 /*  animate_player      Animate the player's movement on the board.                                                  */
+/*  animate_impact      Animate the player's impact with a wall.                                                     */
 /*  animate_death       Animate the player's death.                                                                  */
 /*                                                                                                                   */
 /*********************************************************************************************************************/
@@ -294,6 +295,61 @@ async function animate_player(next_x, next_y)
     if(game.animation === animation)
       game.animation = null;
   }
+}
+
+
+
+
+/**
+ * Animate the player's impact with a wall.
+ *
+ * @param   {string}  direction  The direction of impact.
+ *
+ * @returns {void}
+ */
+
+function animate_impact(direction)
+{
+  // Fetch the board's element id
+  const board = document.getElementById('brain_board');
+
+  // Cancel any ongoing bump animation
+  if(game.bump)
+    game.bump.cancel();
+
+  // Determine an offset for the impact animation
+  let offset_x = 0;
+  let offset_y = 0;
+
+  // Update the offset based on the direction of impact
+  switch(direction)
+  {
+    case 'up':    offset_y = -2; break;
+    case 'down':  offset_y =  2; break;
+    case 'left':  offset_x = -2; break;
+    case 'right': offset_x =  2; break;
+  }
+
+  // Animate the board with the calculated offset to simulate an impact
+  const animation = board.animate(
+    [
+      { transform: 'translate(0px, 0px)' },
+      { transform: 'translate(' + offset_x + 'px, ' + offset_y + 'px)' },
+      { transform: 'translate(' + (-offset_x / 2) + 'px, ' + (-offset_y / 2) + 'px)' },
+      { transform: 'translate(0px, 0px)' }
+    ],
+    { duration: 160, easing: 'ease-out' }
+  );
+
+  // Keep a reference to this animation so it can be cancelled
+  game.bump = animation;
+
+  // Clear the animation reference once the effect finishes
+  animation.onfinish = function()
+  {
+    if(game.bump === animation)
+      game.bump = null;
+  };
 }
 
 
