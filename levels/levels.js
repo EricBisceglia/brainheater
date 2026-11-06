@@ -65,12 +65,12 @@ const levels = [
     id:     '0103',
     set:    1,
     map:    [
-      ".JXXXX",
+      ".XXXXX",
       ".JXJ.X",
       ".JXXXX",
-      "..JXJ.",
-      "X.JXX.",
-      "X..JXG"
+      "..JXX.",
+      "X.JXJ.",
+      "X.J.XG"
     ]
   },
   {
@@ -90,11 +90,11 @@ const levels = [
     id:     '0105',
     set:    1,
     map:    [
-      "..J.J.J.",
+      "..J.J.JX",
       "XJXXXXXJ",
       "XX...JX.",
-      "XJ...JXJ",
-      "XX...JX.",
+      "XJ... XJ",
+      "XX...JXX",
       "XJ....XJ",
       "XXXXJJX.",
       "...J..XG"
@@ -111,7 +111,7 @@ const levels = [
       "XXXXXXXXX",
       "JJJJJJJJJ",
       "XXXX.....",
-      "JXJX.XJXX",
+      "JXJX.XXXX",
       "XXXX..JXG"
     ]
   },
@@ -119,8 +119,8 @@ const levels = [
     id:     '0107',
     set:    1,
     map:    [
-      "..JJX.....X",
-      ".XJXX.XX..X",
+      "..JJXX....X",
+      ".XJXX..X..X",
       ".XJJ...X..X",
       ".X.JX..X.J.",
       ".X...X.X.JX",
@@ -129,7 +129,7 @@ const levels = [
       ".XXX.XX.XJ.",
       ".XJJXXX..XX",
       "......X....",
-      "JXX..X....G"
+      "J.X..X....G"
     ]
   },
   {
@@ -140,8 +140,8 @@ const levels = [
       "JJXJ.JXXXX...",
       "X.JX...X.X...",
       "X......XJXJ..",
-      "XX.JXXXJ...J.",
-      "..JX..JJX..J.",
+      "XX.JXXXJ...XJ",
+      "..JX..JJX..JX",
       "J...J.X...XJJ",
       "XXXX...X.XJ.X",
       "X.XJ.X.X...XJ",

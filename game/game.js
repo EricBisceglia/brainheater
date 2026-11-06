@@ -280,16 +280,30 @@ async function player_move( direction         ,
                 || next_x >= game.map[0].length
                 || next_y >= game.map.length;
 
-  // Different treatment depending on whether the player walked or was thrust into the edge
+  // Handle hitting the edge of the board
   if(hit_wall)
   {
-    // Prevent moving into a border
+    // Prevent walking outside of the board
     if(!forced && distance === 1)
       return;
 
-    // Shorten jumps to the last valid tile inside the board
+    // Kill players sent outside of the board by an arrow
+    if(distance === 1)
+    {
+      player_die();
+      return;
+    }
+
+    // Shorten any jump to the last tile of the board to avoid being sent OOB
     next_x = Math.max(0, Math.min(next_x, game.map[0].length - 1));
     next_y = Math.max(0, Math.min(next_y, game.map.length - 1));
+
+    // When sent at a wall, trigger the impact animation
+    if(next_x === game.player_x && next_y === game.player_y)
+    {
+      animate_impact(direction);
+      return;
+    }
   }
 
   // Remember which generation this movement belongs to
@@ -318,16 +332,9 @@ async function player_move( direction         ,
   // Draw the level after the player has moved
   level_draw(game.level);
 
-  // Trigger an impact animation when the player is sent into a wall by a launcher
-  if(impact && !hit_wall)
+  // Trigger an impact animation when a player is thrown at a wall
+  if(impact || hit_wall)
     animate_impact(direction);
-
-  // Kill the player if were thrust into a wall
-  if(hit_wall)
-  {
-    player_die();
-    return;
-  }
 
   // Resolve the effects of the tile the player landed on
   await tile_resolve(direction);
