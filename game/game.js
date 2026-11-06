@@ -319,6 +319,10 @@ async function player_move( direction         ,
   if(generation !== game.generation)
     return;
 
+  // Collapse any crumbled tiles
+  if(game.map[game.player_y][game.player_x] === 'C')
+    game.map[game.player_y][game.player_x] = 'X';
+
   // Remember the coordinates of the tile the player has just left
   game.visited.add(game.player_x + ',' + game.player_y);
 

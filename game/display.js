@@ -127,6 +127,11 @@ function level_draw(level_id)
           tile.classList.add('tile_loss', 'tile_locked');
           tile_symbol = 'X';
           break;
+
+        case 'C':
+          tile.classList.add('tile_crumble');
+          tile_symbol = 'X';
+          break;
       }
 
       // Add the tile symbol if required
