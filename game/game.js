@@ -27,17 +27,18 @@ const game = {
 /*                                                                                                                   */
 /*********************************************************************************************************************/
 /*                                                                                                                   */
-/*  level_load      Loads a level.                                                                                   */
-/*  level_restart   Restarts the current level.                                                                      */
+/*  level_load        Loads a level.                                                                                 */
+/*  level_restart     Restarts the current level.                                                                    */
 /*                                                                                                                   */
-/*  tile_resolve    Resolves the effect of tile the player is standing on.                                           */
+/*  tile_resolve      Resolves the effect of tile the player is standing on.                                         */
 /*                                                                                                                   */
-/*  key_collect     Collects a key and removes all matching hazards.                                                 */
+/*  key_collect       Collects a key and removes all matching hazards.                                               */
 /*                                                                                                                   */
-/*  player_move     Moves the player one tile in the requested direction.                                            */
-/*  player_launch   Launches the player to the edge of the board in the requested direction.                         */
-/*  player_die      Kills the player and triggers the death animation.                                               */
-/*  player_win      Marks the level as completed and loads the next one.                                             */
+/*  player_move       Moves the player one tile in the requested direction.                                          */
+/*  player_launch     Launches the player to the edge of the board in the requested direction.                       */
+/*  player_teleport   Teleports the player through a portal.                                                         */
+/*  player_die        Kills the player and triggers the death animation.                                             */
+/*  player_win        Marks the level as completed and loads the next one.                                           */
 /*                                                                                                                   */
 /*********************************************************************************************************************/
 
@@ -131,6 +132,9 @@ async function tile_resolve(direction)
   // Fetch the tile under the player
   const tile = game.map[game.player_y][game.player_x];
 
+  // Numbers represent portal pairs
+  const portal = /^[1-9]$/.test(tile);
+
   // Define arrow tile directions
   const arrows = {  '^': 'up'     ,
                     '>': 'right'  ,
@@ -138,7 +142,7 @@ async function tile_resolve(direction)
                     '<': 'left'   };
 
   // Check for repeating movement states
-  if(tile === 'J' || tile === 'L' || arrows[tile])
+  if(tile === 'J' || tile === 'L' || arrows[tile] || portal)
   {
     // Serialize the current movement state
     const state = JSON.stringify([game.player_x, game.player_y, direction, game.map, game.erasers]);
@@ -153,6 +157,13 @@ async function tile_resolve(direction)
       player_die();
       return;
     }
+  }
+
+  // Handle teleporters
+  if(portal)
+  {
+    await player_teleport(direction);
+    return;
   }
 
   // Handle arrow tiles
@@ -406,6 +417,80 @@ async function player_launch(direction)
 
   // Move the player to the edge and resolve the landing tile
   await player_move(direction, distance, true, true);
+}
+
+
+
+
+/**
+ * Teleports the player through a portal.
+ *
+ * @param   {string}  direction  The direction in which the player travels through the portal.
+ *
+ * @returns {Promise<void>}
+ */
+
+async function player_teleport(direction)
+{
+  // Fetch the portal's number
+  const number = game.map[game.player_y][game.player_x];
+
+  // Find all other portals with the same number
+  const pair = [];
+
+  for(let y = 0; y < game.map.length; y++)
+  {
+    for(let x = 0; x < game.map[y].length; x++)
+    {
+      if(game.map[y][x] === number)
+        pair.push([x, y]);
+    }
+  }
+
+  // Ignore wrong portal pairs
+  if(pair.length !== 2)
+  {
+    console.warn('Portal ' + number + ' is not paired.');
+    return;
+  }
+
+  // Find the portal's exit
+  const destination = pair.find(function(position)
+  {
+    return position[0] !== game.player_x
+        || position[1] !== game.player_y;
+  });
+
+  // Remember the portal through which the player entered
+  game.visited.add(game.player_x + ',' + game.player_y);
+
+  // Move the player to the exit portal
+  game.player_x = destination[0];
+  game.player_y = destination[1];
+  level_draw(game.level);
+
+  // Define the exit offsets based on the direction the player is moving
+  const directions = {
+    up:    [ 0, -1],
+    right: [ 1,  0],
+    down:  [ 0,  1],
+    left:  [-1,  0]
+  };
+
+  // Determine the position in which the player will step after exiting the portal
+  const step   = directions[direction];
+  const next_x = game.player_x + step[0];
+  const next_y = game.player_y + step[1];
+
+  // If the exit faces a wall, stop on the portal and shake the board
+  if(next_x < 0 || next_y < 0 || next_x >= game.map[0].length || next_y >= game.map.length)
+  {
+    animate_impact(direction);
+    return;
+  }
+
+  // Step out of the portal and resolve the landing tile
+  await player_move(direction, 1, true);
 }
 
 

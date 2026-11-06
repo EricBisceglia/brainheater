@@ -13,6 +13,7 @@
         --red:          #DF897F                                   ;
         --orange:       #D6A06D                                   ;
         --pink:         #D69BBF                                   ;
+        --purple:       #B4A1DB                                   ;
         --blue:         #8FBBD9                                   ;
         --grid:         #A6B6A544                                 ;
         --notebook:     #91A2980D                                 ;
@@ -149,7 +150,7 @@ button:focus-visible, select:focus-visible, .brain_board:focus-visible
                             border-radius: 50% 50% 0 0; transform: rotate(-5deg);                       }
 .tile_crumble             { color: var(--white);                                                        }
 .tile > span.eraser_icon  { inset: 0; margin: auto; width: 52%; height: 28%; transform: rotate(-30deg); }
-.tile_visited:not(.tile_loss):not(.tile_jump):not(.tile_exit):not(.tile_player):not(.tile_key):not(.tile_launcher):not(.tile_arrow):not(.tile_crumble):not(.tile_eraser):after
+.tile_visited:not(.tile_loss):not(.tile_jump):not(.tile_exit):not(.tile_player):not(.tile_key):not(.tile_launcher):not(.tile_arrow):not(.tile_crumble):not(.tile_eraser):not(.tile_portal):after
                           { content: ''; position: absolute; inset: 0; margin: auto; width: 4px         ;
                             height: 4px; background: #9BA98D66; border-radius: 50%                      ;
                             pointer-events: none;                                                       }
@@ -247,3 +248,28 @@ button:focus-visible, select:focus-visible, .brain_board:focus-visible
 .progress_reset:hover     { color: var(--red); border-color: var(--red);                              }
 @media (pointer: coarse)  { .link_buttons a, .settings_open, .settings_header button,
                             .language_select, .progress_reset { min-height: 44px;                   } }
+
+
+
+.tile_portal
+{
+  color: var(--purple);
+}
+
+/* Slightly irregular portal ring */
+.tile_portal:before
+{
+  content: '';
+  position: absolute;
+  inset: 13%;
+  border: 2px dashed currentColor;
+  border-radius: 45% 55% 52% 48%;
+  transform: rotate(-12deg);
+  pointer-events: none;
+}
+
+/* Smaller number inside the ring */
+.tile_portal > span:not(.player)
+{
+  font-size: calc(100cqw / var(--grid_size) * 0.42);
+}

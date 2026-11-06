@@ -149,6 +149,14 @@ function level_draw(level_id)
           eraser.classList.add('eraser_icon');
           tile.append(eraser);
           break;
+
+        default:
+          if(/^[1-9]$/.test(tile_type))
+          {
+            tile.classList.add('tile_portal');
+            tile_symbol = tile_type;
+          }
+          break;
       }
 
       // Add the tile symbol if required
