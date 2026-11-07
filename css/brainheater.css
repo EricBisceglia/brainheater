@@ -70,24 +70,25 @@ button:focus-visible, select:focus-visible, .brain_board:focus-visible
 /*                                                                                                                   */
 /*********************************************************************************************************************/
 
-.brain_board_container          { position: relative; width: 100%; max-width: var(--board_size)     ;
-                                  margin: 0 auto; container-type: inline-size; --board_size: 314px; }
-.brain_board                    { position: relative; display: grid                                 ;
-                                  grid-template-columns: repeat(var(--grid_size), minmax(0, 1fr))   ;
-                                  grid-template-rows: repeat(var(--grid_size), minmax(0, 1fr))      ;
-                                  width: 100%; aspect-ratio: 1; padding: 3px                        ;
-                                  border: 0; border-radius: 0; overflow: visible                    ;
-                                  isolation: isolate; touch-action: none;                           }
-.brain_board:before             { content: ''; position: absolute; inset: 0                         ;
-                                  border: 1px solid #A5B2A478; border-radius: 3px 1px 5px 2px       ;
-                                  transform: rotate(-0.3deg); pointer-events: none;                 }
-.brain_board:after              { content: ''; position: absolute; inset: 2px -1px -1px 1px         ;
-                                  border: 1px solid #A5B2A428; border-radius: 1px 5px 2px 4px       ;
-                                  transform: rotate(0.18deg); pointer-events: none;                 }
-.brain_board.dead .tile_player  { background: #DF897F22;                                            }
-.brain_board.dead .player       { border-color: var(--red);                                         }
-.brain_board.won .tile_exit     { color: var(--green); background: #92BDA026;                       }
-.brain_board.won .player        { border-color: var(--green);                                       }
+.brain_board_container      { position: relative; width: 100%; max-width: var(--board_size)     ;
+                              margin: 0 auto; container-type: inline-size; --board_size: 314px; }
+.brain_board                { position: relative; display: grid                                 ;
+                              grid-template-columns: repeat(var(--grid_size), minmax(0, 1fr))   ;
+                              grid-template-rows: repeat(var(--grid_size), minmax(0, 1fr))      ;
+                              width: 100%; aspect-ratio: 1; padding: 3px                        ;
+                              border: 0; border-radius: 0; overflow: visible                    ;
+                              isolation: isolate; touch-action: none;                           }
+.brain_board:before         { content: ''; position: absolute; inset: 0                         ;
+                              border: 1px solid #A5B2A478; border-radius: 3px 1px 5px 2px       ;
+                              transform: rotate(-0.3deg); pointer-events: none;                 }
+.brain_board:after          { content: ''; position: absolute; inset: 2px -1px -1px 1px         ;
+                              border: 1px solid #A5B2A428; border-radius: 1px 5px 2px 4px       ;
+                              transform: rotate(0.18deg); pointer-events: none;                 }
+.brain_board.dead .tile_player:not(.tile_gap)
+                            { background: #DF897F22;                                            }
+.brain_board.dead .player   { border-color: var(--red);                                         }
+.brain_board.won .tile_exit { color: var(--green); background: #92BDA026;                       }
+.brain_board.won .player    { border-color: var(--green);                                       }
 
 /*********************************************************************************************************************/
 /*                                                                                                                   */
@@ -116,7 +117,7 @@ button:focus-visible, select:focus-visible, .brain_board:focus-visible
 .tile > span:not(.player) { position: absolute; inset: 0; display: grid; place-items: center                  ;
                             font-size: calc(100cqw / var(--grid_size) * 0.75); line-height: 1                 ;
                             pointer-events: none; transform: translateY(0.12em);                              }
-.tile_light:not(.tile_exit):not(.tile_player)
+.tile_light:not(.tile_exit):not(.tile_player):not(.tile_gap)
                           { background: #C0CEAE0C;                                                            }
 .tile_player              { background: var(--yellowish); z-index: 1;                                         }
 .tile .player             { position: absolute; inset: 0; margin: auto; width: 60%; height: 60%               ;
@@ -124,6 +125,7 @@ button:focus-visible, select:focus-visible, .brain_board:focus-visible
                             transform: rotate(-12deg); pointer-events: none;                                  }
 .tile_exit                { color: var(--yellow); background: var(--yellowish);                               }
 .tile_loss                { color: var(--red);                                                                }
+.tile.tile_gap            { background: #0D1119; border-color: transparent;                                   }
 .tile_jump                { color: var(--green);                                                              }
 .tile_launcher            { color: var(--orange);                                                             }
 .tile_launcher > span:not(.player), .tile_launcher:before

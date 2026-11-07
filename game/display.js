@@ -96,6 +96,10 @@ function level_draw(level_id)
           tile_symbol = 'X';
           break;
 
+        case '#':
+          tile.classList.add('tile_gap');
+          break;
+
         case 'J':
           tile.classList.add('tile_jump');
           tile_symbol = 'X';

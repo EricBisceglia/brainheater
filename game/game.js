@@ -192,6 +192,7 @@ async function tile_resolve(direction)
 
     // Locked deadly tiles
     case 'D':
+    case '#':
       player_die();
       break;
 
@@ -354,7 +355,7 @@ async function player_move( direction         ,
 
   // Collapse any crumbled tiles
   if(game.map[game.player_y][game.player_x] === 'C')
-    game.map[game.player_y][game.player_x] = 'X';
+    game.map[game.player_y][game.player_x] = '#';
 
   // Remember the coordinates of the tile the player has just left
   game.visited.add(game.player_x + ',' + game.player_y);

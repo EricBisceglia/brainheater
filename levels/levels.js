@@ -225,9 +225,18 @@ const levels = [
   {
     id:   '0801',
     set:  8     ,
-    map:  [
-      "..",
-      ".G"
+    map: [
+      "..XX2X.J...",
+      "CLC.JX.....",
+      ".L1XCCXC..X",
+      "XXJJv.v.JDX",
+      "^.X..J...JX",
+      "J.XXJ.L.X..",
+      "JXJ..X.XX.>",
+      "<.XL.....<X",
+      ".XJ.KJJ..XX",
+      "X.XD>....1.",
+      "..2..CXCX.G"
     ]
   }
 ];
