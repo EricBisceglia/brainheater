@@ -14,7 +14,10 @@
         --orange:       #D6A06D                                   ;
         --pink:         #D69BBF                                   ;
         --purple:       #B4A1DB                                   ;
+        --darkpurple:   #0D1119                                   ;
         --blue:         #8FBBD9                                   ;
+        --teal:         #72C6B6                                   ;
+        --cream:        #EDE3CA                                   ;
         --grid:         #A6B6A544                                 ;
         --notebook:     #91A2980D                                 ;
         --margin:       #B9767444                                 ;
@@ -92,14 +95,13 @@ button:focus-visible, select:focus-visible, .brain_board:focus-visible
 /*                                                                                                                   */
 /*********************************************************************************************************************/
 
-.eraser_icon        { position: relative; display: inline-block; width: 1.4rem; height: 0.8rem      ;
-                      color: var(--pink); border: 2px solid currentColor; pointer-events: none      ;
-                      border-radius: 3px 2px 3px 2px; transform: rotate(-30deg);                    }
-.eraser_icon:before { content: ''; position: absolute; top: 0; right: 0; bottom: 0; width: 35%      ;
-                      border-left: 2px solid currentColor; background: currentColor; opacity: 0.4;  }
-.eraser_counter     { position: absolute; top: calc(100% + 0.9rem); right: 0.2rem; display: flex    ;
-                      align-items: center; gap: 0.5rem; height: 1.2rem; color: var(--pink)          ;
-                      font-size: 0.8rem; pointer-events: none;                                      }
+.eraser_icon    { position: relative; display: inline-block; width: 1.4rem; height: 0.8rem            ;
+                  color: var(--pink); border: 2px solid currentColor; border-radius: 3px 4px 2px 3px  ;
+                  background: linear-gradient(90deg, currentColor 60%, var(--cream) 60%)              ;
+                  transform: rotate(-30deg); pointer-events: none;                                    }
+.eraser_counter { position: absolute; top: calc(100% + 0.9rem); right: 0.2rem; display: flex          ;
+                  align-items: center; gap: 0.5rem; height: 1.2rem; color: var(--pink)                ;
+                  font-size: 0.8rem; pointer-events: none;                                            }
 
 /*********************************************************************************************************************/
 /*                                                                                                                   */
@@ -107,60 +109,68 @@ button:focus-visible, select:focus-visible, .brain_board:focus-visible
 /*                                                                                                                   */
 /*********************************************************************************************************************/
 
-.tile                     { position: relative; display: grid; place-items: center                      ;
-                            min-width: 0; min-height: 0; background: #C0CEAE04                          ;
-                            border-right: 1px solid var(--grid)                                         ;
-                            border-bottom: 1px solid var(--grid)                                        }
-.tile > span:not(.player) { position: absolute; inset: 0; display: grid; place-items: center            ;
-                            font-size: calc(100cqw / var(--grid_size) * 0.75); line-height: 1           ;
-                            pointer-events: none; transform: translateY(0.12em);                        }
+.tile                     { position: relative; display: grid; place-items: center                            ;
+                            min-width: 0; min-height: 0; background: #C0CEAE04                                ;
+                            border-right: 1px solid var(--grid)                                               ;
+                            border-bottom: 1px solid var(--grid)                                              }
+.tile > span:not(.player) { position: absolute; inset: 0; display: grid; place-items: center                  ;
+                            font-size: calc(100cqw / var(--grid_size) * 0.75); line-height: 1                 ;
+                            pointer-events: none; transform: translateY(0.12em);                              }
 .tile_light:not(.tile_exit):not(.tile_player)
-                          { background: #C0CEAE0C;                                                      }
-.tile_player              { background: var(--yellowish); z-index: 1;                                   }
-.tile .player             { position: absolute; inset: 0; margin: auto; width: 60%; height: 60%         ;
-                            border: 3px solid var(--yellow); border-radius: 46% 54% 49% 51%             ;
-                            transform: rotate(-12deg); pointer-events: none;                            }
-.tile_exit                { color: var(--yellow); background: var(--yellowish);                         }
-.tile_loss                { color: var(--red);                                                          }
-.tile_jump                { color: var(--green);                                                        }
-.tile_launcher            { color: var(--orange);                                                       }
+                          { background: #C0CEAE0C;                                                            }
+.tile_player              { background: var(--yellowish); z-index: 1;                                         }
+.tile .player             { position: absolute; inset: 0; margin: auto; width: 60%; height: 60%               ;
+                            border: 3px solid var(--yellow); border-radius: 46% 54% 49% 51%                   ;
+                            transform: rotate(-12deg); pointer-events: none;                                  }
+.tile_exit                { color: var(--yellow); background: var(--yellowish);                               }
+.tile_loss                { color: var(--red);                                                                }
+.tile_jump                { color: var(--green);                                                              }
+.tile_launcher            { color: var(--orange);                                                             }
 .tile_launcher > span:not(.player), .tile_launcher:before
-                          { position: absolute; inset: 0; display: grid; place-items: center            ;
-                            font-family: Arial, sans-serif;  transform: none; pointer-events: none      ;
-                            font-size: calc(100cqw / var(--grid_size) * 0.75); line-height: 1;          }
-.tile_launcher:before     { content: '↕';                                                               }
-.tile_arrow               { color: var(--blue);                                                         }
+                          { position: absolute; inset: 0; display: grid; place-items: center                  ;
+                            font-family: Arial, sans-serif;  transform: none; pointer-events: none            ;
+                            font-size: calc(100cqw / var(--grid_size) * 0.75); line-height: 1;                }
+.tile_launcher:before     { content: '↕';                                                                     }
+.tile_arrow               { color: var(--blue);                                                               }
 .tile_arrow > span:not(.player)
-                          { font-family: Arial, sans-serif; transform: none;                            }
+                          { font-family: Arial, sans-serif; transform: none;                                  }
 .tile_arrow > span:not(.player), .tile_launcher > span:not(.player), .tile_launcher:before
-                          { transform: translateY(-0.09em);                                             }
+                          { transform: translateY(-0.09em);                                                   }
 .tile_key:before, .tile_key:after, .tile_locked:before, .tile_locked:after
-                          { content: ''; position: absolute; pointer-events: none;                      }
-.tile_key:before          { left: 21%; top: 33%; width: 28%; height: 28%                                ;
-                            border: 2px solid var(--yellow); border-radius: 47% 53% 45% 55%;            }
-.tile_key:after           { left: 46%; top: 45%; width: 34%; height: 20%; background                    :
-                            linear-gradient(var(--yellow), var(--yellow)) left top / 100% 3px no-repeat ,
-                            linear-gradient(var(--yellow), var(--yellow)) right top / 3px 100% no-repeat,
-                            linear-gradient(var(--yellow), var(--yellow)) 65% top / 3px 75% no-repeat;  }
-.tile_locked              { color: var(--red);                                                          }
-.tile_locked:before       { right: 12%; bottom: 13%; width: 23%; height: 19%; z-index: 1                ;
-                            border: 2px solid var(--yellow); border-radius: 2px 3px 2px 2px             ;
-                            background: var(--paper); transform: rotate(-5deg);                         }
-.tile_locked:after        { right: 17%; bottom: 31%; width: 13%; height: 13%; z-index: 1                ;
-                            border: 2px solid var(--yellow); border-bottom: 0                           ;
-                            border-radius: 50% 50% 0 0; transform: rotate(-5deg);                       }
-.tile_crumble             { color: var(--white);                                                        }
-.tile > span.eraser_icon  { inset: 0; margin: auto; width: 52%; height: 28%; transform: rotate(-30deg); }
-.tile_portal              { color: var(--purple);                                                       }
-.tile_portal:before       { content: ''; position: absolute; inset: 13%; border: 2px dashed currentColor;
-                            border-radius: 45% 55% 52% 48%; transform: rotate(-12deg)                   ;
-                            pointer-events: none;                                                       }
+                          { content: ''; position: absolute; pointer-events: none;                            }
+.tile_key:before          { left: 21%; top: 33%; width: 28%; height: 28%                                      ;
+                            border: 2px solid var(--yellow); border-radius: 47% 53% 45% 55%;                  }
+.tile_key:after           { left: 46%; top: 45%; width: 34%; height: 20%; background                          :
+                            linear-gradient(var(--yellow), var(--yellow)) left top / 100% 3px no-repeat       ,
+                            linear-gradient(var(--yellow), var(--yellow)) right top / 3px 100% no-repeat      ,
+                            linear-gradient(var(--yellow), var(--yellow)) 65% top / 3px 75% no-repeat;        }
+.tile_locked              { color: var(--red);                                                                }
+.tile_locked:before       { right: 12%; bottom: 13%; width: 23%; height: 19%; z-index: 1                      ;
+                            border: 2px solid var(--yellow); border-radius: 2px 3px 2px 2px                   ;
+                            background: var(--paper); transform: rotate(-5deg);                               }
+.tile_locked:after        { right: 17%; bottom: 31%; width: 13%; height: 13%; z-index: 1                      ;
+                            border: 2px solid var(--yellow); border-bottom: 0                                 ;
+                            border-radius: 50% 50% 0 0; transform: rotate(-5deg);                             }
+.tile_crumble             { color: var(--red);                                                                }
+.tile > span.crumble_icon { inset: 0; margin: auto; width: 58%; height: 58%; transform: rotate(5deg)          ;
+                            border: 2px solid currentColor; border-radius: 3px 5px 2px 4px                    ;
+                            background: color-mix(in srgb, currentColor 10%, transparent);                    }
+.crumble_icon:before      { content: ''; position: absolute;  left: 43%;  top: -15%;  width: 10%              ;
+                            height: 130%;  background: var(--paper); transform: rotate(22deg)                 ;
+                            pointer-events: none;                                                             }
+.tile > span.eraser_icon  { inset: 0; margin: auto; width: 65%; height: 38%; transform: rotate(-30deg);       }
+.tile_portal              { color: var(--purple);                                                             }
+.tile_portal:before       { content: ''; position: absolute; inset: 0; margin: auto; width: 68%               ;
+                            height: 68%; border-radius: 50%; border: 0; transform: rotate(-8deg)              ;
+                            background: radial-gradient(farthest-side, var(--darkpurple) calc(100% - 2px)     ,
+                            transparent calc(100% - 2px) ), repeating-conic-gradient( currentColor 0deg 10deg ,
+                            transparent 10deg 20deg );  pointer-events: none;                                 }
 .tile_portal > span:not(.player)
-                          { font-size: calc(100cqw / var(--grid_size) * 0.42);                          }
+                          { font-size: calc(100cqw / var(--grid_size) * 0.34); transform: translateY(0.08em); }
 .tile_visited:not(.tile_loss):not(.tile_jump):not(.tile_exit):not(.tile_player):not(.tile_key):not(.tile_launcher):not(.tile_arrow):not(.tile_crumble):not(.tile_eraser):not(.tile_portal):after
-                          { content: ''; position: absolute; inset: 0; margin: auto; width: 4px         ;
-                            height: 4px; background: #9BA98D66; border-radius: 50%                      ;
-                            pointer-events: none;                                                       }
+                          { content: ''; position: absolute; inset: 0; margin: auto; width: 4px               ;
+                            height: 4px; background: #9BA98D66; border-radius: 50%                            ;
+                            pointer-events: none;                                                             }
 
 /*********************************************************************************************************************/
 /*                                                                                                                   */

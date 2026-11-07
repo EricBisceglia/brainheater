@@ -142,7 +142,9 @@ function level_draw(level_id)
 
         case 'C':
           tile.classList.add('tile_crumble');
-          tile_symbol = 'X';
+          const crumble = document.createElement('span');
+          crumble.classList.add('crumble_icon');
+          tile.append(crumble);
           break;
 
         case 'E':
