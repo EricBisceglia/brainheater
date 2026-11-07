@@ -5,6 +5,7 @@
 /*                                                                                                                   */
 /*  animate_player      Animate the player's movement on the board.                                                  */
 /*  animate_impact      Animate the player's impact with a wall.                                                     */
+/*  animate_win         Animate the player's victory.                                                                */
 /*  animate_death       Animate the player's death.                                                                  */
 /*                                                                                                                   */
 /*********************************************************************************************************************/
@@ -42,8 +43,9 @@ function level_draw(level_id)
   // Hide any previous death message
   document.getElementById('death_message').hidden = true;
 
-  // Update the board's death state
+  // Get rid of any death or victory popins
   board.classList.toggle('dead', game.status === 'dead');
+  board.classList.toggle('won', game.status === 'won');
 
   // Fetch the level's grid size
   const grid_size = game.map.length;
@@ -380,6 +382,59 @@ function animate_impact(direction)
     if(game.bump === animation)
       game.bump = null;
   };
+}
+
+
+
+
+/**
+ * Animate the player's victory
+ *
+ * @returns {Promise<void>}
+ */
+
+async function animate_win()
+{
+  // Fetch the board and the player
+  const board  = document.getElementById('brain_board');
+  const player = board.querySelector('.player');
+
+  // Stop here if there is no player (uh oh)
+  if(!player)
+    return;
+
+  // Dissolve the player
+  const animation = player.animate(
+    [
+      { offset: 0,    transform: 'rotate(-12deg) scale(1)',    opacity: 1 },
+      { offset: 0.35, transform: 'rotate(6deg) scale(1.18)',   opacity: 1 },
+      { offset: 1,    transform: 'rotate(18deg) scale(1.65)',  opacity: 0 }
+    ],
+    { duration: 800, easing: 'ease-out', fill: 'forwards' }
+  );
+
+  // Allow (re)loading a level to cancel this animation
+  game.animation = animation;
+
+  // Wait for the animation to finish
+  try
+  {
+    await animation.finished;
+  }
+
+  // Handle errors just in case
+  catch(error)
+  {
+    if(error.name !== 'AbortError')
+      throw error;
+  }
+
+  // Clear the animation reference once the victory effect is finished
+  finally
+  {
+    if(game.animation === animation)
+      game.animation = null;
+  }
 }
 
 

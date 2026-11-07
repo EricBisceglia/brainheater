@@ -219,7 +219,7 @@ async function tile_resolve(direction)
 
     // Exit
     case 'G':
-      player_win();
+      await player_win();
       break;
   }
 }
@@ -534,20 +534,48 @@ function player_die()
  * @returns {void}
  */
 
-function player_win()
+/**
+ * Saves completion, plays the victory animation, and loads the next level.
+ *
+ * @returns {Promise<void>}
+ */
+
+async function player_win()
 {
-  // Stop here if the gamestate prevents victory
+  // Stop here if the game can't be won at the moment
   if(game.status !== 'playing')
     return;
 
-  // Mark the level as completed
+  // Track which attempt and level come next
+  const generation = game.generation;
+  const next_level = (game.level + 1) % levels.length;
+
+  // Prevent further player input
   game.status = 'won';
+
+  // Mark the level as completed
   game.completed.add(levels[game.level].id);
 
-  // Save the updated progression
+  // Save level completion
   progress_save();
 
-  // Move on to the next level, looping back to the start after the final one
-  const next_level = (game.level + 1) % levels.length;
+  // Cancel any ongoing wall crash animations
+  if(game.bump)
+  {
+    game.bump.cancel();
+    game.bump = null;
+  }
+
+  // Drew the board in the state it is after winning
+  level_draw(game.level);
+
+  // Play the victory animation
+  await animate_win();
+
+  // Stop if the player restarts or changes level
+  if(generation !== game.generation || game.status !== 'won')
+    return;
+
+  // Advance to the next level once the victory animation has finished
   level_load(next_level);
 }

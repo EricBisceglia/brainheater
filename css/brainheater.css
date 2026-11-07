@@ -67,23 +67,24 @@ button:focus-visible, select:focus-visible, .brain_board:focus-visible
 /*                                                                                                                   */
 /*********************************************************************************************************************/
 
-.brain_board_container    { position: relative; width: 100%; max-width: var(--board_size)               ;
-                            margin: 0 auto; container-type: inline-size; --board_size: 314px;           }
-.brain_board              { position: relative; display: grid                                           ;
-                            grid-template-columns: repeat(var(--grid_size), minmax(0, 1fr))             ;
-                            grid-template-rows: repeat(var(--grid_size), minmax(0, 1fr))                ;
-                            width: 100%; aspect-ratio: 1; padding: 3px                                  ;
-                            border: 0; border-radius: 0; overflow: visible                              ;
-                            isolation: isolate; touch-action: none;                                     }
-.brain_board:before       { content: ''; position: absolute; inset: 0                                   ;
-                            border: 1px solid #A5B2A478; border-radius: 3px 1px 5px 2px                 ;
-                            transform: rotate(-0.3deg); pointer-events: none;                           }
-.brain_board:after        { content: ''; position: absolute; inset: 2px -1px -1px 1px                   ;
-                            border: 1px solid #A5B2A428; border-radius: 1px 5px 2px 4px                 ;
-                            transform: rotate(0.18deg); pointer-events: none;                           }
-.brain_board.dead .tile_player
-                          { background: #DF897F22;                                                      }
-.brain_board.dead .player { border-color: var(--red);                                                   }
+.brain_board_container          { position: relative; width: 100%; max-width: var(--board_size)     ;
+                                  margin: 0 auto; container-type: inline-size; --board_size: 314px; }
+.brain_board                    { position: relative; display: grid                                 ;
+                                  grid-template-columns: repeat(var(--grid_size), minmax(0, 1fr))   ;
+                                  grid-template-rows: repeat(var(--grid_size), minmax(0, 1fr))      ;
+                                  width: 100%; aspect-ratio: 1; padding: 3px                        ;
+                                  border: 0; border-radius: 0; overflow: visible                    ;
+                                  isolation: isolate; touch-action: none;                           }
+.brain_board:before             { content: ''; position: absolute; inset: 0                         ;
+                                  border: 1px solid #A5B2A478; border-radius: 3px 1px 5px 2px       ;
+                                  transform: rotate(-0.3deg); pointer-events: none;                 }
+.brain_board:after              { content: ''; position: absolute; inset: 2px -1px -1px 1px         ;
+                                  border: 1px solid #A5B2A428; border-radius: 1px 5px 2px 4px       ;
+                                  transform: rotate(0.18deg); pointer-events: none;                 }
+.brain_board.dead .tile_player  { background: #DF897F22;                                            }
+.brain_board.dead .player       { border-color: var(--red);                                         }
+.brain_board.won .tile_exit     { color: var(--green); background: #92BDA026;                       }
+.brain_board.won .player        { border-color: var(--green);                                       }
 
 /*********************************************************************************************************************/
 /*                                                                                                                   */
@@ -150,6 +151,12 @@ button:focus-visible, select:focus-visible, .brain_board:focus-visible
                             border-radius: 50% 50% 0 0; transform: rotate(-5deg);                       }
 .tile_crumble             { color: var(--white);                                                        }
 .tile > span.eraser_icon  { inset: 0; margin: auto; width: 52%; height: 28%; transform: rotate(-30deg); }
+.tile_portal              { color: var(--purple);                                                       }
+.tile_portal:before       { content: ''; position: absolute; inset: 13%; border: 2px dashed currentColor;
+                            border-radius: 45% 55% 52% 48%; transform: rotate(-12deg)                   ;
+                            pointer-events: none;                                                       }
+.tile_portal > span:not(.player)
+                          { font-size: calc(100cqw / var(--grid_size) * 0.42);                          }
 .tile_visited:not(.tile_loss):not(.tile_jump):not(.tile_exit):not(.tile_player):not(.tile_key):not(.tile_launcher):not(.tile_arrow):not(.tile_crumble):not(.tile_eraser):not(.tile_portal):after
                           { content: ''; position: absolute; inset: 0; margin: auto; width: 4px         ;
                             height: 4px; background: #9BA98D66; border-radius: 50%                      ;
@@ -248,28 +255,3 @@ button:focus-visible, select:focus-visible, .brain_board:focus-visible
 .progress_reset:hover     { color: var(--red); border-color: var(--red);                              }
 @media (pointer: coarse)  { .link_buttons a, .settings_open, .settings_header button,
                             .language_select, .progress_reset { min-height: 44px;                   } }
-
-
-
-.tile_portal
-{
-  color: var(--purple);
-}
-
-/* Slightly irregular portal ring */
-.tile_portal:before
-{
-  content: '';
-  position: absolute;
-  inset: 13%;
-  border: 2px dashed currentColor;
-  border-radius: 45% 55% 52% 48%;
-  transform: rotate(-12deg);
-  pointer-events: none;
-}
-
-/* Smaller number inside the ring */
-.tile_portal > span:not(.player)
-{
-  font-size: calc(100cqw / var(--grid_size) * 0.42);
-}
