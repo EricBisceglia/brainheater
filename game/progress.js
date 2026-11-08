@@ -1,12 +1,11 @@
 /*********************************************************************************************************************/
 /*                                                                                                                   */
-/*                                                    PROGRESSION                                                    */
+/*  progress_save         Saves the current game progression.                                                        */
+/*  progress_load         Loads the saved game progression.                                                          */
+/*  progress_reset        Resets (deletes) saved game progression.                                                   */
 /*                                                                                                                   */
-/*********************************************************************************************************************/
-/*                                                                                                                   */
-/*  progress_save   Saves the current game progression.                                                              */
-/*  progress_load   Loads the saved game progression.                                                                */
-/*  progress_reset  Resets (deletes) saved game progression.                                                         */
+/*  levelset_completed    Checks whether every level in a levelset has been completed.                               */
+/*  levelset_unlocked     Checks whether all previous levlesets have been completed.                                 */
 /*                                                                                                                   */
 /*********************************************************************************************************************/
 
@@ -105,4 +104,60 @@ function progress_reset()
 
   // Return keyboard control to the board (else the game will become unplayable)
   document.getElementById('brain_board').focus({ preventScroll: true });
+}
+
+
+
+
+/**
+ * Checks whether every level in a levelset has been completed.
+ *
+ * @param   {number}  set_id  The levelset's ID.
+ *
+ * @returns {boolean}
+ */
+
+function levelset_completed(set_id)
+{
+  // Fetch all levels IDs belonging to the requested levelset
+  const set_levels = levels.filter(function(level)
+  {
+    return level.set === set_id;
+  });
+
+  // Check completion status of all levels in the levelset
+  return set_levels.length > 0 && set_levels.every(function(level)
+  {
+    return game.completed.has(level.id);
+  });
+}
+
+
+
+
+/**
+ * Checks whether all previous levlesets have been completed.
+ *
+ * @param   {number}  set_id  The levelset's ID.
+ *
+ * @returns {boolean}
+ */
+
+function levelset_unlocked(set_id)
+{
+  // Fetch the requested levelset's id
+  const set_index = levelsets.findIndex(function(levelset)
+  {
+    return levelset.id === set_id;
+  });
+
+  // Stop here if the levelset does not exist
+  if(set_index === -1)
+    return false;
+
+  // Check completion of every levelset with a lower id
+  return levelsets.slice(0, set_index).every(function(levelset)
+  {
+    return levelset_completed(levelset.id);
+  });
 }
