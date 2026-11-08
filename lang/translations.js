@@ -37,6 +37,7 @@ const translations = {
 
   /*                                                    LEVELSETS                                                    */
 
+  levelset_locked:  { en: ' [Locked]',          fr: ' [Verrouillé]'           },
   set_first_pages:  { en: 'First pages',        fr: 'Premières pages'         },
   set_keys:         { en: 'Keys to success',    fr: 'Les clés du succès'      },
   set_arrows:       { en: 'A turn of events',   fr: 'Nouvelle direction'      },

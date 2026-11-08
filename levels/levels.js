@@ -192,23 +192,36 @@ const levels = [
   {
     id:   '0501',
     set:  5     ,
-    map:  [
-      ".CCJC",
-      "CCCCC",
-      "JCXCC",
-      "CCCCX",
-      "CJCCG"
+    map: [
+      "..XXK",
+      "..CC.",
+      "J.XJ.",
+      "XCXXX",
+      "...DG"
     ]
   },
   {
     id:   '0601',
     set:  6     ,
-    map:  [
-      ".EEEE",
-      "XXXXX",
-      "XXXXX",
-      "XXXXX",
-      "XXXXG"
+    map: [
+      ".XEX.",
+      ".X.XX",
+      ".X.XE",
+      ".X.XX",
+      "EX.XG"
+    ]
+  },
+  {
+    id:   '0602',
+    set:  6     ,
+    map: [
+      ".JJJ..J",
+      "XXXXX..",
+      "XXXJ..X",
+      ".E.X..X",
+      "..J..XJ",
+      "XJXJXXJ",
+      ".XJX..G"
     ]
   },
   {
@@ -226,17 +239,46 @@ const levels = [
     id:   '0801',
     set:  8     ,
     map: [
-      "..XX2X.J...",
-      "CLC.JX.....",
-      ".L1XCCXC..X",
-      "XXJJv.v.JDX",
-      "^.X..J...JX",
-      "J.XXJ.L.X..",
-      "JXJ..X.XX.>",
-      "<.XL.....<X",
-      ".XJ.KJJ..XX",
-      "X.XD>....1.",
-      "..2..CXCX.G"
+      "...XXJDX.",
+      "...Jv.JJ.",
+      ">XXXX.C..",
+      "X.J.J.XJJ",
+      "C^J.^XX..",
+      ".X...C...",
+      ".K>J..C..",
+      "X.X.X..CD",
+      ".D.XJXXDG"
+    ]
+  },
+  {
+    id:   '0802',
+    set:  8     ,
+    map: [
+      ".X.JX.X..",
+      "vJ.X1....",
+      "J<DJX..J.",
+      ".JX..D.>.",
+      "...JJX..J",
+      "..XX...XX",
+      "J...K.X.X",
+      ".X..>J.1.",
+      "..J..<..G"
+    ]
+  },
+  {
+    id:   '0803',
+    set:  8     ,
+    map: [
+      ".XXXJ..JJC",
+      ".XX>2X.XJX",
+      "..XC.XXX^.",
+      "XC.DK.CXXX",
+      "Cv.....<..",
+      "..JJ.LJX.X",
+      "XXJ1J..C.J",
+      ".X>XJ..vX.",
+      ".XL2L..D1.",
+      "J....XXX.G"
     ]
   }
 ];

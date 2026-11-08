@@ -27,20 +27,79 @@ const game = {
 /*                                                                                                                   */
 /*********************************************************************************************************************/
 /*                                                                                                                   */
-/*  level_load        Loads a level.                                                                                 */
-/*  level_restart     Restarts the current level.                                                                    */
+/*  levelset_completed    Checks whether every level in a levelset has been completed.                               */
+/*  levelset_unlocked     Checks whether all previous levlesets have been completed.                                 */
 /*                                                                                                                   */
-/*  tile_resolve      Resolves the effect of tile the player is standing on.                                         */
+/*  level_load            Loads a level.                                                                             */
+/*  level_restart         Restarts the current level.                                                                */
 /*                                                                                                                   */
-/*  key_collect       Collects a key and removes all matching hazards.                                               */
+/*  tile_resolve          Resolves the effect of tile the player is standing on.                                     */
 /*                                                                                                                   */
-/*  player_move       Moves the player one tile in the requested direction.                                          */
-/*  player_launch     Launches the player to the edge of the board in the requested direction.                       */
-/*  player_teleport   Teleports the player through a portal.                                                         */
-/*  player_die        Kills the player and triggers the death animation.                                             */
-/*  player_win        Marks the level as completed and loads the next one.                                           */
+/*  key_collect           Collects a key and removes all matching hazards.                                           */
+/*                                                                                                                   */
+/*  player_move           Moves the player one tile in the requested direction.                                      */
+/*  player_launch         Launches the player to the edge of the board in the requested direction.                   */
+/*  player_teleport       Teleports the player through a portal.                                                     */
+/*  player_die            Kills the player and triggers the death animation.                                         */
+/*  player_win            Marks the level as completed and loads the next one.                                       */
 /*                                                                                                                   */
 /*********************************************************************************************************************/
+
+/**
+ * Checks whether every level in a levelset has been completed.
+ *
+ * @param   {number}  set_id  The levelset's ID.
+ *
+ * @returns {boolean}
+ */
+
+function levelset_completed(set_id)
+{
+  // Fetch all levels IDs belonging to the requested levelset
+  const set_levels = levels.filter(function(level)
+  {
+    return level.set === set_id;
+  });
+
+  // Check completion status of all levels in the levelset
+  return set_levels.length > 0 && set_levels.every(function(level)
+  {
+    return game.completed.has(level.id);
+  });
+}
+
+
+
+
+/**
+ * Checks whether all previous levlesets have been completed.
+ *
+ * @param   {number}  set_id  The levelset's ID.
+ *
+ * @returns {boolean}
+ */
+
+function levelset_unlocked(set_id)
+{
+  // Fetch the requested levelset's id
+  const set_index = levelsets.findIndex(function(levelset)
+  {
+    return levelset.id === set_id;
+  });
+
+  // Stop here if the levelset does not exist
+  if(set_index === -1)
+    return false;
+
+  // Check completion of every levelset with a lower id
+  return levelsets.slice(0, set_index).every(function(levelset)
+  {
+    return levelset_completed(levelset.id);
+  });
+}
+
+
+
 
 /**
  * Loads a level.
@@ -55,8 +114,8 @@ function level_load(level_id)
   // Fetch the requested level
   const level = levels[level_id];
 
-  // Stop here if the requested level does not exist
-  if(!level)
+  // Stop here if the level does not exist or has not been unlocked yet
+  if(!level || !levelset_unlocked(level.set))
     return;
 
   // Increment the level generation counter
@@ -547,9 +606,8 @@ async function player_win()
   if(game.status !== 'playing')
     return;
 
-  // Track which attempt and level come next
+  // Track the current attempt's generation
   const generation = game.generation;
-  const next_level = (game.level + 1) % levels.length;
 
   // Prevent further player input
   game.status = 'won';
@@ -577,6 +635,18 @@ async function player_win()
   if(generation !== game.generation || game.status !== 'won')
     return;
 
+  // Determine the next level to load
+  let next_level = (game.level + 1) % levels.length;
+
+  // If the next level belongs to a locked levelset, loop back and find an unlocked level
+  if(!levelset_unlocked(levels[next_level].set))
+  {
+    next_level = levels.findIndex(function(level)
+    {
+      return levelset_unlocked(level.set) && !game.completed.has(level.id);
+    });
+  }
+
   // Advance to the next level once the victory animation has finished
-  level_load(next_level);
+  level_load(next_level === -1 ? 0 : next_level);
 }

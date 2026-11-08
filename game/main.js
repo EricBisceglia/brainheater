@@ -13,10 +13,10 @@ language_load();
 // Load saved progression
 progress_load();
 
-// Find the first level that hasn't been completed yet
+// Find the first level that hasn't been completed yet and doesn't belong to a locked levelset
 const first_unfinished = levels.findIndex(function(level)
 {
-  return !game.completed.has(level.id);
+  return levelset_unlocked(level.set) && !game.completed.has(level.id);
 });
 
 // Load the first unfinished level, or return to the beginning if everything is complete

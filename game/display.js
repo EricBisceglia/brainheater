@@ -214,12 +214,23 @@ function level_select_draw()
   select.replaceChildren();
   buttons.replaceChildren();
 
-    // Make a list of levelsets
+  // Make a list of levelsets
   for(const levelset of levelsets)
   {
-    const option        = document.createElement('option');
-    option.value        = levelset.id;
+    // Check for unlocked levelsets
+    const unlocked = levelset_unlocked(levelset.id);
+
+    // Prepare data for adding the levelset to the selector
+    const option       = document.createElement('option');
+    option.value       = levelset.id;
     option.textContent = string_translate(levelset.name);
+    option.disabled    = !unlocked;
+
+    // Prepare a message for locked levelsets
+    if(!unlocked)
+      option.textContent += string_translate('levelset_locked');
+
+    // Add the levelset option to the selector
     select.append(option);
   }
 
