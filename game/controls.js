@@ -126,3 +126,23 @@ document.getElementById('language_select').addEventListener('change', function(e
 {
   language_change(event.target.value);
 });
+
+// Handle colorblind mode
+document.getElementById('colorblind_toggle').addEventListener('change', function(event)
+{
+  // Fetch the colorblind toggle's state
+  const enabled = event.target.checked;
+
+  // Apply or get rid of colorblind mode
+  document.documentElement.classList.toggle('colorblind', enabled);
+
+  // Save the setting
+  try
+  {
+    localStorage.setItem('brainheater-colorblind', String(enabled));
+  }
+  catch(error)
+  {
+    console.warn('Could not save the colorblind preference.', error);
+  }
+});

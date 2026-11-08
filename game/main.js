@@ -4,6 +4,9 @@
 /*                                                                                                                   */
 /*********************************************************************************************************************/
 
+// Load the saved colorblind mode preference
+colorblind_load();
+
 // Determine the interface language
 language_load();
 

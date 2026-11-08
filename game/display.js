@@ -8,6 +8,8 @@
 /*  animate_win         Animate the player's victory.                                                                */
 /*  animate_death       Animate the player's death.                                                                  */
 /*                                                                                                                   */
+/*  colorblind_load     Loads the saved colorblind mode preferences.                                                 */
+/*                                                                                                                   */
 /*********************************************************************************************************************/
 
 /**
@@ -505,4 +507,33 @@ async function animate_death()
 
   // Show the death message once the animation finishes
   document.getElementById('death_message').hidden = false;
+}
+
+
+
+
+/**
+ * Loads the saved colorblind mode preferences.
+ *
+ * @returns {void}
+ */
+
+function colorblind_load()
+{
+  // Default to off
+  let enabled = false;
+
+  // Attempt to read the saved preference from the browser's local storage
+  try
+  {
+    enabled = localStorage.getItem('brainheater-colorblind') === 'true';
+  }
+  catch(error)
+  {
+    console.warn('Could not load the colorblind preference.', error);
+  }
+
+  // Apply the preference and update the checkbox accordingly
+  document.documentElement.classList.toggle('colorblind', enabled);
+  document.getElementById('colorblind_toggle').checked = enabled;
 }

@@ -24,14 +24,15 @@ const translations = {
 
   /*                                                    SETTINGS                                                     */
 
-  settings:           { en: 'Settings',           fr: 'Réglages'                                                },
-  settings_close:     { en: 'Close',              fr: 'Fermer'                                                  },
-  settings_language:  { en: 'Language',           fr: 'Langue'                                                  },
-  language_en:        { en: 'English',            fr: 'English'                                                 },
-  language_fr:        { en: 'Français',           fr: 'Français'                                                },
-  reset_progress:     { en: 'Reset progression',  fr: 'Effacer la progression'                                  },
-  reset_confirm:      { en: 'Erase progression and restart from the beginning?\n\nThis cannot be undone.'       ,
-                        fr: 'Effacer la progression et recommencer de zéro ?\n\nCette action est irréversible.' },
+  settings:             { en: 'Settings',           fr: 'Réglages'                                                },
+  settings_close:       { en: 'Close',              fr: 'Fermer'                                                  },
+  settings_language:    { en: 'Language',           fr: 'Langue'                                                  },
+  language_en:          { en: 'English',            fr: 'English'                                                 },
+  language_fr:          { en: 'Français',           fr: 'Français'                                                },
+  settings_colorblind:  { en: 'Colorblind mode',    fr: 'Mode daltonien'                                          },
+  reset_progress:       { en: 'Reset progression',  fr: 'Effacer la progression'                                  },
+  reset_confirm:        { en: 'Erase progression and restart from the beginning?\n\nThis cannot be undone.'       ,
+                          fr: 'Effacer la progression et recommencer de zéro ?\n\nCette action est irréversible.' },
 
 
   /*                                                    LEVELSETS                                                    */
