@@ -272,3 +272,35 @@ button:focus-visible, select:focus-visible, .brain_board:focus-visible
 .progress_reset:hover     { color: var(--red); border-color: var(--red);                              }
 @media (pointer: coarse)  { .link_buttons a, .settings_open, .settings_header button,
                             .language_select, .progress_reset { min-height: 44px;                   } }
+
+/*********************************************************************************************************************/
+/*                                                                                                                   */
+/*                                                      ENDING                                                       */
+/*                                                                                                                   */
+/*********************************************************************************************************************/
+
+.ending_screen            { width: 100%; max-width: none; height: 100%; max-height: none; margin: 0                 ;
+                            border: 0; color: var(--ink); background: var(--paper)                                  ;
+                            background-image: repeating-linear-gradient(to bottom, transparent 0, transparent 27px  ,
+                            var(--notebook) 27px, var(--notebook) 28px ); overflow: auto; padding: 2rem 1rem 6rem;  }
+.ending_screen[open]      { display: grid; place-items: center;                                                     }
+.ending_screen::backdrop  { background: var(--paper);                                                               }
+.ending_notebook          { position: relative; width: min(100%, 29rem); text-align: center; background: #20262D    ;
+                            padding: clamp(2rem, 7vw, 4rem) clamp(1.5rem, 6vw, 3rem); border: 2px solid var(--grid) ;
+                            padding-left: clamp(2.5rem, 9vw, 4.5rem); border-radius: 5px 12px 10px 4px              ;
+                            box-shadow: 4px 4px 0 var(--paper), 6px 6px 0 var(--grid); transform: rotate(-1deg);    }
+.ending_notebook:before   { content: ''; position: absolute; top: 0; bottom: 0; left: 1.2rem; width: 5px            ;
+                            border-left: 2px solid var(--margin); border-right: 1px solid var(--margin);            }
+.ending_title             { margin: 0 0 2rem; color: var(--yellow); font-size: clamp(2.5rem, 9vw, 4rem)             ;
+                            font-weight: normal;                                                                    }
+.ending_notebook p        { margin: 0 0 1.5rem; font-size: 1.05rem; line-height: 1.8;                               }
+.ending_signature         { width: fit-content; margin: 2rem auto 3.5rem; font-size: 2.3rem                         ;
+                            transform: rotate(-7deg);                                                               }
+.ending_buttons           { display: flex; justify-content: center; align-items: center; flex-wrap: wrap            ;
+                            gap: 0.6rem;                                                                            }
+.ending_buttons button, .ending_buttons a
+                          { display: inline-flex; align-items: center; justify-content: center; font-size: 0.85rem  ;
+                            padding: 0.5rem 0.7rem; color: var(--darkink); border: 1px solid var(--grid)            ;
+                            border-radius: 5px 2px 6px 3px; text-decoration: none;                                  }
+.ending_buttons button:hover, .ending_buttons a:hover
+                          { color: var(--yellow); border-color: var(--yellow);                                      }

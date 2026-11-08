@@ -7,9 +7,10 @@
 // React to keyboard input
 document.addEventListener('keydown', function(event)
 {
-  // Leave keyboard input to the settings menu if it is open
-  if(document.getElementById('settings_menu').open)
-    return;
+  // Leave keyboard input to any open dialog box
+  if( document.getElementById('settings_menu').open ||
+      document.getElementById('ending_screen').open)
+  return;
 
   // Ignore keyboard shortcuts
   if(event.ctrlKey || event.altKey || event.metaKey)
@@ -73,6 +74,14 @@ document.getElementById('levelset_select').addEventListener('change', function(e
 {
   // Fetch the selected levelset
   const set_id = Number(event.target.value);
+
+  // If the ending is selected, show it instead of loading a level
+  if(event.target.value === 'ending')
+  {
+    event.target.value = levels[game.level].set;
+    ending_show();
+    return;
+  }
 
   // Figure out its first level's id
   const level_id = levels.findIndex(function(level)
@@ -145,4 +154,26 @@ document.getElementById('colorblind_toggle').addEventListener('change', function
   {
     console.warn('Could not save the colorblind preference.', error);
   }
+});
+
+
+
+
+/*********************************************************************************************************************/
+/*                                                                                                                   */
+/*                                                   ENDING SCREEN                                                   */
+/*                                                                                                                   */
+/*********************************************************************************************************************/
+
+// Close the ending screen
+document.getElementById('ending_close').addEventListener('click', function()
+{
+  document.getElementById('ending_screen').close();
+});
+
+// Return to the first level when the ending is closed
+document.getElementById('ending_screen').addEventListener('close', function()
+{
+  level_load(0);
+  document.getElementById('brain_board').focus({ preventScroll: true });
 });

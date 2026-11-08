@@ -102,12 +102,8 @@
 
       <!-- Links / credits -->
       <nav class="link_buttons">
-        <a href="https://thebad.website/" target="_blank" rel="noopener noreferrer">
-          thebad.website
-        </a>
-        <a href="https://discord.gg/XTd3qQKZqV" target="_blank" rel="noopener noreferrer">
-          Discord
-        </a>
+        <a href="https://thebad.website/" target="_blank" rel="noopener noreferrer" data-i18n="link_website"></a>
+        <a href="https://discord.gg/XTd3qQKZqV" target="_blank" rel="noopener noreferrer" data-i18n="link_discord"></a>
       </nav>
 
     </main>
@@ -143,6 +139,35 @@
 
       <button type="button" id="progress_reset" class="progress_reset" data-i18n="reset_progress"></button>
 
+    </dialog>
+
+
+
+
+<!-------------------------------------------------------------------------------------------------------------------->
+<!--                                                                                                                -->
+<!--                                                     ENDING                                                     -->
+<!--                                                                                                                -->
+<!-------------------------------------------------------------------------------------------------------------------->
+
+    <dialog id="ending_screen" class="ending_screen">
+      <article class="ending_notebook">
+        <h2 class="ending_title" data-i18n="ending_title"></h2>
+
+        <p data-i18n="ending_story"></p>
+        <p data-i18n="ending_thanks"></p>
+
+        <div class="ending_signature brain_title">
+          <span data-i18n="ending_signature"></span>
+        </div>
+
+        <nav class="ending_buttons">
+          <button type="button" id="ending_close" class="ending_close" data-i18n="ending_close"></button>
+          <a href="https://thebad.website/" target="_blank" rel="noopener noreferrer" data-i18n="link_website"></a>
+          <a href="https://discord.gg/XTd3qQKZqV" target="_blank" rel="noopener noreferrer" data-i18n="link_discord"></a>
+        </nav>
+
+      </article>
     </dialog>
 
   </body>

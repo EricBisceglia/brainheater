@@ -10,6 +10,8 @@
 /*                                                                                                                   */
 /*  colorblind_load     Loads the saved colorblind mode preferences.                                                 */
 /*                                                                                                                   */
+/*  ending_show         Display the ending screen.                                                                   */
+/*                                                                                                                   */
 /*********************************************************************************************************************/
 
 /**
@@ -228,9 +230,18 @@ function level_select_draw()
 
     // Prepare a message for locked levelsets
     if(!unlocked)
-      option.textContent += string_translate('levelset_locked');
+      option.textContent += string_translate('set_locked');
 
     // Add the levelset option to the selector
+    select.append(option);
+  }
+
+  // Make the ending screen accessible once the final level has been beaten
+  if(game.completed.has(levels[levels.length - 1].id))
+  {
+    const option       = document.createElement('option');
+    option.value       = 'ending';
+    option.textContent = string_translate('set_ending');
     select.append(option);
   }
 
@@ -547,4 +558,23 @@ function colorblind_load()
   // Apply the preference and update the checkbox accordingly
   document.documentElement.classList.toggle('colorblind', enabled);
   document.getElementById('colorblind_toggle').checked = enabled;
+}
+
+
+
+
+/**
+ * Displays the ending screen.
+ *
+ * @returns {void}
+ */
+
+function ending_show()
+{
+  // Fetch the ending screen element
+  const ending = document.getElementById('ending_screen');
+
+  // Show the ending screen (unless it is already showing)
+  if(!ending.open)
+    ending.showModal();
 }

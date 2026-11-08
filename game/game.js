@@ -638,6 +638,13 @@ async function player_win()
   // Determine the next level to load
   let next_level = (game.level + 1) % levels.length;
 
+  // Show the ending popin after beating the last level
+  if(game.level === levels.length - 1)
+  {
+    ending_show();
+    return;
+  }
+
   // If the next level belongs to a locked levelset, loop back and find an unlocked level
   if(!levelset_unlocked(levels[next_level].set))
   {
