@@ -216,24 +216,28 @@ function level_select_draw()
   select.replaceChildren();
   buttons.replaceChildren();
 
-  // Make a list of levelsets
+  // Make a list of unlocked levelsets (+ the next upcoming levelset)
   for(const levelset of levelsets)
   {
     // Check for unlocked levelsets
     const unlocked = levelset_unlocked(levelset.id);
 
-    // Prepare data for adding the levelset to the selector
+    // Prepare the data of unlocked levelsets for display
     const option       = document.createElement('option');
     option.value       = levelset.id;
     option.textContent = string_translate(levelset.name);
     option.disabled    = !unlocked;
 
-    // Prepare a message for locked levelsets
+    // Mention that locked levelsets are locked
     if(!unlocked)
       option.textContent += string_translate('set_locked');
 
-    // Add the levelset option to the selector
+    // Add the levelset to the selector
     select.append(option);
+
+    // Hide everything beyond the next locked levelset
+    if(!unlocked)
+      break;
   }
 
   // Make the ending screen accessible once the final level has been beaten
