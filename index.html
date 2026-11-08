@@ -57,7 +57,8 @@
           <!-- Death message -->
           <div id="death_message" class="death_message" hidden>
             <h3 data-i18n="death_title"></h3>
-            <p data-i18n="death_restart"></p>
+            <p class="keyboard_only" data-i18n="death_restart"></p>
+            <button type="button" id="death_touch_restart" class="touch_only death_touch_restart" data-i18n="death_touch_restart"></button>
           </div>
 
           <!-- Eraser pickups -->
@@ -95,10 +96,11 @@
 <!-------------------------------------------------------------------------------------------------------------------->
 
       <!-- Controls -->
-      <p class="controls">
+      <p class="controls keyboard_only">
         <span data-i18n="controls_move"></span><br>
         <span data-i18n="controls_restart"></span>
       </p>
+      <p class="controls touch_only" data-i18n="controls_swipe"></p>
 
       <!-- Links / credits -->
       <nav class="link_buttons">

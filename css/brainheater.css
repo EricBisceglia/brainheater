@@ -304,3 +304,17 @@ button:focus-visible, select:focus-visible, .brain_board:focus-visible
                             border-radius: 5px 2px 6px 3px; text-decoration: none;                                  }
 .ending_buttons button:hover, .ending_buttons a:hover
                           { color: var(--yellow); border-color: var(--yellow);                                      }
+
+/*********************************************************************************************************************/
+/*                                                                                                                   */
+/*                                                      MOBILE                                                       */
+/*                                                                                                                   */
+/*********************************************************************************************************************/
+
+.touch_only           { display: none;                                        }
+@media (pointer: coarse)                                                      {
+.keyboard_only        { display: none;                                        }
+.touch_only           { display: block;                                       }
+#brain_area           { touch-action: none;user-select: none;                 }
+.death_touch_restart  { min-height: 44px; padding: 0.4rem; color: var(--ink)  ;
+                        font-size: 0.9rem; touch-action: manipulation;      } }

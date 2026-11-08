@@ -13,13 +13,15 @@ const translations = {
 
   /*                                                  DEATH SCREEN                                                   */
 
-  death_title:    { en: 'Oops.',                    fr: 'Oups.'                             },
-  death_restart:  { en: 'Press space to restart.',  fr: 'Appuie sur espace pour continuer.' },
+  death_title:          { en: 'Oops.',                    fr: 'Oups.'                             },
+  death_restart:        { en: 'Press space to restart.',  fr: 'Appuie sur espace pour continuer.' },
+  death_touch_restart:  { en: 'Tap here to restart.',      fr: 'Appuie ici pour recommencer.'     },
 
   /*                                                    CONTROLS                                                     */
 
-  controls_move:    { en: 'Move with arrow keys', fr: 'Déplace-toi avec les flèches'  },
-  controls_restart: { en: 'Space to restart',     fr: 'Recommence avec espace'        },
+  controls_move:    { en: 'Move with arrow keys',     fr: 'Déplace-toi avec les flèches'                 },
+  controls_restart: { en: 'Space to restart',         fr: 'Recommence avec espace'                       },
+  controls_swipe:   { en: 'Swipe the screen to move', fr: 'Glissez avec votre doigt pour vous déplacer'  },
 
   /*                                                    SETTINGS                                                     */
 
