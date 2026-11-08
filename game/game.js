@@ -660,6 +660,10 @@ async function player_win()
     });
   }
 
+  // If there is no next unbeaten level, just advance to the next one in order
+  if(next_level === -1)
+    next_level = (game.level + 1) % levels.length;
+
   // Advance to the next level once the victory animation has finished
-  level_load(next_level === -1 ? 0 : next_level);
+  level_load(next_level);
 }
