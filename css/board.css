@@ -1,0 +1,130 @@
+/*********************************************************************************************************************/
+/*                                                                                                                   */
+/*                                                       BOARD                                                       */
+/*                                                                                                                   */
+/*********************************************************************************************************************/
+
+.brain_board_container      { position: relative; width: 100%; max-width: var(--board_size)     ;
+                              margin: 0 auto; container-type: inline-size; --board_size: 314px; }
+.brain_board                { position: relative; display: grid                                 ;
+                              grid-template-columns: repeat(var(--grid_size), minmax(0, 1fr))   ;
+                              grid-template-rows: repeat(var(--grid_size), minmax(0, 1fr))      ;
+                              width: 100%; aspect-ratio: 1; padding: 3px                        ;
+                              border: 0; border-radius: 0; overflow: visible                    ;
+                              isolation: isolate; touch-action: none;                           }
+.brain_board:before         { content: ''; position: absolute; inset: 0                         ;
+                              border: 1px solid #A5B2A478; border-radius: 3px 1px 5px 2px       ;
+                              transform: rotate(-0.3deg); pointer-events: none;                 }
+.brain_board:after          { content: ''; position: absolute; inset: 2px -1px -1px 1px         ;
+                              border: 1px solid #A5B2A428; border-radius: 1px 5px 2px 4px       ;
+                              transform: rotate(0.18deg); pointer-events: none;                 }
+.brain_board.dead .tile_player:not(.tile_gap)
+                            { background: #DF897F22;                                            }
+.brain_board.dead .player   { border-color: var(--red);                                         }
+.brain_board.won .tile_exit { color: var(--green); background: #92BDA026;                       }
+.brain_board.won .player    { border-color: var(--green);                                       }
+
+/*********************************************************************************************************************/
+/*                                                                                                                   */
+/*                                                   DEATH SCREEN                                                    */
+/*                                                                                                                   */
+/*********************************************************************************************************************/
+
+.brain_board.dead       { animation: death_shake 500ms ease-out;                                                }
+@keyframes death_shake  { 0%, 100% { transform: translateX(0);                                                  }
+                          20%, 60% { transform: translateX(-4px);                                               }
+                          40%, 80% { transform: translateX(4px);                                              } }
+.death_message          { position: absolute; text-align: center; top: 50%; left: 50%; width: max-content       ;
+                          min-width: min(17rem, 85%); max-width: 85%; padding: 2rem 1.8rem; z-index: 5          ;
+                          transform: translate(-50%, -50%) rotate(-2deg); border-radius: 3px 7px 3px 2px        ;
+                          display: flex; flex-direction: column; align-items: center; justify-content: center   ;
+                          background: #20262BF5; border: 1px solid #A5B2A488; box-shadow: 5px 7px 0 #0E121666;  }
+.death_message h3       { margin: 0 0 0.6rem; font-size: 1.8rem; font-weight: normal;                           }
+.death_message p        { margin: 0; color: var(--darkink); font-size: 0.85rem;                                 }
+
+/*********************************************************************************************************************/
+/*                                                                                                                   */
+/*                                                  ERASER COUNTER                                                   */
+/*                                                                                                                   */
+/*********************************************************************************************************************/
+
+.eraser_icon    { position: relative; display: inline-block; width: 1.4rem; height: 0.8rem            ;
+                  color: var(--pink); border: 2px solid currentColor; border-radius: 3px 4px 2px 3px  ;
+                  background: linear-gradient(90deg, currentColor 60%, var(--cream) 60%)              ;
+                  transform: rotate(-30deg); pointer-events: none;                                    }
+.eraser_counter { position: absolute; top: calc(100% + 0.9rem); right: 0.2rem; display: flex          ;
+                  align-items: center; gap: 0.5rem; height: 1.2rem; color: var(--pink)                ;
+                  font-size: 0.8rem; pointer-events: none;                                            }
+
+/*********************************************************************************************************************/
+/*                                                                                                                   */
+/*                                                       TILES                                                       */
+/*                                                                                                                   */
+/*********************************************************************************************************************/
+
+.tile                     { position: relative; display: grid; place-items: center                            ;
+                            min-width: 0; min-height: 0; background: #C0CEAE04                                ;
+                            border-right: 1px solid var(--grid)                                               ;
+                            border-bottom: 1px solid var(--grid)                                              }
+.tile > span:not(.player) { position: absolute; inset: 0; display: grid; place-items: center                  ;
+                            font-size: calc(100cqw / var(--grid_size) * 0.75); line-height: 1                 ;
+                            pointer-events: none; transform: translateY(0.12em);                              }
+.tile_light:not(.tile_exit):not(.tile_player):not(.tile_gap)
+                          { background: #C0CEAE0C;                                                            }
+.tile_player              { background: var(--yellowish);                                                     }
+.tile .player             { position: absolute; inset: 0; margin: auto; width: 60%; height: 60%               ;
+                            border: 3px solid var(--yellow); border-radius: 46% 54% 49% 51%                   ;
+                            transform: rotate(-12deg); pointer-events: none; z-index: 2;                      }
+.tile_exit                { color: var(--yellow); background: var(--yellowish);                               }
+.tile_loss                { color: var(--red);                                                                }
+.tile.tile_gap, .colorblind .brain_board .tile.tile_loss
+                          { background: #0D1119; border-color: transparent; box-shadow: -1px -1px 0 #0D1119;  }
+.colorblind .tile_loss > span:not(.player)
+                          { display: none;                                                                    }
+.tile_jump                { color: var(--green);                                                              }
+.tile_launcher            { color: var(--orange);                                                             }
+.tile_launcher > span:not(.player), .tile_launcher:before
+                          { position: absolute; inset: 0; display: grid; place-items: center                  ;
+                            font-family: Arial, sans-serif;  transform: none; pointer-events: none            ;
+                            font-size: calc(100cqw / var(--grid_size) * 0.75); line-height: 1;                }
+.tile_launcher:before     { content: '↕';                                                                     }
+.tile_arrow               { color: var(--blue);                                                               }
+.tile_arrow > span:not(.player)
+                          { font-family: Arial, sans-serif; transform: none;                                  }
+.tile_arrow > span:not(.player), .tile_launcher > span:not(.player), .tile_launcher:before
+                          { transform: translateY(-0.09em);                                                   }
+.tile_key:before, .tile_key:after, .tile_locked:before, .tile_locked:after
+                          { content: ''; position: absolute; pointer-events: none;                            }
+.tile_key:before          { left: 21%; top: 33%; width: 28%; height: 28%                                      ;
+                            border: 2px solid var(--yellow); border-radius: 47% 53% 45% 55%;                  }
+.tile_key:after           { left: 46%; top: 45%; width: 34%; height: 20%; background                          :
+                            linear-gradient(var(--yellow), var(--yellow)) left top / 100% 3px no-repeat       ,
+                            linear-gradient(var(--yellow), var(--yellow)) right top / 3px 100% no-repeat      ,
+                            linear-gradient(var(--yellow), var(--yellow)) 65% top / 3px 75% no-repeat;        }
+.tile_locked              { color: var(--red);                                                                }
+.tile_locked:before       { right: 12%; bottom: 13%; width: 23%; height: 19%; z-index: 1                      ;
+                            border: 2px solid var(--yellow); border-radius: 2px 3px 2px 2px                   ;
+                            background: var(--paper); transform: rotate(-5deg);                               }
+.tile_locked:after        { right: 17%; bottom: 31%; width: 13%; height: 13%; z-index: 1                      ;
+                            border: 2px solid var(--yellow); border-bottom: 0                                 ;
+                            border-radius: 50% 50% 0 0; transform: rotate(-5deg);                             }
+.tile_crumble             { color: var(--red);                                                                }
+.tile > span.crumble_icon { inset: 0; margin: auto; width: 58%; height: 58%; transform: rotate(5deg)          ;
+                            border: 2px solid currentColor; border-radius: 3px 5px 2px 4px                    ;
+                            background: color-mix(in srgb, currentColor 10%, transparent);                    }
+.crumble_icon:before      { content: ''; position: absolute;  left: 43%;  top: -15%;  width: 10%              ;
+                            height: 130%;  background: var(--paper); transform: rotate(22deg)                 ;
+                            pointer-events: none;                                                             }
+.tile > span.eraser_icon  { inset: 0; margin: auto; width: 65%; height: 38%; transform: rotate(-30deg);       }
+.tile_portal              { color: var(--purple);                                                             }
+.tile_portal:before       { content: ''; position: absolute; inset: 0; margin: auto; width: 68%               ;
+                            height: 68%; border-radius: 50%; border: 0; transform: rotate(-8deg)              ;
+                            background: radial-gradient(farthest-side, var(--darkpurple) calc(100% - 2px)     ,
+                            transparent calc(100% - 2px) ), repeating-conic-gradient( currentColor 0deg 10deg ,
+                            transparent 10deg 20deg );  pointer-events: none;                                 }
+.tile_portal > span:not(.player)
+                          { font-size: calc(100cqw / var(--grid_size) * 0.34); transform: translateY(0.08em); }
+.tile_visited:not(.tile_gap):not(.tile_loss):not(.tile_jump):not(.tile_exit):not(.tile_player):not(.tile_key):not(.tile_launcher):not(.tile_arrow):not(.tile_crumble):not(.tile_eraser):not(.tile_portal):after
+                          { content: ''; position: absolute; inset: 0; margin: auto; pointer-events: none     ;
+                            background: #9BA98D66; border-radius: 50%; width: var(--visited_size, 4px)        ;
+                            height: var(--visited_size, 4px);                                                 }

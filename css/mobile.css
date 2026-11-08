@@ -1,0 +1,55 @@
+/*********************************************************************************************************************/
+/*                                                                                                                   */
+/*                                                      MOBILE                                                       */
+/*                                                                                                                   */
+/*********************************************************************************************************************/
+
+.touch_only               { display: none;                                                              }
+@media (pointer: coarse)                                                                                {
+.keyboard_only            { display: none;                                                              }
+.touch_only               { display: block;                                                             }
+#brain_area               { touch-action: none; user-select: none;                                      }
+.link_buttons a, .settings_open, .settings_header button, .language_select, .progress_reset
+                          { min-height: 44px;                                                           }
+.death_touch_restart      { min-height: 44px; padding: 0.4rem; color: var(--ink)                        ;
+                            font-size: 0.9rem; touch-action: manipulation;                              }
+.tile .player             { border-width: clamp(1px, calc(100cqw / var(--grid_size) * 0.035), 2.5px);   }
+.brain_board              { --visited_size: clamp(1.5px, calc(100cqw / var(--grid_size) * 0.045), 3px); }
+.tile_arrow > span:not(.player), .tile_launcher > span:not(.player), .tile_launcher:before
+                          { display: block; font-size: 0; background: currentColor; transform: none;    }
+.tile_arrow > span:not(.player)
+                          { clip-path: polygon(15% 47%, 70% 47%, 54% 31%, 59% 26%, 85% 50%, 59% 74%     ,
+                            54% 69%, 70% 53%, 15% 53% ); inset: 0;                                      }
+.tile_arrow[data-type="^"] > span:not(.player)
+                          { transform: rotate(-90deg);                                                  }
+.tile_arrow[data-type="v"] > span:not(.player)
+                          { transform: rotate(90deg);                                                   }
+.tile_arrow[data-type="<"] > span:not(.player)
+                          { transform: rotate(180deg);                                                  }
+.tile_launcher > span:not(.player), .tile_launcher:before
+                          {  clip-path: polygon(0% 50%, 25% 20%, 30% 25%, 11% 46%, 89% 46%, 70% 25%     ,
+                            75% 20%, 100% 50%, 75% 80%, 70% 75%, 89% 54%, 11% 54%, 30% 75%, 25% 80%     );
+                            inset: 18%;                                                                 }
+.tile_launcher:before     { content: ''; transform: rotate(90deg);                                    } }
+@media (pointer: coarse) and (max-width: 900px)                                                         {
+.brain_container          { padding: 0.8rem 1.2rem 1rem 2.4rem;                                         }
+.brain_container:before   { left: 0.8rem;                                                               }
+.brain_header             { display: flex; justify-content: center; gap: 0; padding-top: 1.0rem         ;
+                            margin-bottom: 2.1rem;                                                      }
+.settings_open            { position: static; padding: 0.25rem 0.6rem; font-size: 0.75rem               ;
+                            border: 1px solid var(--grid); border-radius: 5px 2px 6px 3px               ;
+                            transform: none;                                                            }
+.brain_header .brain_title
+                          { margin: 0; font-size: clamp(1.8rem, 7vw, 2.3rem); white-space: nowrap;      }
+.brain_board_container    { max-width: min(var(--board_size), max(12rem, calc(100svh - 18rem)))         ;
+                            width: 96%;                                                                 }
+.eraser_counter           { top: calc(100% + 0.35rem); gap: 0.35rem; font-size: 0.7rem;                 }
+.level_selection          { margin-top: 1.5rem;                                                         }
+.levelset_select          { padding: 0.25rem;                                                           }
+.level_buttons            { display: grid; grid-template-columns: repeat(4, 2.75rem); gap: 0.2rem 0.6rem;
+                            justify-content: center; margin: 1.0rem auto 0;                             }
+.level_button             { width: 2.75rem; height: 2.75rem; min-width: 0; min-height: 0; padding: 0    ;
+                            font-size: 0.85rem;                                                         }
+.controls                 { margin-top: 0.8rem; font-size: 0.75rem;                                     }
+.link_buttons             { gap: 0.6rem; margin-top: 1.2rem;                                            }
+.link_buttons a           { padding: 0.25rem 0.6rem; font-size: 0.75rem;                              } }
