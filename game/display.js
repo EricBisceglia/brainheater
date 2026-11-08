@@ -240,8 +240,11 @@ function level_select_draw()
       break;
   }
 
-  // Make the ending screen accessible once the final level has been beaten
-  if(game.completed.has(levels[levels.length - 1].id))
+  // Make the ending screen accessible at will once all levels have been beaten
+  if(levels.every(function(level)
+  {
+    return game.completed.has(level.id);
+  }))
   {
     const option       = document.createElement('option');
     option.value       = 'ending';

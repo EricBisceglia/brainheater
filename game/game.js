@@ -591,12 +591,6 @@ function player_die()
 /**
  * Marks the current level as completed and loads the next one.
  *
- * @returns {void}
- */
-
-/**
- * Saves completion, plays the victory animation, and loads the next level.
- *
  * @returns {Promise<void>}
  */
 
@@ -611,6 +605,9 @@ async function player_win()
 
   // Prevent further player input
   game.status = 'won';
+
+  // Keep track of whether this level was unfinished before beating it
+  const first_completion = !game.completed.has(levels[game.level].id);
 
   // Mark the level as completed
   game.completed.add(levels[game.level].id);
@@ -635,22 +632,31 @@ async function player_win()
   if(generation !== game.generation || game.status !== 'won')
     return;
 
-  // Determine the next level to load
-  let next_level = (game.level + 1) % levels.length;
-
-  // Show the ending popin after beating the last level
-  if(game.level === levels.length - 1)
+  // Show the ending when completing the final unbeated level
+  if(first_completion && levels.every(function(level)
+  {
+    return game.completed.has(level.id);
+  }))
   {
     ending_show();
     return;
   }
 
-  // If the next level belongs to a locked levelset, loop back and find an unlocked level
-  if(!levelset_unlocked(levels[next_level].set))
+  // Find the next unbeated level within unlocked levelsets
+  let next_level = levels.findIndex(function(level, index)
+  {
+    return index > game.level
+        && levelset_unlocked(level.set)
+        && !game.completed.has(level.id);
+  });
+
+  // If all upcoming levels have been beaten, looked for previous unbeaten ones
+  if(next_level === -1)
   {
     next_level = levels.findIndex(function(level)
     {
-      return levelset_unlocked(level.set) && !game.completed.has(level.id);
+      return levelset_unlocked(level.set)
+          && !game.completed.has(level.id);
     });
   }
 
