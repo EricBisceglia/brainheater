@@ -86,8 +86,9 @@ function level_draw(level_id)
         tile.classList.add('tile_visited');
 
       // Store the tile's coordinate
-      tile.dataset.x = x;
-      tile.dataset.y = y;
+      tile.dataset.x    = x;
+      tile.dataset.y    = y;
+      tile.dataset.type = tile_type;
 
       // Determine the tile's appearance
       let tile_symbol = '';
