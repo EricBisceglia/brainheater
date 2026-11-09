@@ -377,6 +377,88 @@ const levels = [
     ]
   },
   {
+    id:   '0402',
+    set:  4     ,
+    map: [
+      ".LKX.XJ.",
+      ".LX...X<",
+      ".LX.XX.X",
+      ".LKJ..J.",
+      "DDDDDDDD",
+      ".LX.JL.X",
+      ".LKX..X.",
+      "DLD.XX.G"
+    ]
+  },
+  {
+    id:   '0403',
+    set:  4     ,
+    map: [
+      ".X...XL..",
+      ".LJJXXX.X",
+      ".J.XLJXJ.",
+      "...LXJXXX",
+      "..XXXXXJL",
+      "J.X.LXJX.",
+      "XXJXLJ..X",
+      ".JXJJLLXX",
+      "X...X...G"
+    ]
+  },
+  {
+    id:   '0404',
+    set:  4     ,
+    map: [
+      "..L.X.....",
+      "..L.XLLLXX",
+      "..L.......",
+      "LLLLLLXXXX",
+      "..L.......",
+      "..LXX...XX",
+      "..L..X..X.",
+      "LLL..XLLLL",
+      "..L..L..XX",
+      ".XL.XL..XG"
+    ]
+  },
+  {
+    id:   '0405',
+    set:  4     ,
+    map: [
+      "....XXX..XL.",
+      "XX.LX.....X.",
+      ".L.LX.LXX.X.",
+      "XX..X..LX..X",
+      ".L..XL..XL.X",
+      ".X.LXL.XL..X",
+      "XL.X...X..LX",
+      "LX....XX.LX.",
+      ".X.LLX...XX.",
+      "..XXX..LXXLX",
+      "......LXXLXX",
+      ".LXXXXX..XXG"
+    ]
+  },
+  {
+    id:   '0406',
+    set:  4     ,
+    map: [
+      ".JXJ.J.J.JX..",
+      "..JXJ.JJ.XXL.",
+      "X.X..L<<L..XJ",
+      "....J.J^J.J.v",
+      "JXvXX......X.",
+      "...<^.JJJ.J.K",
+      "X^XXX.J.J.J.X",
+      "....J.XJ...XL",
+      ".JX..J.^..X..",
+      "...X..X.v..XJ",
+      "XJ.LX..XX..J.",
+      "...J.JKJJJ.^D",
+      "..X...JX.J.XG"
+    ]
+  },
+  {
     id:   '0501',
     set:  5     ,
     map: [
