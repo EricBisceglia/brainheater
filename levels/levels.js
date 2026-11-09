@@ -166,6 +166,91 @@ const levels = [
     ]
   },
   {
+    id:   '0202',
+    set:  2     ,
+    map: [
+      ".X.J.K",
+      "JXJXXD",
+      ".J.JJ.",
+      "J.JXXX",
+      "JX.D..",
+      ".D.D.G"
+    ]
+  },
+  {
+    id:   '0203',
+    set:  2     ,
+    map: [
+      ".JD.JXK",
+      "JXXJXJ.",
+      "X.JX.DJ",
+      "KX..JX.",
+      "JD..DX.",
+      ".X.JX.X",
+      ".J.X..G"
+    ]
+  },
+  {
+    id:   '0204',
+    set:  2     ,
+    map: [
+      ".......X",
+      ".XDXJXXX",
+      ".XKX.J..",
+      ".XXXJ..J",
+      "J.J.JJ..",
+      "....J...",
+      "J...JJXD",
+      ".J.X..XG"
+    ]
+  },
+  {
+    id:   '0205',
+    set:  2     ,
+    map: [
+      "...JXJXXX",
+      "...JXJ...",
+      "JJJJXJJJJ",
+      "XXXXXXXXX",
+      "JJJJXJJJJ",
+      ".J.JXJ...",
+      "XJXJXJXKX",
+      "...JXJXXX",
+      ".D.JXJ.JG"
+    ]
+  },
+  {
+    id:   '0206',
+    set:  2     ,
+    map: [
+      ".JJXXJXDJ",
+      "..XJX.X.D",
+      "JJJJXK.X.",
+      ".X..JJJJD",
+      "X...JJXD.",
+      "XXJJJJ.XJ",
+      ".JXJX..XX",
+      "....D.X..",
+      "J.XXD..XG"
+    ]
+  },
+  {
+    id:   '0207',
+    set:  2     ,
+    map: [
+      "....DDJXJ.",
+      ".XJ.DDJX.X",
+      "J..JDDJXX.",
+      ".JJ.DDJXXJ",
+      ".XJ.DDJX.X",
+      "JX.JDDJXJ.",
+      "KX.XDDJXXJ",
+      "XJ.JDDJX.X",
+      "J.JXDDJXXJ",
+      "...XDDJXXG"
+    ]
+  },
+  {
     id:   '0301',
     set:  3     ,
     map:  [
@@ -174,6 +259,108 @@ const levels = [
       "v.JXX",
       "v><J.",
       ".J.^G"
+    ]
+  },
+  {
+    id:   '0302',
+    set:  3     ,
+    map: [
+      ".JJ>vXJ",
+      "...^<XX",
+      "vJJ.XXX",
+      "X.>.XXX",
+      "X<.<.XJ",
+      "v.JXv.X",
+      "^..X..G"
+    ]
+  },
+  {
+    id:   '0303',
+    set:  3     ,
+    map: [
+      "..JXJXX",
+      "^vXX>J.",
+      "...X.vv",
+      "XXJJ.^J",
+      "J.J>^JX",
+      "....><v",
+      ">J.JX^G"
+    ]
+  },
+  {
+    id:   '0304',
+    set:  3     ,
+    map: [
+      ".>J.v.<X",
+      ".X.v<vJ^",
+      ".J.J.^X.",
+      ">J..J.JJ",
+      "..<>JX.^",
+      ".X.X^...",
+      ".J.J^<<X",
+      ".J.JX>.G"
+    ]
+  },
+  {
+    id:   '0305',
+    set:  3     ,
+    map: [
+      "..JDvv<X",
+      "...XJ.^K",
+      ".JX.J.J.",
+      "JXX.Jv<<",
+      "X<X..vXX",
+      ">.XJ.JDX",
+      "v.^XXX>D",
+      "XDJ<JX^G"
+    ]
+  },
+  {
+    id:   '0306',
+    set:  3     ,
+    map: [
+      ".J.JJJJ.X",
+      "XXJXXXX..",
+      "...X..vJJ",
+      "J.JX..XJ<",
+      "^.JX..JJJ",
+      "JXJX<>^<J",
+      ">JJXJJ..^",
+      ".X.JXJX^X",
+      ".JXJXJ..G"
+    ]
+  },
+  {
+    id:   '0307',
+    set:  3     ,
+    map: [
+      "....XX<...",
+      "JJJJXXJJJJ",
+      "XXXXXXXXXX",
+      "JJJJXXJJJJ",
+      ".<..XX^^..",
+      "v^.>XX.><.",
+      "JJJJXXJJJJ",
+      "XXXXXXXXXX",
+      "JJJJXXJJJJ",
+      "><>>JX..<G"
+    ]
+  },
+  {
+    id:   '0308',
+    set:  3     ,
+    map: [
+      "...J.J.v..K",
+      "..J.JXvJ...",
+      ".J.DX>J.J.^",
+      "J.>^.^.J.J<",
+      ".J....J.X..",
+      "J.J.^K.J.XJ",
+      "^JJ.J^>>J.^",
+      "JJ..<..^.^.",
+      "..<.D.^.X^.",
+      "vXv.X.J.J^v",
+      "K.^.X.J.>^G"
     ]
   },
   {
