@@ -550,6 +550,99 @@ const levels = [
     ]
   },
   {
+    id:   '0603',
+    set:  6     ,
+    map: [
+      "..L..X..",
+      "..C.J.<v",
+      "X..J.^.J",
+      "JX.X.XXE",
+      ".XXX.XL.",
+      "XXJXXJXX",
+      "X...X.X.",
+      "X.<.JX.G"
+    ]
+  },
+  {
+    id:   '0604',
+    set:  6     ,
+    map: [
+      "..X.EXE.",
+      ".EX..XE.",
+      "XXXXXXXX",
+      "..X..X.E",
+      "J.X.JX..",
+      "XXXXXDDD",
+      "..X..D..",
+      ".KX..D.G"
+    ]
+  },
+  {
+    id:   '0605',
+    set:  6     ,
+    map: [
+      "..X..JX.K",
+      ".X..J..X.",
+      "..J.J..XJ",
+      "..XX..X..",
+      ".J.XXXX.J",
+      "..X.X.XX.",
+      "..JXJ.XXX",
+      ".JX.XE.DX",
+      "X.J.JX.DG"
+    ]
+  },
+  {
+    id:   '0606',
+    set:  6     ,
+    map: [
+      "...LXE.J..",
+      "....XX.L..",
+      "..JX..XXXX",
+      ".X...JXJ..",
+      "JEJX...X..",
+      "..XJ.XX..X",
+      "J.XXX.XEXX",
+      "..X.J.JXXX",
+      "JXXXX.XXXX",
+      "..J...XXXG"
+    ]
+  },
+  {
+    id:   '0607',
+    set:  6     ,
+    map: [
+      "..J..X.J..E",
+      "..XJXXXX.XX",
+      ".J.J.XJ....",
+      "X.X..XX.XJ.",
+      ".JX.JX.J...",
+      "XXXXXXXXXXX",
+      "...XJX..J..",
+      "X.J..XXJ.X.",
+      "JX...X..J.X",
+      ".XJX.XJ.XXD",
+      "K..JXX.XXDG"
+    ]
+  },
+  {
+    id:   '0608',
+    set:  6     ,
+    map: [
+      "....X......",
+      "..EEXX...XX",
+      "XX...XXXXX.",
+      ".XXX.XXXX..",
+      "...XXXXEX..",
+      "...XXXX.XXE",
+      "X...X.X..XX",
+      "XXXXX...XXX",
+      "..XXXX.XX..",
+      ".XXE.XXXX..",
+      "EXX....X..G"
+    ]
+  },
+  {
     id:   '0701',
     set:  7     ,
     map:  [
