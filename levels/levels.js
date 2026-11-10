@@ -470,6 +470,62 @@ const levels = [
     ]
   },
   {
+    id:   '0502',
+    set:  5     ,
+    map: [
+      ".J.C..",
+      ".C.XXJ",
+      "JX.JXK",
+      ".X.X.X",
+      "CJXCX.",
+      ".XCCDG"
+    ]
+  },
+  {
+    id:   '0503',
+    set:  5     ,
+    map: [
+      "..CKXK.",
+      "..XXCX.",
+      "J.J..JX",
+      "CD.J..J",
+      "..J.DC.",
+      "XCX.CDD",
+      "XKX.J.G"
+    ]
+  },
+  {
+    id:   '0504',
+    set:  5     ,
+    map: [
+      ".C.XKC.J.",
+      "C..L<XX.^",
+      "..L...X.v",
+      "XLX..^.J.",
+      "X...X.JXX",
+      "CJ.JX.C..",
+      "J....XJL.",
+      ".JX>XKJCX",
+      "...J.CXDG"
+    ]
+  },
+  {
+    id:   '0505',
+    set:  5     ,
+    map: [
+      ".CCCXXXCXX",
+      "CXXCCXJCCC",
+      "XCCJCCCCLC",
+      "CCCXXCXXCC",
+      "CJCXXXXXCX",
+      "CCCXLCCCCC",
+      "CCLXXXXCXC",
+      "CCCCKCXCKC",
+      "CXCXXCXXXX",
+      "KXCCCCXXDG"
+    ]
+  },
+  {
     id:   '0601',
     set:  6     ,
     map: [
