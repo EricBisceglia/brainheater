@@ -12,7 +12,7 @@ You can [play it on The Bad Website](https://thebad.website/games/brainheater/).
 
 You can also download this repo then open `index.html` in your browser.
 
-There's no build or dependencies, it will work right away.
+There's nothing to build or install, it will work right away.
 
 ## About
 

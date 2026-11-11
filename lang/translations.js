@@ -19,9 +19,9 @@ const translations = {
 
   /*                                                    CONTROLS                                                     */
 
-  controls_move:    { en: 'Move with arrow keys',     fr: 'Déplace-toi avec les flèches'                 },
-  controls_restart: { en: 'Space to restart',         fr: 'Recommence avec espace'                       },
-  controls_swipe:   { en: 'Swipe the screen to move', fr: 'Glissez avec votre doigt pour vous déplacer'  },
+  controls_move:    { en: 'Move with arrow keys',     fr: 'Déplace-toi avec les flèches'                  },
+  controls_restart: { en: 'Space to restart',         fr: 'Recommence avec espace'                        },
+  controls_swipe:   { en: 'Swipe the screen to move', fr: 'Faites glisser votre doigt pour vous déplacer' },
 
   /*                                                    SETTINGS                                                     */
 
