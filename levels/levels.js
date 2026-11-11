@@ -96,7 +96,7 @@ const levels = [
       "..J.J.JX",
       "XJXXXXXJ",
       "XX...JX.",
-      "XJ... XJ",
+      "XJ....XJ",
       "XX...JXX",
       "XJ....XJ",
       "XXXXJJX.",
@@ -767,7 +767,7 @@ const levels = [
       "..CX3CC",
       "C1.XC2.",
       ".CCXJ.C",
-      "XXXXXXX",
+      "XXXDXXX",
       "X.3XJCE",
       "K1JX^2X",
       "X<CX.XG"
