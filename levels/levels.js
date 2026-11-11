@@ -749,53 +749,112 @@ const levels = [
     ]
   },
   {
+    id:   '0803',
+    set:  8     ,
+    map: [
+      "..LXKE",
+      "..X^^^",
+      "LX.JX<",
+      "X<.J.1",
+      "J<XX><",
+      "E<1DLG"
+    ]
+  },
+  {
+    id:   '0804',
+    set:  8     ,
+    map: [
+      "..CX3CC",
+      "C1.XC2.",
+      ".CCXJ.C",
+      "XXXXXXX",
+      "X.3XJCE",
+      "K1JX^2X",
+      "X<CX.XG"
+    ]
+  },
+  {
+    id:   '0805',
+    set:  8     ,
+    map: [
+      ".1CCCCCX",
+      "CXCXCLCC",
+      "CCLXCCCE",
+      "CXXXXXXX",
+      "CCCKC1CC",
+      "XXJXCDDD",
+      "JXXXCDXX",
+      "CCCXCDXG"
+    ]
+  },
+  {
     id:   '0806',
     set:  8     ,
     map: [
-      "...XXJDX.",
-      "...Jv.JJ.",
-      ">XXXX.C..",
+      "...DXJDX.",
+      "..CJJ.JJ.",
+      "1JXXX.C..",
       "X.J.J.XJJ",
-      "C^J.^XX..",
-      ".X...C...",
-      ".K>J..C..",
-      "X.X.X..CD",
-      ".D.XJXXDG"
+      "C^J..XX.1",
+      ".X...C..J",
+      ".K>J..X..",
+      "XLX.X..XD",
+      ".D.XJ.XDG"
     ]
   },
   {
     id:   '0807',
     set:  8     ,
     map: [
-      ".X.JX.X..",
-      "vJ.X1....",
-      "J<DJX..J.",
-      ".JX..D.>.",
-      "...JJX..J",
-      "..XX...XX",
-      "J...K.X.X",
-      ".X..>J.1.",
-      "..J..<..G"
+      ".XXXX..JJC",
+      ".XX>2..XJ.",
+      "..XC.XXX^J",
+      "XC.D..CXXX",
+      "Cv.....<.K",
+      "..JJ.LJX.X",
+      "XXJ1...C.J",
+      ".X>XJ..vX.",
+      ".XL2L..D1.",
+      ".....XXX.G"
     ]
   },
   {
     id:   '0808',
     set:  8     ,
     map: [
-      ".XXXJ..JJC",
-      ".XX>2X.XJX",
-      "..XC.XXX^.",
-      "XC.DK.CXXX",
-      "Cv.....<..",
-      "..JJ.LJX.X",
-      "XXJ1J..C.J",
-      ".X>XJ..vX.",
-      ".XL2L..D1.",
-      "J....XXX.G"
+      "...1XXX2...",
+      "...2XXX.XJ.",
+      "...3XXX.XX.",
+      "...4XXX3..v",
+      "XXXXXXXXXXX",
+      "E...XXXXXXX",
+      "XXXXXXXXXXX",
+      ".EXEXXX4J.^",
+      "..X.XXXXL..",
+      "XXXXXEX...X",
+      "E.XEX.X1>XG"
     ]
   },
   {
     id:   '0809',
+    set:  8     ,
+    map: [
+      ".J.J.JJJJJJ.",
+      "JJ.X..XXXXX.",
+      "...XJ.JJJJJ.",
+      "..X..J.JXXXX",
+      "X.XJX.J.JJ..",
+      "XJX.XJ.J.XX.",
+      ".X.JXJXXXJ..",
+      "..J.XJX.X.J.",
+      ".J.XXJXJ.X.J",
+      "J.J.XJX.J.X.",
+      ".J.XXJXJ.J.X",
+      "..J.J.X.J.JG"
+    ]
+  },
+  {
+    id:   '0810',
     set:  8     ,
     map: [
       ".JvJJJJJJJJ<1",
