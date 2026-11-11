@@ -15,7 +15,7 @@ const translations = {
 
   death_title:          { en: 'Oops.',                    fr: 'Oups.'                             },
   death_restart:        { en: 'Press space to restart.',  fr: 'Appuie sur espace pour continuer.' },
-  death_touch_restart:  { en: 'Tap here to restart.',      fr: 'Appuie ici pour recommencer.'     },
+  death_touch_restart:  { en: 'Tap here to restart.',     fr: 'Appuie ici pour recommencer.'      },
 
   /*                                                    CONTROLS                                                     */
 
@@ -46,7 +46,7 @@ const translations = {
   ending_story:     { en: 'Brain Heater is a recreation of a game I used to scribble on notebooks when I was a kid.',
                       fr: 'Brain Heater est la réinterprétation d\'un jeu que je gribouillais dans des cahiers quand j\'étais un enfant.'                                          },
   ending_thanks:    { en: 'Congratulations on beating the game, I hope you had fun!'  ,
-                      fr: 'C\'est la fin du jeu, j\'espère qu\'il vous a plu !'       },
+                      fr: 'Vous avez fini le jeu, j\'espère qu\'il vous a plu !'      },
   ending_signature: { en: 'Bad',        fr: 'Bad'                                     },
   ending_close:     { en: 'Goodbye',    fr: 'Au revoir'                               },
 
